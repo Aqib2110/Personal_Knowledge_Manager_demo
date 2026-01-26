@@ -1,13 +1,12 @@
 import { NextRequest,NextResponse } from "next/server";
-import { useRouter } from "next/router";
 import { prisma } from "@/lib/prisma";
 import { runQuery } from "@/lib/query";
 
-export async function POST(req:NextRequest)
+export async function POST(req:NextRequest,{params}:{params:{id:string}})
 {
  try {
-       const router = useRouter();
-    const { id } = router.query;
+    //    const router = useRouter();
+    const id = params.id;
     const { query } = await req.json();
 
     if(!id || !query)
