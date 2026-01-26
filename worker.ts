@@ -1,0 +1,85 @@
+import 'dotenv/config'; 
+
+import { Worker,Job } from "bullmq";
+import IORedis from 'ioredis';
+// import { downloadFile } from '@/lib/s3';
+// import { extractTextFromFile } from '@/lib/parser';
+// import { generateKeywords } from '@/lib/parser';
+// import { prisma } from '@/lib/prisma';
+import { downloadFile } from './lib/s3';
+import { extractTextFromFile } from './lib/parser';
+import { generateKeywords } from './lib/parser';
+import { prisma } from './lib/prisma';
+const connection = new IORedis({
+    host:'localhost',
+    port:6379,
+    maxRetriesPerRequest: null
+})
+console.log("worker has started");
+console.log(process.env.AWS_S3_BUCKET_NAME,process.env.AWS_ACCESS_KEY_ID,process.env.AWS_SECRET_ACCESS_KEY);
+const worker = new Worker('process_document', async (job: Job) => {
+    const { documentId, workspaceId, filePath,fileName } = job.data;
+  console.log("task has occured");
+    if(!documentId || !workspaceId || !filePath) 
+    {
+        throw new Error("Missing job data");
+    }
+    
+   try {
+    const fileBuffer = await downloadFile(filePath);
+    const sections = await extractTextFromFile(fileBuffer,fileName);
+    // console.log(sections);
+    const sectionWithKeywords = sections.map((section:any) => ({
+     ...section,
+     keywords:generateKeywords(section.content)
+    }))
+
+    for(const sec of sectionWithKeywords)
+    {
+  await prisma.section.create({
+    data:{
+        documentId:documentId,
+        title:sec.title,
+        content:sec.content,
+        keywords:sec.keywords.join(",")
+    }
+  })
+    }
+  
+
+    await prisma.document.update({
+    where:{
+        id:documentId
+    },
+    data:{
+        status:"completed"
+    }
+    })
+ 
+    console.log("document processed successfully");
+
+   } catch (err) {
+    console.error("error while processing document",err)
+     await prisma.document.update({
+    where:{
+        id:documentId
+    },
+    data:{
+        status:"failed"
+    }
+    })
+
+throw err;
+   }
+},{
+ connection
+})
+
+worker.on("completed",(job)=>{
+console.log(` Job ${job.id} completed`);
+})
+
+worker.on("failed",(job,err)=>{
+    if(!job)return;
+    console.error(`job ${job.id} failed`,err);
+})

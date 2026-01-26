@@ -1,0 +1,51 @@
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model user{
+  id String @id @default(uuid())
+  email String @unique
+  name String
+  password String?
+  workspaces workspace[]
+  documents document[]
+}
+
+model workspace{
+  id String @id @default(uuid())
+  name String
+  userId String
+  slug String @unique
+  documents document[]
+  user user @relation(fields: [userId], references: [id])
+}
+
+model document{
+id String @id @default(uuid())
+title String
+workspaceId String
+userId String
+fileUrl String
+fileName String
+status String @default("processing")
+createdAt DateTime @default(now())
+sections  section[]
+workspace workspace @relation(fields: [workspaceId], references: [id])
+user user @relation(fields: [userId], references: [id])
+}
+
+model section{
+  id  String @id @default(uuid())
+  documentId String
+  time String?
+  title String
+  content String
+  keywords String
+  document document @relation(fields: [documentId], references: [id])
+}

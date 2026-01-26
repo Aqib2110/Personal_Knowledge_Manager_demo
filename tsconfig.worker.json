@@ -1,0 +1,9 @@
+// {
+//   "extends": "./tsconfig.json",
+//   "compilerOptions": {
+//     "noEmit": false,
+//     "outDir": "dist",
+//     "module": "es2015"
+//   },
+//   "include": ["lib/worker.ts", "lib/queue.ts", "lib/s3.ts"]
+// }
