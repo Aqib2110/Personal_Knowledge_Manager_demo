@@ -50,10 +50,10 @@ export default function LibraryPage() {
       {" "}
       <div className=" z-20 border-b border-gray-300 border bg-gray-50 backdrop-blur">
         {" "}
-        <div className="flex items-center justify-between px-6 py-4">
+        <div className="hidden md:flex  items-center justify-between px-6 py-4">
           {" "}
           <h1 className="text-xl text-black font-semibold">Library</h1>
-          <div className="flex items-center gap-3">
+          <div className="flex justify-between items-center gap-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-700" />
               <Input
@@ -66,6 +66,27 @@ export default function LibraryPage() {
             </Button>
           </div>
         </div>
+
+
+ <div className="flex flex-col md:hidden   px-6 py-4">
+          {" "}
+          <h1 className="text-xl text-black py-2 font-semibold">Library</h1>
+          <div className="flex justify-between items-center gap-3">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-700" />
+              <Input
+                placeholder="Search documents..."
+                className="pl-9 bg-white border-white/10 text-gray-700 focus-visible:ring-0"
+              />
+            </div>
+            <Button className="gap-2 cursor-pointer hover:bg-black hover:text-white bg-white text-black">
+              <Upload className="h-4 w-4 " /> Upload
+            </Button>
+          </div>
+        </div>
+
+
+
       </div>
       <div className="flex">
         <aside className="hidden lg:block w-64 border-r border-gray-300 p-6 space-y-6">

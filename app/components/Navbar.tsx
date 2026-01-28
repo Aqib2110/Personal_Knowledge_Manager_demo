@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import { SearchIcon } from "lucide-react";
-import { BellIcon } from "lucide-react";
+import { BellIcon,MenuIcon } from "lucide-react";
+
 import { KnowledgeIcon } from "./KnowlegeIcon";
 import { Profile } from "./Profile";
 import Link from "next/link";
@@ -11,13 +12,13 @@ const Navbar = () => {
   return (
     <div className="px-5 w-full h-[60px] border-b fixed top-0  border-white/10  bg-gradient-to-r from-slate-900 to-[#0B1E36]">
       <div className="flex h-full  justify-between items-center  gap-2">
-        <div className="flex h-full    flex-4 ">
-          <div className=" flex  flex-5  justify-between items-center">
+        <div className="flex h-full    md:flex-4 ">
+          <div className=" flex  flex-5 gap-5 justify-between items-center">
 
 
 
 
- <div className="flex h-full justify-center py-3  items-center gap-2">
+ <div className="flex h-full  justify-center py-3  items-center gap-2">
             <span>
               <KnowledgeIcon className="w-6 h-6 text-blue-700" />
             </span>
@@ -26,7 +27,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          <div className=" flex h-full  justify-center  gap-15">
+          <div className=" hidden h-full md:flex  justify-center gap-5 lg:gap-15">
            
             <Link
               href={"/"}
@@ -44,7 +45,7 @@ const Navbar = () => {
                 setnav("Library");
               }}
             >
-            My Library  <span className={`absolute ${nav === "Library" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
+            Library  <span className={`absolute ${nav === "Library" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
             </Link>
             <Link
               href={"/tags"}
@@ -62,7 +63,7 @@ const Navbar = () => {
                 setnav("AI");
               }}
             >
-            AI Assistant <span className={`absolute ${nav === "AI" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
+           AI Assistant <span className={`absolute ${nav === "AI" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
             </Link>
             <Link
               href={"/pricing"}
@@ -102,7 +103,7 @@ const Navbar = () => {
           </div>
         </div>
       </div> */}
-      <div className=" justify-end items-center flex gap-5 h-full py-3 flex-1">
+      <div className="  gap-5 justify-end items-center flex h-full py-3 md:flex-1">
         <Link href={'/notifications'} className="cursor-pointer relative p-1.5">
  <BellIcon size={22} className="text-white" />
  <span className="bg-white p-0.5  text-center flex justify-center items-center text-xl rounded-full top-0 right-0 absolute">
@@ -113,6 +114,10 @@ const Navbar = () => {
         
       <div>
         <Profile />
+      </div>
+      <div className="block md:hidden">
+ <MenuIcon size={22} className="text-white" />
+
       </div>
       </div>
       </div>

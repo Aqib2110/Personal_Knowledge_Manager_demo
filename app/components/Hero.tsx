@@ -11,20 +11,20 @@ const Hero = () => {
   return (
     <div className="min-h-screen relative z-1 bg-[url('/personal_knowledge_manager_bg.png')] bg-cover bg-center ">
       <div className='absolute inset-0 z-[-1] bg-black/50'></div>
-  <div className="flex flex-col pr-[6%] justify-center items-center">
+  <div className="flex flex-col  px-6 md:px-0 pr-auto lg:pr-[6%]  justify-center items-center">
         <motion.h1 
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5 }}
 
-        className="text-5xl pt-8 mx-auto text-white font-extrabold">
+        className="text-5xl pt-8  text-center text-white font-extrabold">
           Your Personal Knowledge Manager
         </motion.h1>
         <motion.p
          initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay:0.3 }}
-        className="text-white pt-2 font-semibold text-2xl">
+        className="text-white text-center pt-2 font-semibold text-2xl">
           Organize, Summarize and Discover Insights With Ease.
         </motion.p>
       </div>
@@ -32,8 +32,8 @@ const Hero = () => {
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay:0.6 }}
-      className=" flex items-center  mt-3 w-full">
-        <div className="h-full w-1/4 pt-3 flex justify-center   py-2">
+      className=" hidden flex-col md:flex md:flex-row gap-5 items-center  justify-center lg:justify-start  mt-3 w-full">
+        <div className="h-full w-full md:w-fit lg:w-1/4 pt-3 flex justify-center   py-2">
           <span className="bg-blue-500 flex items-center gap-2 cursor-pointer rounded-md px-9 py-2.5 text-white">
              <span className=" text-white">
              <UploadIcon size={18} className=" text-white " />
@@ -42,24 +42,51 @@ const Hero = () => {
           </span>
         </div>
 
-        <div className="w-3/4 flex ">
-          <div className="border w-[60%] rounded-md bg-white border-gray-300 px-3 py-3   flex  items-center gap-2">
+        <div className="lg:w-3/4 w-full  justify-center md:justify-start md:w-fit flex ">
+          <div className=" w-100 lg:w-[60%] rounded-md bg-white border-gray-300 px-3 py-3   flex  items-center gap-2">
             <SearchIcon size={20} className="text-gray-500 " />
             <input
               type="text"
               placeholder="Search your knowledge..."
-              className="w-full text-sm  rounded-md text-gray-700 outline-none bg-white"
+              className="w-full  text-sm  rounded-md text-gray-700 outline-none bg-white"
             />
           </div>
         </div>
       </motion.div>
-      <div className="w-full pt-2 pb-3 flex flex-1 px-5">
-<div className=" flex gap-5 flex-1">
+        <motion.div
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.5, delay:0.6 }}
+      className=" flex flex-col md:hidden md:flex-row items-center gap-1 justify-center lg:justify-start  mt-3 w-full">
+       
+
+        <div className="px-6  w-full  justify-center md:justify-start md:w-fit flex ">
+          <div className=" w-full rounded-md bg-white border-gray-300 px-3 py-3   flex  items-center gap-2">
+            <SearchIcon size={20} className="text-gray-500 " />
+            <input
+              type="text"
+              placeholder="Search your knowledge..."
+              className="w-full  text-sm  rounded-md text-gray-700 outline-none bg-white"
+            />
+          </div>
+        </div>
+
+         <div className="h-full w-full  md:w-fit lg:w-1/4 pt-3 flex justify-center   py-2">
+          <span className="bg-blue-500 flex items-center gap-2 cursor-pointer rounded-md px-9 py-2.5 text-white">
+             <span className=" text-white">
+             <UploadIcon size={18} className=" text-white " />
+            </span>
+            Upload Document
+          </span>
+        </div>
+      </motion.div>
+      <div className="w-full pt-2 pb-3 flex flex-1 px-6">
+<div className=" flex flex-col md:flex-row   gap-5 flex-1">
 <motion.div 
  initial={{ opacity: 0, x: -20 }}
   animate={{ opacity: 1, x: 0 }}
   transition={{ duration: 0.5, delay:0.9 }}
-className="bg-white/90 border-white/10 w-[20%] h-fit rounded-xl pb-2 px-4">
+className="bg-white/90 border-white/10 w-full lg:w-[20%] h-fit rounded-xl pb-2 px-4">
 <div className="">
 <div className="flex justify-between items-center pt-3  border-black">
   
@@ -144,7 +171,7 @@ Recent Files
  initial={{ opacity: 0, x: -20 }}
 animate={{ opacity: 1, x: 0 }}
 transition={{ duration: 0.5, delay:1.2 }}
-className="  bg-white/90  border-white/10 h-fit w-[50%] rounded-xl border px-4">
+className="  bg-white/90  border-white/10 h-fit w-full lg:w-[50%] rounded-xl border px-4">
   <div>
    <h1 className="text-xl pt-5 font-bold text-black">Smart Summary</h1>
    <div className="border-gray-300 pt-1 border-b"></div>
@@ -177,7 +204,7 @@ className="  bg-white/90  border-white/10 h-fit w-[50%] rounded-xl border px-4">
  initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay:1.5 }}
-className=" bg-white/90  h-fit w-[30%] pb-5 rounded-xl border px-5">
+className=" bg-white/90  h-fit w-full lg:w-[30%] pb-5 rounded-xl border px-5">
 <div>
 <div className=" flex justify-between items-center pt-3  border-black ">
   
