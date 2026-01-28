@@ -25,7 +25,6 @@ export default function Roles() {
   return (
     <div className="flex pt-[60px] h-screen bg-gray-50">
       
-      {/* LEFT SIDEBAR – WORKSPACES */}
       <aside className="w-72 border-r bg-white p-4">
         <h2 className="mb-4 text-sm font-semibold text-gray-500">
           Workspaces
@@ -43,10 +42,8 @@ export default function Roles() {
         </div>
       </aside>
 
-      {/* MAIN CONTENT */}
       <main className="flex-1 overflow-auto p-8 space-y-8">
 
-        {/* HEADER */}
         <div>
           <h1 className="text-2xl font-semibold">Product Team</h1>
           <p className="text-sm text-gray-500">
@@ -54,7 +51,6 @@ export default function Roles() {
           </p>
         </div>
 
-        {/* INVITE MEMBERS */}
         <div className="rounded-xl bg-white p-6 shadow-sm">
           <h3 className="mb-4 text-lg font-semibold">Invite Members</h3>
 
@@ -76,7 +72,6 @@ export default function Roles() {
           </div>
         </div>
 
-        {/* MEMBERS TABLE */}
         <div className="rounded-xl bg-white p-6 shadow-sm">
           <h3 className="mb-4 text-lg font-semibold">Members</h3>
 
@@ -114,7 +109,6 @@ export default function Roles() {
           </div>
         </div>
 
-        {/* ROLES EXPLANATION */}
         <div className="rounded-xl bg-white p-6 shadow-sm">
           <h3 className="mb-4 text-lg font-semibold">Roles & Permissions</h3>
 

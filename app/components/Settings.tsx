@@ -9,12 +9,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 const Settings = () => {
     return (
         <div className='min-h-screen bg-gray-50 px-6 pb-6 pt-[60px]'>
-            <div className="mx-auto max-w-5xl space-y-8"> {/* Header */}
+            <div className="mx-auto max-w-5xl space-y-8"> 
 
                 <div> <h1 className="text-3xl font-semibold text-gray-900">Settings</h1>
                     <p className="mt-1 text-gray-500">Manage your account, preferences, and workspace</p> </div>
 
-                {/* Profile Section */}
                 <Card className="rounded-2xl">
                     <CardHeader>
                         <CardTitle>Profile</CardTitle>
@@ -34,7 +33,6 @@ const Settings = () => {
                     </CardContent>
                 </Card>
 
-                {/* Workspace Settings */}
                 <Card className="rounded-2xl">
                     <CardHeader>
                         <CardTitle>Workspace</CardTitle>
@@ -51,7 +49,6 @@ const Settings = () => {
                     </CardContent>
                 </Card>
 
-                {/* Notifications */}
                 <Card className="rounded-2xl">
                     <CardHeader>
                         <CardTitle>Notifications</CardTitle>
@@ -72,7 +69,6 @@ const Settings = () => {
                     </CardContent>
                 </Card>
 
-                {/* Security */}
                 <Card className="rounded-2xl">
                     <CardHeader>
                         <CardTitle>Security</CardTitle>
@@ -85,7 +81,6 @@ const Settings = () => {
 
                 <Separator />
 
-                {/* Danger Zone */}
                 <Card className="rounded-2xl border-red-200">
                     <CardHeader>
                         <CardTitle className="text-red-600">Danger Zone</CardTitle>

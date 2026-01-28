@@ -14,7 +14,7 @@ const workspaces = [ { name: "Acme Inc", documents: ["Product Requirements", "De
 
 
  export default function AnalyticsPage() {
- return ( <div className="min-h-screen pt-[60px] bg-gray-50 flex"> {/* Sidebar */} 
+ return ( <div className="min-h-screen pt-[60px] bg-gray-50 flex"> 
  <aside className="w-72 border-r border-gray-200 bg-white"> 
     <div className="p-5 border-b border-gray-200"> 
         <h2 className="font-semibold text-gray-900">Workspaces</h2> 
@@ -25,13 +25,11 @@ className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100"
 
 > {doc} </li> ))} </ul> </div> ))} </div> </ScrollArea> </aside>
 
-{/* Main Content */}
   <main className="flex-1 p-8 space-y-10">
     <h1 className="text-3xl font-semibold text-gray-900">
       Analytics Overview
     </h1>
 
-    {/* 1️⃣ KPI Section */}
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {kpis.map((kpi) => (
         <Card key={kpi.label} className="bg-white border-gray-200">
@@ -45,7 +43,6 @@ className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100"
       ))}
     </div>
 
-    {/* 3️⃣ Document Usage Analytics */}
     <Card className="bg-white border-gray-200">
       <CardHeader>
         <CardTitle>Most Used Documents</CardTitle>
@@ -62,7 +59,6 @@ className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100"
       </CardContent>
     </Card>
 
-    {/* 5️⃣ AI Usage Trend Over Time */}
     <Card className="bg-white border-gray-200">
       <CardHeader>
         <CardTitle>AI Questions Over Time</CardTitle>
