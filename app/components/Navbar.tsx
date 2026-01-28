@@ -2,20 +2,23 @@
 import React from "react";
 import { SearchIcon } from "lucide-react";
 import { BellIcon,MenuIcon } from "lucide-react";
-
+import MobNav from "./MobNav";
 import { KnowledgeIcon } from "./KnowlegeIcon";
 import { Profile } from "./Profile";
 import Link from "next/link";
 import { useState } from "react";
 const Navbar = () => {
   const [nav, setnav] = useState("Dashboard");
+  const [sidebar, setsidebar] = useState(false);
   return (
     <div className="px-5 w-full h-[60px] border-b fixed top-0  border-white/10  bg-gradient-to-r from-slate-900 to-[#0B1E36]">
-      <div className="flex h-full  justify-between items-center  gap-2">
+      <div className="flex h-full  justify-between items-center  ">
         <div className="flex h-full    md:flex-4 ">
-          <div className=" flex  flex-5 gap-5 justify-between items-center">
+          <div className=" flex  flex-5  justify-between items-center">
 
-
+<div className={`${sidebar ? "block" : "hidden" }`}>
+  <MobNav sidebar={sidebar} setsidebar={setsidebar}/>
+</div>
 
 
  <div className="flex h-full  justify-center py-3  items-center gap-2">
@@ -26,8 +29,8 @@ const Navbar = () => {
               Knowledge<span className="text-white">Hub</span>{" "}
             </span>
           </div>
-
-          <div className=" hidden h-full md:flex  justify-center gap-5 lg:gap-15">
+          
+          <div className="hidden h-full md:flex justify-center gap-5 md:gap-8 lg:gap-15">
            
             <Link
               href={"/"}
@@ -58,12 +61,12 @@ const Navbar = () => {
             </Link>
             <Link
               href={"/ai"}
-              className={`relative py-3 text-white  h-full justify-center font-semibold flex items-center  gap-5 rounded-md `}
+              className={`relative py-3 text-white text-center h-full justify-center font-semibold flex items-center  gap-5 rounded-md `}
               onClick={() => {
                 setnav("AI");
               }}
             >
-           AI Assistant <span className={`absolute ${nav === "AI" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
+           AI Assistant <span className={`absolute  ${nav === "AI" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
             </Link>
             <Link
               href={"/pricing"}
@@ -116,7 +119,7 @@ const Navbar = () => {
         <Profile />
       </div>
       <div className="block md:hidden">
- <MenuIcon size={22} className="text-white" />
+ <MenuIcon size={22} className="text-white" onClick={()=>{setsidebar(true);}} />
 
       </div>
       </div>
