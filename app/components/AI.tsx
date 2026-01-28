@@ -191,52 +191,52 @@ const AI = () => {
   const [loadingVal, setloadingVal] = useState('.');
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if(timer)
-    {
-    timerRef.current = setInterval(() => {
-  setloadingVal(prev=>{
-  if(prev.length === 1) return '..';
-   if(prev.length === 2) return '...';
-   return '.'
-  })
-  },300)
-   }
-  return ()=>{
-    if(timerRef.current)
-    clearInterval(timerRef.current);
-     }
+  // useEffect(() => {
+  //   if(timer)
+  //   {
+  //   timerRef.current = setInterval(() => {
+  // setloadingVal(prev=>{
+  // if(prev.length === 1) return '..';
+  //  if(prev.length === 2) return '...';
+  //  return '.'
+  // })
+  // },300)
+  //  }
+  // return ()=>{
+  //   if(timerRef.current)
+  //   clearInterval(timerRef.current);
+  //    }
 
-  }, [timer])
+  // }, [timer])
 
 
 
-  useEffect(() => {
-   fetch("/api/workspace")
-   .then(res=>res.json())
-   .then(data=>{
-    if(!data.success)
-    {
-     alert("error while getting workspaces");
-     return;
-    }
-    setorganization(data.workspaces);
-   })
-  }, [])
+  // useEffect(() => {
+  //  fetch("/api/workspace")
+  //  .then(res=>res.json())
+  //  .then(data=>{
+  //   if(!data.success)
+  //   {
+  //    alert("error while getting workspaces");
+  //    return;
+  //   }
+  //   setorganization(data.workspaces);
+  //  })
+  // }, [])
 
-    useEffect(() => {
-   fetch(`/api/documents/${documentId}/chats`)
-   .then(res=>{
-    if(!res.ok)
-      {
-    throw new Error(`HTTP error! Status: ${res.status}`)
-     }
-   return res.json();
-   })
-   .then((data:any)=>{
-    setchats(data.chats);
-   })
-  }, [documentId])
+  //   useEffect(() => {
+  //  fetch(`/api/documents/${documentId}/chats`)
+  //  .then(res=>{
+  //   if(!res.ok)
+  //     {
+  //   throw new Error(`HTTP error! Status: ${res.status}`)
+  //    }
+  //  return res.json();
+  //  })
+  //  .then((data:any)=>{
+  //   setchats(data.chats);
+  //  })
+  // }, [documentId])
   
   const handleSend = async(id:string)=>{
     if(!inputRef.current)return;
