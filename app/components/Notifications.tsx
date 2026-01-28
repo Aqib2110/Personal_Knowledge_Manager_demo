@@ -8,7 +8,7 @@ import {
 
 export default function Notifications() {
   return (
-    <div className="min-h-screen bg-gray-50 p-8">
+    <div className="min-h-screen  bg-gray-50 px-8 pb-8 pt-[60px]">
       
       <div className="mb-8">
         <h1 className="text-2xl font-semibold">Notifications</h1>
