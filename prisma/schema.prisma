@@ -23,6 +23,8 @@ model workspace{
   userId String
   slug String @unique
   documents document[]
+  chats chat[]
+  projects project[]
   user user @relation(fields: [userId], references: [id])
 }
 
@@ -35,7 +37,10 @@ fileUrl String
 fileName String
 status String @default("processing")
 createdAt DateTime @default(now())
+projectId String
 sections  section[]
+chats chat[]
+project project @relation(fields: [projectId],references: [id])
 workspace workspace @relation(fields: [workspaceId], references: [id])
 user user @relation(fields: [userId], references: [id])
 }
@@ -48,4 +53,23 @@ model section{
   content String
   keywords String
   document document @relation(fields: [documentId], references: [id])
+}
+
+model chat{
+  id String @id @default(uuid())
+  message String
+  userId String
+  documentId String
+  workspaceId String
+  workspace workspace @relation(fields: [workspaceId],references: [id])
+  document document @relation(fields: [documentId],references: [id])
+}
+
+model project{
+  id String @unique @default(uuid())
+  name String
+  workspaceId String
+  userId String
+  documents document[]
+  workspace workspace @relation(fields: [workspaceId],references: [id])
 }

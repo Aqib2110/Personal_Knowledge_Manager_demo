@@ -12,15 +12,15 @@
  */
 
 import * as runtime from "@prisma/client/runtime/client"
-import type * as Prisma from "./prismaNamespace.ts"
+import type * as Prisma from "./prismaNamespace"
 
 
 const config: runtime.GetPrismaClientConfig = {
   "previewFeatures": [],
-  "clientVersion": "7.2.0",
-  "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
+  "clientVersion": "7.3.0",
+  "engineVersion": "9d6ad21cbbceab97458517b147a6a09ff43aa735",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel user {\n  id         String      @id @default(uuid())\n  email      String      @unique\n  name       String\n  password   String?\n  workspaces workspace[]\n  documents  document[]\n}\n\nmodel workspace {\n  id        String     @id @default(uuid())\n  name      String\n  userId    String\n  slug      String     @unique\n  documents document[]\n  user      user       @relation(fields: [userId], references: [id])\n}\n\nmodel document {\n  id          String    @id @default(uuid())\n  title       String\n  workspaceId String\n  userId      String\n  fileUrl     String\n  fileName    String\n  status      String    @default(\"processing\")\n  createdAt   DateTime  @default(now())\n  sections    section[]\n  workspace   workspace @relation(fields: [workspaceId], references: [id])\n  user        user      @relation(fields: [userId], references: [id])\n}\n\nmodel section {\n  id         String   @id @default(uuid())\n  documentId String\n  time       String?\n  title      String\n  content    String\n  keywords   String\n  document   document @relation(fields: [documentId], references: [id])\n}\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel user {\n  id         String      @id @default(uuid())\n  email      String      @unique\n  name       String\n  password   String?\n  workspaces workspace[]\n  documents  document[]\n}\n\nmodel workspace {\n  id        String     @id @default(uuid())\n  name      String\n  userId    String\n  slug      String     @unique\n  documents document[]\n  chats     chat[]\n  projects  project[]\n  user      user       @relation(fields: [userId], references: [id])\n}\n\nmodel document {\n  id          String    @id @default(uuid())\n  title       String\n  workspaceId String\n  userId      String\n  fileUrl     String\n  fileName    String\n  status      String    @default(\"processing\")\n  createdAt   DateTime  @default(now())\n  projectId   String\n  sections    section[]\n  chats       chat[]\n  project     project   @relation(fields: [projectId], references: [id])\n  workspace   workspace @relation(fields: [workspaceId], references: [id])\n  user        user      @relation(fields: [userId], references: [id])\n}\n\nmodel section {\n  id         String   @id @default(uuid())\n  documentId String\n  time       String?\n  title      String\n  content    String\n  keywords   String\n  document   document @relation(fields: [documentId], references: [id])\n}\n\nmodel chat {\n  id          String    @id @default(uuid())\n  message     String\n  userId      String\n  documentId  String\n  workspaceId String\n  workspace   workspace @relation(fields: [workspaceId], references: [id])\n  document    document  @relation(fields: [documentId], references: [id])\n}\n\nmodel project {\n  id          String     @unique @default(uuid())\n  name        String\n  workspaceId String\n  userId      String\n  documents   document[]\n  workspace   workspace  @relation(fields: [workspaceId], references: [id])\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"user\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaces\",\"kind\":\"object\",\"type\":\"workspace\",\"relationName\":\"userToworkspace\"},{\"name\":\"documents\",\"kind\":\"object\",\"type\":\"document\",\"relationName\":\"documentTouser\"}],\"dbName\":null},\"workspace\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"documents\",\"kind\":\"object\",\"type\":\"document\",\"relationName\":\"documentToworkspace\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"userToworkspace\"}],\"dbName\":null},\"document\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fileUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fileName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"sections\",\"kind\":\"object\",\"type\":\"section\",\"relationName\":\"documentTosection\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"workspace\",\"relationName\":\"documentToworkspace\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"documentTouser\"}],\"dbName\":null},\"section\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"documentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"time\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"keywords\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"document\",\"kind\":\"object\",\"type\":\"document\",\"relationName\":\"documentTosection\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"user\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaces\",\"kind\":\"object\",\"type\":\"workspace\",\"relationName\":\"userToworkspace\"},{\"name\":\"documents\",\"kind\":\"object\",\"type\":\"document\",\"relationName\":\"documentTouser\"}],\"dbName\":null},\"workspace\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slug\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"documents\",\"kind\":\"object\",\"type\":\"document\",\"relationName\":\"documentToworkspace\"},{\"name\":\"chats\",\"kind\":\"object\",\"type\":\"chat\",\"relationName\":\"chatToworkspace\"},{\"name\":\"projects\",\"kind\":\"object\",\"type\":\"project\",\"relationName\":\"projectToworkspace\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"userToworkspace\"}],\"dbName\":null},\"document\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fileUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fileName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"status\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"projectId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sections\",\"kind\":\"object\",\"type\":\"section\",\"relationName\":\"documentTosection\"},{\"name\":\"chats\",\"kind\":\"object\",\"type\":\"chat\",\"relationName\":\"chatTodocument\"},{\"name\":\"project\",\"kind\":\"object\",\"type\":\"project\",\"relationName\":\"documentToproject\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"workspace\",\"relationName\":\"documentToworkspace\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"user\",\"relationName\":\"documentTouser\"}],\"dbName\":null},\"section\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"documentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"time\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"keywords\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"document\",\"kind\":\"object\",\"type\":\"document\",\"relationName\":\"documentTosection\"}],\"dbName\":null},\"chat\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"message\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"documentId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"workspace\",\"relationName\":\"chatToworkspace\"},{\"name\":\"document\",\"kind\":\"object\",\"type\":\"document\",\"relationName\":\"chatTodocument\"}],\"dbName\":null},\"project\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"workspaceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"documents\",\"kind\":\"object\",\"type\":\"document\",\"relationName\":\"documentToproject\"},{\"name\":\"workspace\",\"kind\":\"object\",\"type\":\"workspace\",\"relationName\":\"projectToworkspace\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -37,12 +37,14 @@ async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Modul
 }
 
 config.compilerWasm = {
-  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_bg.postgresql.mjs"),
+  getRuntime: async () => await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.mjs"),
 
   getQueryCompilerWasmModule: async () => {
-    const { wasm } = await import("@prisma/client/runtime/query_compiler_bg.postgresql.wasm-base64.mjs")
+    const { wasm } = await import("@prisma/client/runtime/query_compiler_fast_bg.postgresql.wasm-base64.mjs")
     return await decodeBase64AsWasm(wasm)
-  }
+  },
+
+  importName: "./query_compiler_fast_bg.js"
 }
 
 
@@ -213,6 +215,26 @@ export interface PrismaClient<
     * ```
     */
   get section(): Prisma.sectionDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.chat`: Exposes CRUD operations for the **chat** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Chats
+    * const chats = await prisma.chat.findMany()
+    * ```
+    */
+  get chat(): Prisma.chatDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.project`: Exposes CRUD operations for the **project** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Projects
+    * const projects = await prisma.project.findMany()
+    * ```
+    */
+  get project(): Prisma.projectDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

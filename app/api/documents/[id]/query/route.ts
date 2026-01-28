@@ -5,15 +5,14 @@ import { runQuery } from "@/lib/query";
 export async function POST(req:NextRequest,{params}:{params:{id:string}})
 {
  try {
-    //    const router = useRouter();
     const id = params.id;
-    const { query } = await req.json();
+    const { query,workspaceId,userId } = await req.json();
 
     if(!id || !query)
     {
         return NextResponse.json({error:"Missing id or query"}, {status:400});
     }
-    
+
     const document = await prisma.document.findUnique({
         where:{
             id:id as string
@@ -25,13 +24,20 @@ export async function POST(req:NextRequest,{params}:{params:{id:string}})
     }
     
 
-    const answer = await runQuery(document.sections, query);
-
+    const answer = await runQuery(document?.sections,query);
+      await prisma.chat.create({
+        data:{
+            message:JSON.stringify({question:query,answer:answer}),
+            userId,
+            documentId:id,
+            workspaceId
+        }
+      })
     return NextResponse.json({
         question:query,
         answer,
         documentId:id
-    })
+    },{status:200})
  } catch (error) {
     console.error("Error in query route:", error);
     return NextResponse.json({error:"Internal Server Error"}, {status:500});

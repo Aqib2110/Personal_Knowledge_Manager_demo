@@ -3,6 +3,7 @@ import React from "react";
 import { SearchIcon } from "lucide-react";
 import { BellIcon } from "lucide-react";
 import { KnowledgeIcon } from "./KnowlegeIcon";
+import { Profile } from "./Profile";
 import Link from "next/link";
 import { useState } from "react";
 const Navbar = () => {
@@ -10,8 +11,8 @@ const Navbar = () => {
   return (
     <div className="px-5 w-full h-[60px] border-b fixed top-0  border-white/10  bg-gradient-to-r from-slate-900 to-[#0B1E36]">
       <div className="flex h-full  justify-between items-center  gap-2">
-        <div className="flex h-full    flex-2 ">
-          <div className=" flex  flex-2 justify-between items-center">
+        <div className="flex h-full    flex-4 ">
+          <div className=" flex  flex-5  justify-between items-center">
 
 
 
@@ -25,7 +26,7 @@ const Navbar = () => {
             </span>
           </div>
 
-          <div className=" flex h-full  justify-center  gap-12">
+          <div className=" flex h-full  justify-center  gap-15">
            
             <Link
               href={"/"}
@@ -63,6 +64,24 @@ const Navbar = () => {
             >
             AI Assistant <span className={`absolute ${nav === "AI" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
             </Link>
+            <Link
+              href={"/pricing"}
+              className={`relative py-3 text-white  h-full justify-center font-semibold flex items-center  gap-5 rounded-md `}
+              onClick={() => {
+                setnav("Pricing");
+              }}
+            >
+            Pricing <span className={`absolute ${nav === "Pricing" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
+            </Link>
+             <Link
+              href={"/analytics"}
+              className={`relative py-3 text-white  h-full justify-center font-semibold flex items-center  gap-5 rounded-md `}
+              onClick={() => {
+                setnav("Analytics");
+              }}
+            >
+            Analytics <span className={`absolute ${nav === "Analytics" ? "block" : "hidden"} bottom-0 w-full  border`}> </span>
+            </Link>
           </div>
 
 
@@ -74,7 +93,7 @@ const Navbar = () => {
           
         </div>
 
-        <div className=" h-full py-3 flex-1">
+        {/* <div className=" h-full py-3 flex-1">
           <div className="flex h-full justify-end gap-5 items-center ">
             <BellIcon size={22} className="text-white" />
             <div className="rounded-full flex justify-center items-center border border-gray-500 w-8 h-8">
@@ -82,6 +101,20 @@ const Navbar = () => {
             </div>
           </div>
         </div>
+      </div> */}
+      <div className=" justify-end items-center flex gap-5 h-full py-3 flex-1">
+        <Link href={'/notifications'} className="cursor-pointer relative p-1.5">
+ <BellIcon size={22} className="text-white" />
+ <span className="bg-white p-0.5  text-center flex justify-center items-center text-xl rounded-full top-0 right-0 absolute">
+ <span className="p-1 bg-blue-500 rounded-full"></span>
+ 
+ </span>
+        </Link>
+        
+      <div>
+        <Profile />
+      </div>
+      </div>
       </div>
 
       {/* <div className='w-[18vw] flex text-gray-700 items-center px-5 gap-2'>

@@ -17,8 +17,8 @@
 
 import * as runtime from "@prisma/client/runtime/index-browser"
 
-export type * from '../models.ts'
-export type * from './prismaNamespace.ts'
+export type * from '../models'
+export type * from './prismaNamespace'
 
 export const Decimal = runtime.Decimal
 
@@ -54,7 +54,9 @@ export const ModelName = {
   user: 'user',
   workspace: 'workspace',
   document: 'document',
-  section: 'section'
+  section: 'section',
+  chat: 'chat',
+  project: 'project'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -63,12 +65,12 @@ export type ModelName = (typeof ModelName)[keyof typeof ModelName]
  * Enums
  */
 
-export const TransactionIsolationLevel = {
+export const TransactionIsolationLevel = runtime.makeStrictEnum({
   ReadUncommitted: 'ReadUncommitted',
   ReadCommitted: 'ReadCommitted',
   RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
-} as const
+} as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
@@ -101,7 +103,8 @@ export const DocumentScalarFieldEnum = {
   fileUrl: 'fileUrl',
   fileName: 'fileName',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  projectId: 'projectId'
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
@@ -117,6 +120,27 @@ export const SectionScalarFieldEnum = {
 } as const
 
 export type SectionScalarFieldEnum = (typeof SectionScalarFieldEnum)[keyof typeof SectionScalarFieldEnum]
+
+
+export const ChatScalarFieldEnum = {
+  id: 'id',
+  message: 'message',
+  userId: 'userId',
+  documentId: 'documentId',
+  workspaceId: 'workspaceId'
+} as const
+
+export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]
+
+
+export const ProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  workspaceId: 'workspaceId',
+  userId: 'userId'
+} as const
+
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
 export const SortOrder = {

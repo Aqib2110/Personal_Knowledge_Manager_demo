@@ -16,10 +16,10 @@
  */
 
 import * as runtime from "@prisma/client/runtime/client"
-import type * as Prisma from "../models.ts"
-import { type PrismaClient } from "./class.ts"
+import type * as Prisma from "../models"
+import { type PrismaClient } from "./class"
 
-export type * from '../models.ts'
+export type * from '../models'
 
 export type DMMF = typeof runtime.DMMF
 
@@ -80,12 +80,12 @@ export type PrismaVersion = {
 }
 
 /**
- * Prisma Client JS version: 7.2.0
- * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
+ * Prisma Client JS version: 7.3.0
+ * Query Engine version: 9d6ad21cbbceab97458517b147a6a09ff43aa735
  */
 export const prismaVersion: PrismaVersion = {
-  client: "7.2.0",
-  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
+  client: "7.3.0",
+  engine: "9d6ad21cbbceab97458517b147a6a09ff43aa735"
 }
 
 /**
@@ -387,7 +387,9 @@ export const ModelName = {
   user: 'user',
   workspace: 'workspace',
   document: 'document',
-  section: 'section'
+  section: 'section',
+  chat: 'chat',
+  project: 'project'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -403,7 +405,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "workspace" | "document" | "section"
+    modelProps: "user" | "workspace" | "document" | "section" | "chat" | "project"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -703,6 +705,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    chat: {
+      payload: Prisma.$chatPayload<ExtArgs>
+      fields: Prisma.chatFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.chatFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.chatFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>
+        }
+        findFirst: {
+          args: Prisma.chatFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.chatFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>
+        }
+        findMany: {
+          args: Prisma.chatFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>[]
+        }
+        create: {
+          args: Prisma.chatCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>
+        }
+        createMany: {
+          args: Prisma.chatCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.chatCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>[]
+        }
+        delete: {
+          args: Prisma.chatDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>
+        }
+        update: {
+          args: Prisma.chatUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>
+        }
+        deleteMany: {
+          args: Prisma.chatDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.chatUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.chatUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>[]
+        }
+        upsert: {
+          args: Prisma.chatUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$chatPayload>
+        }
+        aggregate: {
+          args: Prisma.ChatAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateChat>
+        }
+        groupBy: {
+          args: Prisma.chatGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.chatCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ChatCountAggregateOutputType> | number
+        }
+      }
+    }
+    project: {
+      payload: Prisma.$projectPayload<ExtArgs>
+      fields: Prisma.projectFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.projectFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.projectFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>
+        }
+        findFirst: {
+          args: Prisma.projectFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.projectFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>
+        }
+        findMany: {
+          args: Prisma.projectFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>[]
+        }
+        create: {
+          args: Prisma.projectCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>
+        }
+        createMany: {
+          args: Prisma.projectCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.projectCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>[]
+        }
+        delete: {
+          args: Prisma.projectDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>
+        }
+        update: {
+          args: Prisma.projectUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>
+        }
+        deleteMany: {
+          args: Prisma.projectDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.projectUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.projectUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>[]
+        }
+        upsert: {
+          args: Prisma.projectUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$projectPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProject>
+        }
+        groupBy: {
+          args: Prisma.projectGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.projectCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -770,7 +920,8 @@ export const DocumentScalarFieldEnum = {
   fileUrl: 'fileUrl',
   fileName: 'fileName',
   status: 'status',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  projectId: 'projectId'
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
@@ -786,6 +937,27 @@ export const SectionScalarFieldEnum = {
 } as const
 
 export type SectionScalarFieldEnum = (typeof SectionScalarFieldEnum)[keyof typeof SectionScalarFieldEnum]
+
+
+export const ChatScalarFieldEnum = {
+  id: 'id',
+  message: 'message',
+  userId: 'userId',
+  documentId: 'documentId',
+  workspaceId: 'workspaceId'
+} as const
+
+export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]
+
+
+export const ProjectScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  workspaceId: 'workspaceId',
+  userId: 'userId'
+} as const
+
+export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -958,6 +1130,8 @@ export type GlobalOmitConfig = {
   workspace?: Prisma.workspaceOmit
   document?: Prisma.documentOmit
   section?: Prisma.sectionOmit
+  chat?: Prisma.chatOmit
+  project?: Prisma.projectOmit
 }
 
 /* Types for Logging */
