@@ -263,20 +263,22 @@ const AI = () => {
     <div className='h-screen w-full flex bg-gray-50 pt-[60px]'>
       <div className='flex md:px-3  flex-1 md:py-4 '>
 
-       <div className={`border ${!sidebar ? "w-[8%]" : "w-[80%]"} md:w-[20%]  md:mt-0 mt-[60px] h-screen fixed top-0 left-0 `}>
+       <div className={`border ${!sidebar ? "w-[8%]" : "w-[80%]"} lg:w-[25%]  md:w-[30%]  md:mt-0 mt-[60px] h-screen md:h-full md:relative fixed top-0 left-0 `}>
 
 
 
  <div className='w-full h-full bg-white relative border-r flex flex-col border-gray-300'>
-  {!sidebar ? <MenuIcon size={15} className='text-black absolute top-1 right-1' onClick={()=>{setsidebar(true);}}/>
-    : <CrossIcon size={15} className='text-black absolute top-1 right-1 rotate-[45deg]' onClick={()=>{setsidebar(false);}}/>
+    {!sidebar ? <MenuIcon size={15} className={`text-black md:hidden  absolute top-1 right-1`} onClick={()=>{setsidebar(true);}}/>
+
+    : <CrossIcon size={15} className={`text-black md:hidden  absolute top-1 right-1 rotate-[45deg]`} onClick={()=>{setsidebar(false);}}/>
+
 }
-          <h2 className={`font-bold ${sidebar ? "block" : "hidden"} text-xl`}>Workspaces</h2>
-          <div className={`py-3 flex ${sidebar ? "block" : "hidden"} overflow-auto flex-col gap-3 flex-1`}>
+          <h2 className={`font-bold ${sidebar ? "block" : "hidden"} md:block text-xl`}>Workspaces</h2>
+          <div className={`py-3 flex ${sidebar ? "block" : "hidden"} md:block overflow-auto flex-col gap-3 flex-1`}>
             {organizations.map((org) => {
               const currItem = organiz.find(item => item.id === org.id);
               return (
-                <ul className='bg-white   text-black border flex  flex-col rounded-md pl-6 pr-2 py-3'>
+                <ul className='bg-white   text-black border  flex  flex-col rounded-md pl-6 pr-2 py-3'>
                   <li className='list-disc px-2 border rounded-md'>
                     <div className='flex cursor-pointer  justify-between items-center' onClick={() => { setorganiz((orgn) => orgn.map(item => item.id === org.id ? { ...item, open: !item.open } : item)) }}>
 
@@ -382,7 +384,7 @@ const AI = () => {
        </div>
 
        
-        <div className=' flex flex-col border  ml-[8%] w-full md:w-[80%]'>
+        <div className=' flex flex-col  px-3  ml-[8%] md:ml-0 w-full md:flex-1'>
           <div className='border flex-1 flex flex-col gap-2 overflow-auto p-3'>
             {chats.map((chat: any) => {
               return chat.message ? <div className=''>

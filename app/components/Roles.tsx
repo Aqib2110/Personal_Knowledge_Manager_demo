@@ -29,17 +29,17 @@ export default function Roles() {
 
   return (
     <div className="flex overflow-auto pt-[60px] border min-h-screen bg-gray-50">
-      <div className="h-full  w-full">
+      <div className="h-full flex  w-full">
 
    
 
- <aside className={`${sidebar ? "w-[80%]" : "w-[8%]"}  h-screen md:w-[20%]  fixed md:relative mt-[60px] md:mt-0 z-10 md:z-0 top-0 left-0 border-r   border-gray-200 bg-white`}> 
+ <aside className={`${sidebar ? "w-[80%]" : "w-[8%]"}  h-screen md:w-[30%] lg:w-[25%]  fixed md:relative mt-[60px] md:mt-0 z-10 md:z-0 top-0 left-0 border-r   border-gray-200 bg-white`}> 
  {sidebar ?  <CrossIcon size={15} className="text-black block md:hidden absolute rotate-[45deg] top-3 right-3" onClick={()=>{setsidebar(false);}}/>
-  : <MenuIcon size={15} className="text-black absolute top-3 right-1" onClick={()=>{setsidebar(true);}} />}
-    <div className={`p-5 ${sidebar ? "block" : "hidden"} border-b border-gray-200`}> 
+  : <MenuIcon size={15} className="text-black block md:hidden absolute top-3 right-1" onClick={()=>{setsidebar(true);}} />}
+    <div className={`p-5 ${sidebar ? "block" : "hidden"} md:block border-b border-gray-200`}> 
         <h2 className="font-semibold text-gray-900">Workspaces</h2>       
         </div>
-         <div className={`${sidebar ? "block" : "hidden"} space-y-1`}>
+         <div className={`${sidebar ? "block" : "hidden"} md:block space-y-1`}>
           {workspaces.map(ws => (
             <button
               key={ws.id}
@@ -71,7 +71,7 @@ export default function Roles() {
         </div>
       </aside> */}
 
-      <main className="pl-[10%]   w-full md:w-[80%] border  p-8 space-y-8">
+      <main className="pl-[10%] md:pl-8   w-full md:w-[80%] border  p-8 space-y-8">
 
         <div>
           <h1 className="text-2xl font-semibold">Product Team</h1>
