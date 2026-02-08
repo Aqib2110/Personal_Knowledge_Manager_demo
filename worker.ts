@@ -2,10 +2,6 @@ import 'dotenv/config';
 
 import { Worker,Job } from "bullmq";
 import IORedis from 'ioredis';
-// import { downloadFile } from '@/lib/s3';
-// import { extractTextFromFile } from '@/lib/parser';
-// import { generateKeywords } from '@/lib/parser';
-// import { prisma } from '@/lib/prisma';
 import { downloadFile } from './lib/s3';
 import { extractTextFromFile } from './lib/parser';
 import { generateKeywords } from './lib/parser';
@@ -16,15 +12,16 @@ const connection = new IORedis({
     maxRetriesPerRequest: null
 })
 console.log("worker has started");
-console.log(process.env.AWS_S3_BUCKET_NAME,process.env.AWS_ACCESS_KEY_ID,process.env.AWS_SECRET_ACCESS_KEY);
+// console.log(process.env.AWS_S3_BUCKET_NAME,process.env.AWS_ACCESS_KEY_ID,process.env.AWS_SECRET_ACCESS_KEY);
 const worker = new Worker('process_document', async (job: Job) => {
-    const { documentId, workspaceId, filePath,fileName } = job.data;
+    console.log("worker reached");
+    const { documentId, workspaceId, filePath,fileName,userId } = job.data;
+    console.log(documentId,"id rech")
   console.log("task has occured");
     if(!documentId || !workspaceId || !filePath) 
     {
         throw new Error("Missing job data");
     }
-    
    try {
     const fileBuffer = await downloadFile(filePath);
     const sections = await extractTextFromFile(fileBuffer,fileName);
@@ -54,6 +51,16 @@ const worker = new Worker('process_document', async (job: Job) => {
     data:{
         status:"completed"
     }
+    })
+
+    await prisma.notification.create({
+       data:{
+        userId,
+        type:"ai_processing",
+        reach:"personal",
+        title:"AI processing completed .",
+        workspaceId
+       }
     })
  
     console.log("document processed successfully");

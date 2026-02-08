@@ -18,11 +18,6 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model user
- * 
- */
-export type user = Prisma.userModel
-/**
  * Model workspace
  * 
  */
@@ -47,3 +42,18 @@ export type chat = Prisma.chatModel
  * 
  */
 export type project = Prisma.projectModel
+/**
+ * Model member
+ * 
+ */
+export type member = Prisma.memberModel
+/**
+ * Model user
+ * 
+ */
+export type user = Prisma.userModel
+/**
+ * Model notification
+ * 
+ */
+export type notification = Prisma.notificationModel

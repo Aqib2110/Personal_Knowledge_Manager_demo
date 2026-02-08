@@ -8,10 +8,12 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/user'
 export type * from './models/workspace'
 export type * from './models/document'
 export type * from './models/section'
 export type * from './models/chat'
 export type * from './models/project'
+export type * from './models/member'
+export type * from './models/user'
+export type * from './models/notification'
 export type * from './commonInputTypes'

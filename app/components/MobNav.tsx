@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link';
 import { useState } from 'react';
-import { CrossIcon,Cross } from 'lucide-react';
+import { Cross } from 'lucide-react';
 const MobNav = ({sidebar,setsidebar}:{sidebar:boolean,setsidebar:React.Dispatch<boolean>}) => {
     const [nav, setnav] = useState("Dashboard");
+     useEffect(() => {
+       const path = window.location.pathname;
+        if(path === "/")setnav("Dashboard");
+        else if(path === "/library")setnav("Library");
+        else if(path === "/tags")setnav("Tags");
+        else if(path === "/ai")setnav("AI");
+        else if(path === "/pricing")setnav("Pricing");
+        else if(path === "/analytics")setnav("Analytics");
+      }, [])
   return (
-    <div className='h-screen absolute top-0 right-0 z-10 w-full bg-gradient-to-r from-slate-900 to-[#0B1E36]'>
-        <div className=" h-full  flex flex-col justify-center items-center gap-20">
+    <div className='h-screen absolute flex justify-center items-center top-0 right-0 z-10 w-full bg-gradient-to-r from-slate-900 to-[#0B1E36]'>
+        <div className=" h-4/5  flex flex-col justify-between items-center">
             <Cross size={22} className='text-white rotate-[45deg] absolute top-3 right-3' onClick={()=>{setsidebar(false);}}/>
                   <Link
                     href={"/"}

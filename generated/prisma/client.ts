@@ -29,8 +29,8 @@ export * from "./enums"
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Users
- * const users = await prisma.user.findMany()
+ * // Fetch zero or more Workspaces
+ * const workspaces = await prisma.workspace.findMany()
  * ```
  * 
  * Read more in our [docs](https://pris.ly/d/client).
@@ -39,11 +39,6 @@ export const PrismaClient = $Class.getPrismaClientClass()
 export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts extends Prisma.PrismaClientOptions["omit"] = Prisma.PrismaClientOptions["omit"], ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = $Class.PrismaClient<LogOpts, OmitOpts, ExtArgs>
 export { Prisma }
 
-/**
- * Model user
- * 
- */
-export type user = Prisma.userModel
 /**
  * Model workspace
  * 
@@ -69,3 +64,18 @@ export type chat = Prisma.chatModel
  * 
  */
 export type project = Prisma.projectModel
+/**
+ * Model member
+ * 
+ */
+export type member = Prisma.memberModel
+/**
+ * Model user
+ * 
+ */
+export type user = Prisma.userModel
+/**
+ * Model notification
+ * 
+ */
+export type notification = Prisma.notificationModel

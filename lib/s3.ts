@@ -1,26 +1,34 @@
 import { GetObject$, GetObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { Readable } from "stream";
 
+// export const s3 = new S3Client({
+//         region:process.env.AWS_REGION,
+//         credentials:{
+//             accessKeyId:process.env.AWS_ACCESS_KEY_ID!,
+//             secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY!
+//         }
+//     });
 export const s3 = new S3Client({
-        region:process.env.AWS_REGION,
+        region:"auto",
+        endpoint:process.env.R2_ENDPOINT,
         credentials:{
-            accessKeyId:process.env.AWS_ACCESS_KEY_ID!,
-            secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY!
+            accessKeyId:process.env.ACCESS_KEY_ID!,
+            secretAccessKey:process.env.SECRET_ACCESS_KEY!
         }
     });
 
 
 export async function s3Upload(fileName:string,buffer:Buffer,fileType:string){
        const uploadParams = {
-            Bucket:process.env.AWS_S3_BUCKET_NAME!,
+            Bucket:process.env.R2_BUCKET,
             Key:fileName,
             Body:buffer,
-            // ContentType:fileType
+            ContentType:fileType
         };
     
         await s3.send(new PutObjectCommand(uploadParams));
 
-    return `https://${process.env.AWS_S3_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${fileName}`;    
+    return `${process.env.R2_ENDPOINT}/${fileName}`;    
 }    
 
 function streamToBuffer(stream:Readable) : Promise<Buffer>
@@ -41,12 +49,13 @@ export async function downloadFile(fileUrl:string) : Promise<Buffer>
 {
     console.log("downloading....................................")
 const url = new URL(fileUrl);
-const bucket = url.hostname.split(".")[0];
-const key = url.pathname.slice(1);
-console.log(key,bucket,url);
+// const bucket = url.hostname.split(".")[0];
+const key = decodeURIComponent(url.pathname.slice(1));
+console.log("s3 rech")
+console.log(key,process.env.R2_BUCKET,url,"url");
 
 const command = new GetObjectCommand({
-    Bucket:bucket,
+    Bucket:process.env.R2_BUCKET,
     Key:key
 })
 

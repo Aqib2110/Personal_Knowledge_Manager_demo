@@ -183,7 +183,7 @@ export async function parsePDFBuffer(fileBuffer: Buffer): Promise<string> {
 
 export async function extractTextFromFile(fileBuffer:Buffer,filename?:String) : Promise<section[]>
 {
-const extension = filename?.split(".")[1];
+const extension = filename?.split(".")[filename?.split(".").length-1];
 console.log(extension);
 let rawText = "";
 // if(extension === "pdf"){

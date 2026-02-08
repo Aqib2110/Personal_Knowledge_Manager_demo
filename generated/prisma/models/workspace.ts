@@ -27,6 +27,7 @@ export type AggregateWorkspace = {
 export type WorkspaceMinAggregateOutputType = {
   id: string | null
   name: string | null
+  role: string | null
   userId: string | null
   slug: string | null
 }
@@ -34,6 +35,7 @@ export type WorkspaceMinAggregateOutputType = {
 export type WorkspaceMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  role: string | null
   userId: string | null
   slug: string | null
 }
@@ -41,6 +43,7 @@ export type WorkspaceMaxAggregateOutputType = {
 export type WorkspaceCountAggregateOutputType = {
   id: number
   name: number
+  role: number
   userId: number
   slug: number
   _all: number
@@ -50,6 +53,7 @@ export type WorkspaceCountAggregateOutputType = {
 export type WorkspaceMinAggregateInputType = {
   id?: true
   name?: true
+  role?: true
   userId?: true
   slug?: true
 }
@@ -57,6 +61,7 @@ export type WorkspaceMinAggregateInputType = {
 export type WorkspaceMaxAggregateInputType = {
   id?: true
   name?: true
+  role?: true
   userId?: true
   slug?: true
 }
@@ -64,6 +69,7 @@ export type WorkspaceMaxAggregateInputType = {
 export type WorkspaceCountAggregateInputType = {
   id?: true
   name?: true
+  role?: true
   userId?: true
   slug?: true
   _all?: true
@@ -144,8 +150,9 @@ export type workspaceGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 export type WorkspaceGroupByOutputType = {
   id: string
   name: string
+  role: string
   userId: string
-  slug: string
+  slug: string | null
   _count: WorkspaceCountAggregateOutputType | null
   _min: WorkspaceMinAggregateOutputType | null
   _max: WorkspaceMaxAggregateOutputType | null
@@ -172,44 +179,54 @@ export type workspaceWhereInput = {
   NOT?: Prisma.workspaceWhereInput | Prisma.workspaceWhereInput[]
   id?: Prisma.StringFilter<"workspace"> | string
   name?: Prisma.StringFilter<"workspace"> | string
+  role?: Prisma.StringFilter<"workspace"> | string
   userId?: Prisma.StringFilter<"workspace"> | string
-  slug?: Prisma.StringFilter<"workspace"> | string
+  slug?: Prisma.StringNullableFilter<"workspace"> | string | null
   documents?: Prisma.DocumentListRelationFilter
   chats?: Prisma.ChatListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  members?: Prisma.MemberListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
 }
 
 export type workspaceOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   documents?: Prisma.documentOrderByRelationAggregateInput
   chats?: Prisma.chatOrderByRelationAggregateInput
   projects?: Prisma.projectOrderByRelationAggregateInput
+  members?: Prisma.memberOrderByRelationAggregateInput
+  notifications?: Prisma.notificationOrderByRelationAggregateInput
   user?: Prisma.userOrderByWithRelationInput
 }
 
 export type workspaceWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  slug?: string
   AND?: Prisma.workspaceWhereInput | Prisma.workspaceWhereInput[]
   OR?: Prisma.workspaceWhereInput[]
   NOT?: Prisma.workspaceWhereInput | Prisma.workspaceWhereInput[]
   name?: Prisma.StringFilter<"workspace"> | string
+  role?: Prisma.StringFilter<"workspace"> | string
   userId?: Prisma.StringFilter<"workspace"> | string
+  slug?: Prisma.StringNullableFilter<"workspace"> | string | null
   documents?: Prisma.DocumentListRelationFilter
   chats?: Prisma.ChatListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
+  members?: Prisma.MemberListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
-}, "id" | "slug">
+}, "id">
 
 export type workspaceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.workspaceCountOrderByAggregateInput
   _max?: Prisma.workspaceMaxOrderByAggregateInput
   _min?: Prisma.workspaceMinOrderByAggregateInput
@@ -221,68 +238,113 @@ export type workspaceScalarWhereWithAggregatesInput = {
   NOT?: Prisma.workspaceScalarWhereWithAggregatesInput | Prisma.workspaceScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"workspace"> | string
   name?: Prisma.StringWithAggregatesFilter<"workspace"> | string
+  role?: Prisma.StringWithAggregatesFilter<"workspace"> | string
   userId?: Prisma.StringWithAggregatesFilter<"workspace"> | string
-  slug?: Prisma.StringWithAggregatesFilter<"workspace"> | string
+  slug?: Prisma.StringNullableWithAggregatesFilter<"workspace"> | string | null
 }
 
 export type workspaceCreateInput = {
   id?: string
   name: string
-  slug: string
+  role?: string
+  slug?: string | null
   documents?: Prisma.documentCreateNestedManyWithoutWorkspaceInput
   chats?: Prisma.chatCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.projectCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutWorkspaceInput
   user: Prisma.userCreateNestedOneWithoutWorkspacesInput
 }
 
 export type workspaceUncheckedCreateInput = {
   id?: string
   name: string
+  role?: string
   userId: string
-  slug: string
+  slug?: string | null
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutWorkspaceInput
   chats?: Prisma.chatUncheckedCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.projectUncheckedCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberUncheckedCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type workspaceUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.documentUpdateManyWithoutWorkspaceNestedInput
   chats?: Prisma.chatUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.projectUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutWorkspaceNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutWorkspacesNestedInput
 }
 
 export type workspaceUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.documentUncheckedUpdateManyWithoutWorkspaceNestedInput
   chats?: Prisma.chatUncheckedUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.projectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type workspaceCreateManyInput = {
   id?: string
   name: string
+  role?: string
   userId: string
-  slug: string
+  slug?: string | null
 }
 
 export type workspaceUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type workspaceUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type workspaceCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+}
+
+export type workspaceMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+}
+
+export type workspaceMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  role?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
+}
+
+export type WorkspaceScalarRelationFilter = {
+  is?: Prisma.workspaceWhereInput
+  isNot?: Prisma.workspaceWhereInput
 }
 
 export type WorkspaceListRelationFilter = {
@@ -295,72 +357,12 @@ export type workspaceOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type workspaceCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
-export type workspaceMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
-}
-
-export type workspaceMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  name?: Prisma.SortOrder
-  userId?: Prisma.SortOrder
-  slug?: Prisma.SortOrder
-}
-
-export type WorkspaceScalarRelationFilter = {
-  is?: Prisma.workspaceWhereInput
-  isNot?: Prisma.workspaceWhereInput
-}
-
-export type workspaceCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.workspaceCreateWithoutUserInput, Prisma.workspaceUncheckedCreateWithoutUserInput> | Prisma.workspaceCreateWithoutUserInput[] | Prisma.workspaceUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutUserInput | Prisma.workspaceCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.workspaceCreateManyUserInputEnvelope
-  connect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-}
-
-export type workspaceUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.workspaceCreateWithoutUserInput, Prisma.workspaceUncheckedCreateWithoutUserInput> | Prisma.workspaceCreateWithoutUserInput[] | Prisma.workspaceUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutUserInput | Prisma.workspaceCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.workspaceCreateManyUserInputEnvelope
-  connect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-}
-
-export type workspaceUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.workspaceCreateWithoutUserInput, Prisma.workspaceUncheckedCreateWithoutUserInput> | Prisma.workspaceCreateWithoutUserInput[] | Prisma.workspaceUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutUserInput | Prisma.workspaceCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.workspaceUpsertWithWhereUniqueWithoutUserInput | Prisma.workspaceUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.workspaceCreateManyUserInputEnvelope
-  set?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-  disconnect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-  delete?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-  connect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-  update?: Prisma.workspaceUpdateWithWhereUniqueWithoutUserInput | Prisma.workspaceUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.workspaceUpdateManyWithWhereWithoutUserInput | Prisma.workspaceUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.workspaceScalarWhereInput | Prisma.workspaceScalarWhereInput[]
-}
-
-export type workspaceUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.workspaceCreateWithoutUserInput, Prisma.workspaceUncheckedCreateWithoutUserInput> | Prisma.workspaceCreateWithoutUserInput[] | Prisma.workspaceUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutUserInput | Prisma.workspaceCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.workspaceUpsertWithWhereUniqueWithoutUserInput | Prisma.workspaceUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.workspaceCreateManyUserInputEnvelope
-  set?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-  disconnect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-  delete?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-  connect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
-  update?: Prisma.workspaceUpdateWithWhereUniqueWithoutUserInput | Prisma.workspaceUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.workspaceUpdateManyWithWhereWithoutUserInput | Prisma.workspaceUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.workspaceScalarWhereInput | Prisma.workspaceScalarWhereInput[]
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
 export type workspaceCreateNestedOneWithoutDocumentsInput = {
@@ -405,22 +407,354 @@ export type workspaceUpdateOneRequiredWithoutProjectsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.workspaceUpdateToOneWithWhereWithoutProjectsInput, Prisma.workspaceUpdateWithoutProjectsInput>, Prisma.workspaceUncheckedUpdateWithoutProjectsInput>
 }
 
-export type workspaceCreateWithoutUserInput = {
+export type workspaceCreateNestedOneWithoutMembersInput = {
+  create?: Prisma.XOR<Prisma.workspaceCreateWithoutMembersInput, Prisma.workspaceUncheckedCreateWithoutMembersInput>
+  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutMembersInput
+  connect?: Prisma.workspaceWhereUniqueInput
+}
+
+export type workspaceUpdateOneRequiredWithoutMembersNestedInput = {
+  create?: Prisma.XOR<Prisma.workspaceCreateWithoutMembersInput, Prisma.workspaceUncheckedCreateWithoutMembersInput>
+  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutMembersInput
+  upsert?: Prisma.workspaceUpsertWithoutMembersInput
+  connect?: Prisma.workspaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.workspaceUpdateToOneWithWhereWithoutMembersInput, Prisma.workspaceUpdateWithoutMembersInput>, Prisma.workspaceUncheckedUpdateWithoutMembersInput>
+}
+
+export type workspaceCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.workspaceCreateWithoutUserInput, Prisma.workspaceUncheckedCreateWithoutUserInput> | Prisma.workspaceCreateWithoutUserInput[] | Prisma.workspaceUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutUserInput | Prisma.workspaceCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.workspaceCreateManyUserInputEnvelope
+  connect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+}
+
+export type workspaceUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.workspaceCreateWithoutUserInput, Prisma.workspaceUncheckedCreateWithoutUserInput> | Prisma.workspaceCreateWithoutUserInput[] | Prisma.workspaceUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutUserInput | Prisma.workspaceCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.workspaceCreateManyUserInputEnvelope
+  connect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+}
+
+export type workspaceUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.workspaceCreateWithoutUserInput, Prisma.workspaceUncheckedCreateWithoutUserInput> | Prisma.workspaceCreateWithoutUserInput[] | Prisma.workspaceUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutUserInput | Prisma.workspaceCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.workspaceUpsertWithWhereUniqueWithoutUserInput | Prisma.workspaceUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.workspaceCreateManyUserInputEnvelope
+  set?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+  disconnect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+  delete?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+  connect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+  update?: Prisma.workspaceUpdateWithWhereUniqueWithoutUserInput | Prisma.workspaceUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.workspaceUpdateManyWithWhereWithoutUserInput | Prisma.workspaceUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.workspaceScalarWhereInput | Prisma.workspaceScalarWhereInput[]
+}
+
+export type workspaceUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.workspaceCreateWithoutUserInput, Prisma.workspaceUncheckedCreateWithoutUserInput> | Prisma.workspaceCreateWithoutUserInput[] | Prisma.workspaceUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutUserInput | Prisma.workspaceCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.workspaceUpsertWithWhereUniqueWithoutUserInput | Prisma.workspaceUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.workspaceCreateManyUserInputEnvelope
+  set?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+  disconnect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+  delete?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+  connect?: Prisma.workspaceWhereUniqueInput | Prisma.workspaceWhereUniqueInput[]
+  update?: Prisma.workspaceUpdateWithWhereUniqueWithoutUserInput | Prisma.workspaceUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.workspaceUpdateManyWithWhereWithoutUserInput | Prisma.workspaceUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.workspaceScalarWhereInput | Prisma.workspaceScalarWhereInput[]
+}
+
+export type workspaceCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.workspaceCreateWithoutNotificationsInput, Prisma.workspaceUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.workspaceWhereUniqueInput
+}
+
+export type workspaceUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.workspaceCreateWithoutNotificationsInput, Prisma.workspaceUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.workspaceCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.workspaceUpsertWithoutNotificationsInput
+  connect?: Prisma.workspaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.workspaceUpdateToOneWithWhereWithoutNotificationsInput, Prisma.workspaceUpdateWithoutNotificationsInput>, Prisma.workspaceUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type workspaceCreateWithoutDocumentsInput = {
   id?: string
   name: string
-  slug: string
+  role?: string
+  slug?: string | null
+  chats?: Prisma.chatCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.projectCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutWorkspaceInput
+  user: Prisma.userCreateNestedOneWithoutWorkspacesInput
+}
+
+export type workspaceUncheckedCreateWithoutDocumentsInput = {
+  id?: string
+  name: string
+  role?: string
+  userId: string
+  slug?: string | null
+  chats?: Prisma.chatUncheckedCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberUncheckedCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type workspaceCreateOrConnectWithoutDocumentsInput = {
+  where: Prisma.workspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutDocumentsInput, Prisma.workspaceUncheckedCreateWithoutDocumentsInput>
+}
+
+export type workspaceUpsertWithoutDocumentsInput = {
+  update: Prisma.XOR<Prisma.workspaceUpdateWithoutDocumentsInput, Prisma.workspaceUncheckedUpdateWithoutDocumentsInput>
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutDocumentsInput, Prisma.workspaceUncheckedCreateWithoutDocumentsInput>
+  where?: Prisma.workspaceWhereInput
+}
+
+export type workspaceUpdateToOneWithWhereWithoutDocumentsInput = {
+  where?: Prisma.workspaceWhereInput
+  data: Prisma.XOR<Prisma.workspaceUpdateWithoutDocumentsInput, Prisma.workspaceUncheckedUpdateWithoutDocumentsInput>
+}
+
+export type workspaceUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  chats?: Prisma.chatUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.projectUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutWorkspaceNestedInput
+  user?: Prisma.userUpdateOneRequiredWithoutWorkspacesNestedInput
+}
+
+export type workspaceUncheckedUpdateWithoutDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  chats?: Prisma.chatUncheckedUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.projectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type workspaceCreateWithoutChatsInput = {
+  id?: string
+  name: string
+  role?: string
+  slug?: string | null
+  documents?: Prisma.documentCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.projectCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutWorkspaceInput
+  user: Prisma.userCreateNestedOneWithoutWorkspacesInput
+}
+
+export type workspaceUncheckedCreateWithoutChatsInput = {
+  id?: string
+  name: string
+  role?: string
+  userId: string
+  slug?: string | null
+  documents?: Prisma.documentUncheckedCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberUncheckedCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type workspaceCreateOrConnectWithoutChatsInput = {
+  where: Prisma.workspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutChatsInput, Prisma.workspaceUncheckedCreateWithoutChatsInput>
+}
+
+export type workspaceUpsertWithoutChatsInput = {
+  update: Prisma.XOR<Prisma.workspaceUpdateWithoutChatsInput, Prisma.workspaceUncheckedUpdateWithoutChatsInput>
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutChatsInput, Prisma.workspaceUncheckedCreateWithoutChatsInput>
+  where?: Prisma.workspaceWhereInput
+}
+
+export type workspaceUpdateToOneWithWhereWithoutChatsInput = {
+  where?: Prisma.workspaceWhereInput
+  data: Prisma.XOR<Prisma.workspaceUpdateWithoutChatsInput, Prisma.workspaceUncheckedUpdateWithoutChatsInput>
+}
+
+export type workspaceUpdateWithoutChatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.documentUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.projectUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutWorkspaceNestedInput
+  user?: Prisma.userUpdateOneRequiredWithoutWorkspacesNestedInput
+}
+
+export type workspaceUncheckedUpdateWithoutChatsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.documentUncheckedUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.projectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type workspaceCreateWithoutProjectsInput = {
+  id?: string
+  name: string
+  role?: string
+  slug?: string | null
+  documents?: Prisma.documentCreateNestedManyWithoutWorkspaceInput
+  chats?: Prisma.chatCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutWorkspaceInput
+  user: Prisma.userCreateNestedOneWithoutWorkspacesInput
+}
+
+export type workspaceUncheckedCreateWithoutProjectsInput = {
+  id?: string
+  name: string
+  role?: string
+  userId: string
+  slug?: string | null
+  documents?: Prisma.documentUncheckedCreateNestedManyWithoutWorkspaceInput
+  chats?: Prisma.chatUncheckedCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberUncheckedCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type workspaceCreateOrConnectWithoutProjectsInput = {
+  where: Prisma.workspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutProjectsInput, Prisma.workspaceUncheckedCreateWithoutProjectsInput>
+}
+
+export type workspaceUpsertWithoutProjectsInput = {
+  update: Prisma.XOR<Prisma.workspaceUpdateWithoutProjectsInput, Prisma.workspaceUncheckedUpdateWithoutProjectsInput>
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutProjectsInput, Prisma.workspaceUncheckedCreateWithoutProjectsInput>
+  where?: Prisma.workspaceWhereInput
+}
+
+export type workspaceUpdateToOneWithWhereWithoutProjectsInput = {
+  where?: Prisma.workspaceWhereInput
+  data: Prisma.XOR<Prisma.workspaceUpdateWithoutProjectsInput, Prisma.workspaceUncheckedUpdateWithoutProjectsInput>
+}
+
+export type workspaceUpdateWithoutProjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.documentUpdateManyWithoutWorkspaceNestedInput
+  chats?: Prisma.chatUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutWorkspaceNestedInput
+  user?: Prisma.userUpdateOneRequiredWithoutWorkspacesNestedInput
+}
+
+export type workspaceUncheckedUpdateWithoutProjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.documentUncheckedUpdateManyWithoutWorkspaceNestedInput
+  chats?: Prisma.chatUncheckedUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type workspaceCreateWithoutMembersInput = {
+  id?: string
+  name: string
+  role?: string
+  slug?: string | null
   documents?: Prisma.documentCreateNestedManyWithoutWorkspaceInput
   chats?: Prisma.chatCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.projectCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutWorkspaceInput
+  user: Prisma.userCreateNestedOneWithoutWorkspacesInput
+}
+
+export type workspaceUncheckedCreateWithoutMembersInput = {
+  id?: string
+  name: string
+  role?: string
+  userId: string
+  slug?: string | null
+  documents?: Prisma.documentUncheckedCreateNestedManyWithoutWorkspaceInput
+  chats?: Prisma.chatUncheckedCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutWorkspaceInput
+}
+
+export type workspaceCreateOrConnectWithoutMembersInput = {
+  where: Prisma.workspaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutMembersInput, Prisma.workspaceUncheckedCreateWithoutMembersInput>
+}
+
+export type workspaceUpsertWithoutMembersInput = {
+  update: Prisma.XOR<Prisma.workspaceUpdateWithoutMembersInput, Prisma.workspaceUncheckedUpdateWithoutMembersInput>
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutMembersInput, Prisma.workspaceUncheckedCreateWithoutMembersInput>
+  where?: Prisma.workspaceWhereInput
+}
+
+export type workspaceUpdateToOneWithWhereWithoutMembersInput = {
+  where?: Prisma.workspaceWhereInput
+  data: Prisma.XOR<Prisma.workspaceUpdateWithoutMembersInput, Prisma.workspaceUncheckedUpdateWithoutMembersInput>
+}
+
+export type workspaceUpdateWithoutMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.documentUpdateManyWithoutWorkspaceNestedInput
+  chats?: Prisma.chatUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.projectUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutWorkspaceNestedInput
+  user?: Prisma.userUpdateOneRequiredWithoutWorkspacesNestedInput
+}
+
+export type workspaceUncheckedUpdateWithoutMembersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  documents?: Prisma.documentUncheckedUpdateManyWithoutWorkspaceNestedInput
+  chats?: Prisma.chatUncheckedUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.projectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutWorkspaceNestedInput
+}
+
+export type workspaceCreateWithoutUserInput = {
+  id?: string
+  name: string
+  role?: string
+  slug?: string | null
+  documents?: Prisma.documentCreateNestedManyWithoutWorkspaceInput
+  chats?: Prisma.chatCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.projectCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutWorkspaceInput
 }
 
 export type workspaceUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
-  slug: string
+  role?: string
+  slug?: string | null
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutWorkspaceInput
   chats?: Prisma.chatUncheckedCreateNestedManyWithoutWorkspaceInput
   projects?: Prisma.projectUncheckedCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberUncheckedCreateNestedManyWithoutWorkspaceInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
 export type workspaceCreateOrConnectWithoutUserInput = {
@@ -455,194 +789,111 @@ export type workspaceScalarWhereInput = {
   NOT?: Prisma.workspaceScalarWhereInput | Prisma.workspaceScalarWhereInput[]
   id?: Prisma.StringFilter<"workspace"> | string
   name?: Prisma.StringFilter<"workspace"> | string
+  role?: Prisma.StringFilter<"workspace"> | string
   userId?: Prisma.StringFilter<"workspace"> | string
-  slug?: Prisma.StringFilter<"workspace"> | string
+  slug?: Prisma.StringNullableFilter<"workspace"> | string | null
 }
 
-export type workspaceCreateWithoutDocumentsInput = {
+export type workspaceCreateWithoutNotificationsInput = {
   id?: string
   name: string
-  slug: string
-  chats?: Prisma.chatCreateNestedManyWithoutWorkspaceInput
-  projects?: Prisma.projectCreateNestedManyWithoutWorkspaceInput
-  user: Prisma.userCreateNestedOneWithoutWorkspacesInput
-}
-
-export type workspaceUncheckedCreateWithoutDocumentsInput = {
-  id?: string
-  name: string
-  userId: string
-  slug: string
-  chats?: Prisma.chatUncheckedCreateNestedManyWithoutWorkspaceInput
-  projects?: Prisma.projectUncheckedCreateNestedManyWithoutWorkspaceInput
-}
-
-export type workspaceCreateOrConnectWithoutDocumentsInput = {
-  where: Prisma.workspaceWhereUniqueInput
-  create: Prisma.XOR<Prisma.workspaceCreateWithoutDocumentsInput, Prisma.workspaceUncheckedCreateWithoutDocumentsInput>
-}
-
-export type workspaceUpsertWithoutDocumentsInput = {
-  update: Prisma.XOR<Prisma.workspaceUpdateWithoutDocumentsInput, Prisma.workspaceUncheckedUpdateWithoutDocumentsInput>
-  create: Prisma.XOR<Prisma.workspaceCreateWithoutDocumentsInput, Prisma.workspaceUncheckedCreateWithoutDocumentsInput>
-  where?: Prisma.workspaceWhereInput
-}
-
-export type workspaceUpdateToOneWithWhereWithoutDocumentsInput = {
-  where?: Prisma.workspaceWhereInput
-  data: Prisma.XOR<Prisma.workspaceUpdateWithoutDocumentsInput, Prisma.workspaceUncheckedUpdateWithoutDocumentsInput>
-}
-
-export type workspaceUpdateWithoutDocumentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  chats?: Prisma.chatUpdateManyWithoutWorkspaceNestedInput
-  projects?: Prisma.projectUpdateManyWithoutWorkspaceNestedInput
-  user?: Prisma.userUpdateOneRequiredWithoutWorkspacesNestedInput
-}
-
-export type workspaceUncheckedUpdateWithoutDocumentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  chats?: Prisma.chatUncheckedUpdateManyWithoutWorkspaceNestedInput
-  projects?: Prisma.projectUncheckedUpdateManyWithoutWorkspaceNestedInput
-}
-
-export type workspaceCreateWithoutChatsInput = {
-  id?: string
-  name: string
-  slug: string
-  documents?: Prisma.documentCreateNestedManyWithoutWorkspaceInput
-  projects?: Prisma.projectCreateNestedManyWithoutWorkspaceInput
-  user: Prisma.userCreateNestedOneWithoutWorkspacesInput
-}
-
-export type workspaceUncheckedCreateWithoutChatsInput = {
-  id?: string
-  name: string
-  userId: string
-  slug: string
-  documents?: Prisma.documentUncheckedCreateNestedManyWithoutWorkspaceInput
-  projects?: Prisma.projectUncheckedCreateNestedManyWithoutWorkspaceInput
-}
-
-export type workspaceCreateOrConnectWithoutChatsInput = {
-  where: Prisma.workspaceWhereUniqueInput
-  create: Prisma.XOR<Prisma.workspaceCreateWithoutChatsInput, Prisma.workspaceUncheckedCreateWithoutChatsInput>
-}
-
-export type workspaceUpsertWithoutChatsInput = {
-  update: Prisma.XOR<Prisma.workspaceUpdateWithoutChatsInput, Prisma.workspaceUncheckedUpdateWithoutChatsInput>
-  create: Prisma.XOR<Prisma.workspaceCreateWithoutChatsInput, Prisma.workspaceUncheckedCreateWithoutChatsInput>
-  where?: Prisma.workspaceWhereInput
-}
-
-export type workspaceUpdateToOneWithWhereWithoutChatsInput = {
-  where?: Prisma.workspaceWhereInput
-  data: Prisma.XOR<Prisma.workspaceUpdateWithoutChatsInput, Prisma.workspaceUncheckedUpdateWithoutChatsInput>
-}
-
-export type workspaceUpdateWithoutChatsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  documents?: Prisma.documentUpdateManyWithoutWorkspaceNestedInput
-  projects?: Prisma.projectUpdateManyWithoutWorkspaceNestedInput
-  user?: Prisma.userUpdateOneRequiredWithoutWorkspacesNestedInput
-}
-
-export type workspaceUncheckedUpdateWithoutChatsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
-  documents?: Prisma.documentUncheckedUpdateManyWithoutWorkspaceNestedInput
-  projects?: Prisma.projectUncheckedUpdateManyWithoutWorkspaceNestedInput
-}
-
-export type workspaceCreateWithoutProjectsInput = {
-  id?: string
-  name: string
-  slug: string
+  role?: string
+  slug?: string | null
   documents?: Prisma.documentCreateNestedManyWithoutWorkspaceInput
   chats?: Prisma.chatCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.projectCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberCreateNestedManyWithoutWorkspaceInput
   user: Prisma.userCreateNestedOneWithoutWorkspacesInput
 }
 
-export type workspaceUncheckedCreateWithoutProjectsInput = {
+export type workspaceUncheckedCreateWithoutNotificationsInput = {
   id?: string
   name: string
+  role?: string
   userId: string
-  slug: string
+  slug?: string | null
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutWorkspaceInput
   chats?: Prisma.chatUncheckedCreateNestedManyWithoutWorkspaceInput
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutWorkspaceInput
+  members?: Prisma.memberUncheckedCreateNestedManyWithoutWorkspaceInput
 }
 
-export type workspaceCreateOrConnectWithoutProjectsInput = {
+export type workspaceCreateOrConnectWithoutNotificationsInput = {
   where: Prisma.workspaceWhereUniqueInput
-  create: Prisma.XOR<Prisma.workspaceCreateWithoutProjectsInput, Prisma.workspaceUncheckedCreateWithoutProjectsInput>
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutNotificationsInput, Prisma.workspaceUncheckedCreateWithoutNotificationsInput>
 }
 
-export type workspaceUpsertWithoutProjectsInput = {
-  update: Prisma.XOR<Prisma.workspaceUpdateWithoutProjectsInput, Prisma.workspaceUncheckedUpdateWithoutProjectsInput>
-  create: Prisma.XOR<Prisma.workspaceCreateWithoutProjectsInput, Prisma.workspaceUncheckedCreateWithoutProjectsInput>
+export type workspaceUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.workspaceUpdateWithoutNotificationsInput, Prisma.workspaceUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.workspaceCreateWithoutNotificationsInput, Prisma.workspaceUncheckedCreateWithoutNotificationsInput>
   where?: Prisma.workspaceWhereInput
 }
 
-export type workspaceUpdateToOneWithWhereWithoutProjectsInput = {
+export type workspaceUpdateToOneWithWhereWithoutNotificationsInput = {
   where?: Prisma.workspaceWhereInput
-  data: Prisma.XOR<Prisma.workspaceUpdateWithoutProjectsInput, Prisma.workspaceUncheckedUpdateWithoutProjectsInput>
+  data: Prisma.XOR<Prisma.workspaceUpdateWithoutNotificationsInput, Prisma.workspaceUncheckedUpdateWithoutNotificationsInput>
 }
 
-export type workspaceUpdateWithoutProjectsInput = {
+export type workspaceUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.documentUpdateManyWithoutWorkspaceNestedInput
   chats?: Prisma.chatUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.projectUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUpdateManyWithoutWorkspaceNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutWorkspacesNestedInput
 }
 
-export type workspaceUncheckedUpdateWithoutProjectsInput = {
+export type workspaceUncheckedUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.documentUncheckedUpdateManyWithoutWorkspaceNestedInput
   chats?: Prisma.chatUncheckedUpdateManyWithoutWorkspaceNestedInput
+  projects?: Prisma.projectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type workspaceCreateManyUserInput = {
   id?: string
   name: string
-  slug: string
+  role?: string
+  slug?: string | null
 }
 
 export type workspaceUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.documentUpdateManyWithoutWorkspaceNestedInput
   chats?: Prisma.chatUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.projectUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type workspaceUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   documents?: Prisma.documentUncheckedUpdateManyWithoutWorkspaceNestedInput
   chats?: Prisma.chatUncheckedUpdateManyWithoutWorkspaceNestedInput
   projects?: Prisma.projectUncheckedUpdateManyWithoutWorkspaceNestedInput
+  members?: Prisma.memberUncheckedUpdateManyWithoutWorkspaceNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutWorkspaceNestedInput
 }
 
 export type workspaceUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  slug?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -654,12 +905,16 @@ export type WorkspaceCountOutputType = {
   documents: number
   chats: number
   projects: number
+  members: number
+  notifications: number
 }
 
 export type WorkspaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | WorkspaceCountOutputTypeCountDocumentsArgs
   chats?: boolean | WorkspaceCountOutputTypeCountChatsArgs
   projects?: boolean | WorkspaceCountOutputTypeCountProjectsArgs
+  members?: boolean | WorkspaceCountOutputTypeCountMembersArgs
+  notifications?: boolean | WorkspaceCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -693,15 +948,32 @@ export type WorkspaceCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Ty
   where?: Prisma.projectWhereInput
 }
 
+/**
+ * WorkspaceCountOutputType without action
+ */
+export type WorkspaceCountOutputTypeCountMembersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.memberWhereInput
+}
+
+/**
+ * WorkspaceCountOutputType without action
+ */
+export type WorkspaceCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.notificationWhereInput
+}
+
 
 export type workspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  role?: boolean
   userId?: boolean
   slug?: boolean
   documents?: boolean | Prisma.workspace$documentsArgs<ExtArgs>
   chats?: boolean | Prisma.workspace$chatsArgs<ExtArgs>
   projects?: boolean | Prisma.workspace$projectsArgs<ExtArgs>
+  members?: boolean | Prisma.workspace$membersArgs<ExtArgs>
+  notifications?: boolean | Prisma.workspace$notificationsArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["workspace"]>
@@ -709,6 +981,7 @@ export type workspaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type workspaceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  role?: boolean
   userId?: boolean
   slug?: boolean
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -717,6 +990,7 @@ export type workspaceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type workspaceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  role?: boolean
   userId?: boolean
   slug?: boolean
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -725,15 +999,18 @@ export type workspaceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
 export type workspaceSelectScalar = {
   id?: boolean
   name?: boolean
+  role?: boolean
   userId?: boolean
   slug?: boolean
 }
 
-export type workspaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "userId" | "slug", ExtArgs["result"]["workspace"]>
+export type workspaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "role" | "userId" | "slug", ExtArgs["result"]["workspace"]>
 export type workspaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | Prisma.workspace$documentsArgs<ExtArgs>
   chats?: boolean | Prisma.workspace$chatsArgs<ExtArgs>
   projects?: boolean | Prisma.workspace$projectsArgs<ExtArgs>
+  members?: boolean | Prisma.workspace$membersArgs<ExtArgs>
+  notifications?: boolean | Prisma.workspace$notificationsArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.WorkspaceCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -750,13 +1027,16 @@ export type $workspacePayload<ExtArgs extends runtime.Types.Extensions.InternalA
     documents: Prisma.$documentPayload<ExtArgs>[]
     chats: Prisma.$chatPayload<ExtArgs>[]
     projects: Prisma.$projectPayload<ExtArgs>[]
+    members: Prisma.$memberPayload<ExtArgs>[]
+    notifications: Prisma.$notificationPayload<ExtArgs>[]
     user: Prisma.$userPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    role: string
     userId: string
-    slug: string
+    slug: string | null
   }, ExtArgs["result"]["workspace"]>
   composites: {}
 }
@@ -1154,6 +1434,8 @@ export interface Prisma__workspaceClient<T, Null = never, ExtArgs extends runtim
   documents<T extends Prisma.workspace$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.workspace$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$documentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chats<T extends Prisma.workspace$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.workspace$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$chatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.workspace$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.workspace$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$projectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  members<T extends Prisma.workspace$membersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.workspace$membersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$memberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.workspace$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.workspace$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$notificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.userDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.userDefaultArgs<ExtArgs>>): Prisma.Prisma__userClient<runtime.Types.Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1186,6 +1468,7 @@ export interface Prisma__workspaceClient<T, Null = never, ExtArgs extends runtim
 export interface workspaceFieldRefs {
   readonly id: Prisma.FieldRef<"workspace", 'String'>
   readonly name: Prisma.FieldRef<"workspace", 'String'>
+  readonly role: Prisma.FieldRef<"workspace", 'String'>
   readonly userId: Prisma.FieldRef<"workspace", 'String'>
   readonly slug: Prisma.FieldRef<"workspace", 'String'>
 }
@@ -1653,6 +1936,54 @@ export type workspace$projectsArgs<ExtArgs extends runtime.Types.Extensions.Inte
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * workspace.members
+ */
+export type workspace$membersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the member
+   */
+  select?: Prisma.memberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the member
+   */
+  omit?: Prisma.memberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.memberInclude<ExtArgs> | null
+  where?: Prisma.memberWhereInput
+  orderBy?: Prisma.memberOrderByWithRelationInput | Prisma.memberOrderByWithRelationInput[]
+  cursor?: Prisma.memberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberScalarFieldEnum | Prisma.MemberScalarFieldEnum[]
+}
+
+/**
+ * workspace.notifications
+ */
+export type workspace$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the notification
+   */
+  select?: Prisma.notificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the notification
+   */
+  omit?: Prisma.notificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.notificationInclude<ExtArgs> | null
+  where?: Prisma.notificationWhereInput
+  orderBy?: Prisma.notificationOrderByWithRelationInput | Prisma.notificationOrderByWithRelationInput[]
+  cursor?: Prisma.notificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

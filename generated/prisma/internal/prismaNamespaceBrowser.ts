@@ -51,12 +51,14 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  user: 'user',
   workspace: 'workspace',
   document: 'document',
   section: 'section',
   chat: 'chat',
-  project: 'project'
+  project: 'project',
+  member: 'member',
+  user: 'user',
+  notification: 'notification'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -75,19 +77,10 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const UserScalarFieldEnum = {
-  id: 'id',
-  email: 'email',
-  name: 'name',
-  password: 'password'
-} as const
-
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
 export const WorkspaceScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  role: 'role',
   userId: 'userId',
   slug: 'slug'
 } as const
@@ -104,7 +97,8 @@ export const DocumentScalarFieldEnum = {
   fileName: 'fileName',
   status: 'status',
   createdAt: 'createdAt',
-  projectId: 'projectId'
+  projectId: 'projectId',
+  tags: 'tags'
 } as const
 
 export type DocumentScalarFieldEnum = (typeof DocumentScalarFieldEnum)[keyof typeof DocumentScalarFieldEnum]
@@ -126,6 +120,7 @@ export const ChatScalarFieldEnum = {
   id: 'id',
   message: 'message',
   userId: 'userId',
+  createdAt: 'createdAt',
   documentId: 'documentId',
   workspaceId: 'workspaceId'
 } as const
@@ -141,6 +136,44 @@ export const ProjectScalarFieldEnum = {
 } as const
 
 export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
+
+
+export const MemberScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  workspaceId: 'workspaceId',
+  email: 'email',
+  name: 'name',
+  role: 'role'
+} as const
+
+export type MemberScalarFieldEnum = (typeof MemberScalarFieldEnum)[keyof typeof MemberScalarFieldEnum]
+
+
+export const UserScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  password: 'password'
+} as const
+
+export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  reach: 'reach',
+  title: 'title',
+  memName: 'memName',
+  documentId: 'documentId',
+  createdAt: 'createdAt',
+  workspaceId: 'workspaceId',
+  memberId: 'memberId'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
 
 
 export const SortOrder = {

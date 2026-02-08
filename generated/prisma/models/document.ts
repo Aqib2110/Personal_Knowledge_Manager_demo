@@ -58,6 +58,7 @@ export type DocumentCountAggregateOutputType = {
   status: number
   createdAt: number
   projectId: number
+  tags: number
   _all: number
 }
 
@@ -96,6 +97,7 @@ export type DocumentCountAggregateInputType = {
   status?: true
   createdAt?: true
   projectId?: true
+  tags?: true
   _all?: true
 }
 
@@ -181,6 +183,7 @@ export type DocumentGroupByOutputType = {
   status: string
   createdAt: Date
   projectId: string
+  tags: string[]
   _count: DocumentCountAggregateOutputType | null
   _min: DocumentMinAggregateOutputType | null
   _max: DocumentMaxAggregateOutputType | null
@@ -214,8 +217,10 @@ export type documentWhereInput = {
   status?: Prisma.StringFilter<"document"> | string
   createdAt?: Prisma.DateTimeFilter<"document"> | Date | string
   projectId?: Prisma.StringFilter<"document"> | string
+  tags?: Prisma.StringNullableListFilter<"document">
   sections?: Prisma.SectionListRelationFilter
   chats?: Prisma.ChatListRelationFilter
+  notification?: Prisma.NotificationListRelationFilter
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.workspaceWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
@@ -231,8 +236,10 @@ export type documentOrderByWithRelationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
   sections?: Prisma.sectionOrderByRelationAggregateInput
   chats?: Prisma.chatOrderByRelationAggregateInput
+  notification?: Prisma.notificationOrderByRelationAggregateInput
   project?: Prisma.projectOrderByWithRelationInput
   workspace?: Prisma.workspaceOrderByWithRelationInput
   user?: Prisma.userOrderByWithRelationInput
@@ -251,8 +258,10 @@ export type documentWhereUniqueInput = Prisma.AtLeast<{
   status?: Prisma.StringFilter<"document"> | string
   createdAt?: Prisma.DateTimeFilter<"document"> | Date | string
   projectId?: Prisma.StringFilter<"document"> | string
+  tags?: Prisma.StringNullableListFilter<"document">
   sections?: Prisma.SectionListRelationFilter
   chats?: Prisma.ChatListRelationFilter
+  notification?: Prisma.NotificationListRelationFilter
   project?: Prisma.XOR<Prisma.ProjectScalarRelationFilter, Prisma.projectWhereInput>
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.workspaceWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
@@ -268,6 +277,7 @@ export type documentOrderByWithAggregationInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
   _count?: Prisma.documentCountOrderByAggregateInput
   _max?: Prisma.documentMaxOrderByAggregateInput
   _min?: Prisma.documentMinOrderByAggregateInput
@@ -286,6 +296,7 @@ export type documentScalarWhereWithAggregatesInput = {
   status?: Prisma.StringWithAggregatesFilter<"document"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"document"> | Date | string
   projectId?: Prisma.StringWithAggregatesFilter<"document"> | string
+  tags?: Prisma.StringNullableListFilter<"document">
 }
 
 export type documentCreateInput = {
@@ -295,8 +306,10 @@ export type documentCreateInput = {
   fileName: string
   status?: string
   createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
   sections?: Prisma.sectionCreateNestedManyWithoutDocumentInput
   chats?: Prisma.chatCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationCreateNestedManyWithoutDocumentInput
   project: Prisma.projectCreateNestedOneWithoutDocumentsInput
   workspace: Prisma.workspaceCreateNestedOneWithoutDocumentsInput
   user: Prisma.userCreateNestedOneWithoutDocumentsInput
@@ -312,8 +325,10 @@ export type documentUncheckedCreateInput = {
   status?: string
   createdAt?: Date | string
   projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
   sections?: Prisma.sectionUncheckedCreateNestedManyWithoutDocumentInput
   chats?: Prisma.chatUncheckedCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type documentUpdateInput = {
@@ -323,8 +338,10 @@ export type documentUpdateInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUpdateManyWithoutDocumentNestedInput
   chats?: Prisma.chatUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUpdateManyWithoutDocumentNestedInput
   project?: Prisma.projectUpdateOneRequiredWithoutDocumentsNestedInput
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutDocumentsNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutDocumentsNestedInput
@@ -340,8 +357,10 @@ export type documentUncheckedUpdateInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUncheckedUpdateManyWithoutDocumentNestedInput
   chats?: Prisma.chatUncheckedUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type documentCreateManyInput = {
@@ -354,6 +373,7 @@ export type documentCreateManyInput = {
   status?: string
   createdAt?: Date | string
   projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
 }
 
 export type documentUpdateManyMutationInput = {
@@ -363,6 +383,7 @@ export type documentUpdateManyMutationInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
 }
 
 export type documentUncheckedUpdateManyInput = {
@@ -375,6 +396,7 @@ export type documentUncheckedUpdateManyInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
 }
 
 export type DocumentListRelationFilter = {
@@ -387,6 +409,14 @@ export type documentOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type StringNullableListFilter<$PrismaModel = never> = {
+  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
+  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
+  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
+  isEmpty?: boolean
+}
+
 export type documentCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
@@ -397,6 +427,7 @@ export type documentCountOrderByAggregateInput = {
   status?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   projectId?: Prisma.SortOrder
+  tags?: Prisma.SortOrder
 }
 
 export type documentMaxOrderByAggregateInput = {
@@ -428,46 +459,9 @@ export type DocumentScalarRelationFilter = {
   isNot?: Prisma.documentWhereInput
 }
 
-export type documentCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput> | Prisma.documentCreateWithoutUserInput[] | Prisma.documentUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.documentCreateOrConnectWithoutUserInput | Prisma.documentCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.documentCreateManyUserInputEnvelope
-  connect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-}
-
-export type documentUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput> | Prisma.documentCreateWithoutUserInput[] | Prisma.documentUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.documentCreateOrConnectWithoutUserInput | Prisma.documentCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.documentCreateManyUserInputEnvelope
-  connect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-}
-
-export type documentUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput> | Prisma.documentCreateWithoutUserInput[] | Prisma.documentUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.documentCreateOrConnectWithoutUserInput | Prisma.documentCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.documentUpsertWithWhereUniqueWithoutUserInput | Prisma.documentUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.documentCreateManyUserInputEnvelope
-  set?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-  disconnect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-  delete?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-  connect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-  update?: Prisma.documentUpdateWithWhereUniqueWithoutUserInput | Prisma.documentUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.documentUpdateManyWithWhereWithoutUserInput | Prisma.documentUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
-}
-
-export type documentUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput> | Prisma.documentCreateWithoutUserInput[] | Prisma.documentUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.documentCreateOrConnectWithoutUserInput | Prisma.documentCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.documentUpsertWithWhereUniqueWithoutUserInput | Prisma.documentUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.documentCreateManyUserInputEnvelope
-  set?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-  disconnect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-  delete?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-  connect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
-  update?: Prisma.documentUpdateWithWhereUniqueWithoutUserInput | Prisma.documentUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.documentUpdateManyWithWhereWithoutUserInput | Prisma.documentUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
+export type DocumentNullableScalarRelationFilter = {
+  is?: Prisma.documentWhereInput | null
+  isNot?: Prisma.documentWhereInput | null
 }
 
 export type documentCreateNestedManyWithoutWorkspaceInput = {
@@ -512,8 +506,17 @@ export type documentUncheckedUpdateManyWithoutWorkspaceNestedInput = {
   deleteMany?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
 }
 
+export type documentCreatetagsInput = {
+  set: string[]
+}
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type documentUpdatetagsInput = {
+  set?: string[]
+  push?: string | string[]
 }
 
 export type documentCreateNestedOneWithoutSectionsInput = {
@@ -586,71 +589,62 @@ export type documentUncheckedUpdateManyWithoutProjectNestedInput = {
   deleteMany?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
 }
 
-export type documentCreateWithoutUserInput = {
-  id?: string
-  title: string
-  fileUrl: string
-  fileName: string
-  status?: string
-  createdAt?: Date | string
-  sections?: Prisma.sectionCreateNestedManyWithoutDocumentInput
-  chats?: Prisma.chatCreateNestedManyWithoutDocumentInput
-  project: Prisma.projectCreateNestedOneWithoutDocumentsInput
-  workspace: Prisma.workspaceCreateNestedOneWithoutDocumentsInput
+export type documentCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput> | Prisma.documentCreateWithoutUserInput[] | Prisma.documentUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.documentCreateOrConnectWithoutUserInput | Prisma.documentCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.documentCreateManyUserInputEnvelope
+  connect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
 }
 
-export type documentUncheckedCreateWithoutUserInput = {
-  id?: string
-  title: string
-  workspaceId: string
-  fileUrl: string
-  fileName: string
-  status?: string
-  createdAt?: Date | string
-  projectId: string
-  sections?: Prisma.sectionUncheckedCreateNestedManyWithoutDocumentInput
-  chats?: Prisma.chatUncheckedCreateNestedManyWithoutDocumentInput
+export type documentUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput> | Prisma.documentCreateWithoutUserInput[] | Prisma.documentUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.documentCreateOrConnectWithoutUserInput | Prisma.documentCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.documentCreateManyUserInputEnvelope
+  connect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
 }
 
-export type documentCreateOrConnectWithoutUserInput = {
-  where: Prisma.documentWhereUniqueInput
-  create: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput>
+export type documentUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput> | Prisma.documentCreateWithoutUserInput[] | Prisma.documentUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.documentCreateOrConnectWithoutUserInput | Prisma.documentCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.documentUpsertWithWhereUniqueWithoutUserInput | Prisma.documentUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.documentCreateManyUserInputEnvelope
+  set?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
+  disconnect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
+  delete?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
+  connect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
+  update?: Prisma.documentUpdateWithWhereUniqueWithoutUserInput | Prisma.documentUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.documentUpdateManyWithWhereWithoutUserInput | Prisma.documentUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
 }
 
-export type documentCreateManyUserInputEnvelope = {
-  data: Prisma.documentCreateManyUserInput | Prisma.documentCreateManyUserInput[]
-  skipDuplicates?: boolean
+export type documentUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput> | Prisma.documentCreateWithoutUserInput[] | Prisma.documentUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.documentCreateOrConnectWithoutUserInput | Prisma.documentCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.documentUpsertWithWhereUniqueWithoutUserInput | Prisma.documentUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.documentCreateManyUserInputEnvelope
+  set?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
+  disconnect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
+  delete?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
+  connect?: Prisma.documentWhereUniqueInput | Prisma.documentWhereUniqueInput[]
+  update?: Prisma.documentUpdateWithWhereUniqueWithoutUserInput | Prisma.documentUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.documentUpdateManyWithWhereWithoutUserInput | Prisma.documentUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
 }
 
-export type documentUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.documentWhereUniqueInput
-  update: Prisma.XOR<Prisma.documentUpdateWithoutUserInput, Prisma.documentUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput>
+export type documentCreateNestedOneWithoutNotificationInput = {
+  create?: Prisma.XOR<Prisma.documentCreateWithoutNotificationInput, Prisma.documentUncheckedCreateWithoutNotificationInput>
+  connectOrCreate?: Prisma.documentCreateOrConnectWithoutNotificationInput
+  connect?: Prisma.documentWhereUniqueInput
 }
 
-export type documentUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.documentWhereUniqueInput
-  data: Prisma.XOR<Prisma.documentUpdateWithoutUserInput, Prisma.documentUncheckedUpdateWithoutUserInput>
-}
-
-export type documentUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.documentScalarWhereInput
-  data: Prisma.XOR<Prisma.documentUpdateManyMutationInput, Prisma.documentUncheckedUpdateManyWithoutUserInput>
-}
-
-export type documentScalarWhereInput = {
-  AND?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
-  OR?: Prisma.documentScalarWhereInput[]
-  NOT?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
-  id?: Prisma.StringFilter<"document"> | string
-  title?: Prisma.StringFilter<"document"> | string
-  workspaceId?: Prisma.StringFilter<"document"> | string
-  userId?: Prisma.StringFilter<"document"> | string
-  fileUrl?: Prisma.StringFilter<"document"> | string
-  fileName?: Prisma.StringFilter<"document"> | string
-  status?: Prisma.StringFilter<"document"> | string
-  createdAt?: Prisma.DateTimeFilter<"document"> | Date | string
-  projectId?: Prisma.StringFilter<"document"> | string
+export type documentUpdateOneWithoutNotificationNestedInput = {
+  create?: Prisma.XOR<Prisma.documentCreateWithoutNotificationInput, Prisma.documentUncheckedCreateWithoutNotificationInput>
+  connectOrCreate?: Prisma.documentCreateOrConnectWithoutNotificationInput
+  upsert?: Prisma.documentUpsertWithoutNotificationInput
+  disconnect?: Prisma.documentWhereInput | boolean
+  delete?: Prisma.documentWhereInput | boolean
+  connect?: Prisma.documentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.documentUpdateToOneWithWhereWithoutNotificationInput, Prisma.documentUpdateWithoutNotificationInput>, Prisma.documentUncheckedUpdateWithoutNotificationInput>
 }
 
 export type documentCreateWithoutWorkspaceInput = {
@@ -660,8 +654,10 @@ export type documentCreateWithoutWorkspaceInput = {
   fileName: string
   status?: string
   createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
   sections?: Prisma.sectionCreateNestedManyWithoutDocumentInput
   chats?: Prisma.chatCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationCreateNestedManyWithoutDocumentInput
   project: Prisma.projectCreateNestedOneWithoutDocumentsInput
   user: Prisma.userCreateNestedOneWithoutDocumentsInput
 }
@@ -675,8 +671,10 @@ export type documentUncheckedCreateWithoutWorkspaceInput = {
   status?: string
   createdAt?: Date | string
   projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
   sections?: Prisma.sectionUncheckedCreateNestedManyWithoutDocumentInput
   chats?: Prisma.chatUncheckedCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type documentCreateOrConnectWithoutWorkspaceInput = {
@@ -705,6 +703,22 @@ export type documentUpdateManyWithWhereWithoutWorkspaceInput = {
   data: Prisma.XOR<Prisma.documentUpdateManyMutationInput, Prisma.documentUncheckedUpdateManyWithoutWorkspaceInput>
 }
 
+export type documentScalarWhereInput = {
+  AND?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
+  OR?: Prisma.documentScalarWhereInput[]
+  NOT?: Prisma.documentScalarWhereInput | Prisma.documentScalarWhereInput[]
+  id?: Prisma.StringFilter<"document"> | string
+  title?: Prisma.StringFilter<"document"> | string
+  workspaceId?: Prisma.StringFilter<"document"> | string
+  userId?: Prisma.StringFilter<"document"> | string
+  fileUrl?: Prisma.StringFilter<"document"> | string
+  fileName?: Prisma.StringFilter<"document"> | string
+  status?: Prisma.StringFilter<"document"> | string
+  createdAt?: Prisma.DateTimeFilter<"document"> | Date | string
+  projectId?: Prisma.StringFilter<"document"> | string
+  tags?: Prisma.StringNullableListFilter<"document">
+}
+
 export type documentCreateWithoutSectionsInput = {
   id?: string
   title: string
@@ -712,7 +726,9 @@ export type documentCreateWithoutSectionsInput = {
   fileName: string
   status?: string
   createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
   chats?: Prisma.chatCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationCreateNestedManyWithoutDocumentInput
   project: Prisma.projectCreateNestedOneWithoutDocumentsInput
   workspace: Prisma.workspaceCreateNestedOneWithoutDocumentsInput
   user: Prisma.userCreateNestedOneWithoutDocumentsInput
@@ -728,7 +744,9 @@ export type documentUncheckedCreateWithoutSectionsInput = {
   status?: string
   createdAt?: Date | string
   projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
   chats?: Prisma.chatUncheckedCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type documentCreateOrConnectWithoutSectionsInput = {
@@ -754,7 +772,9 @@ export type documentUpdateWithoutSectionsInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   chats?: Prisma.chatUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUpdateManyWithoutDocumentNestedInput
   project?: Prisma.projectUpdateOneRequiredWithoutDocumentsNestedInput
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutDocumentsNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutDocumentsNestedInput
@@ -770,7 +790,9 @@ export type documentUncheckedUpdateWithoutSectionsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   chats?: Prisma.chatUncheckedUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type documentCreateWithoutChatsInput = {
@@ -780,7 +802,9 @@ export type documentCreateWithoutChatsInput = {
   fileName: string
   status?: string
   createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
   sections?: Prisma.sectionCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationCreateNestedManyWithoutDocumentInput
   project: Prisma.projectCreateNestedOneWithoutDocumentsInput
   workspace: Prisma.workspaceCreateNestedOneWithoutDocumentsInput
   user: Prisma.userCreateNestedOneWithoutDocumentsInput
@@ -796,7 +820,9 @@ export type documentUncheckedCreateWithoutChatsInput = {
   status?: string
   createdAt?: Date | string
   projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
   sections?: Prisma.sectionUncheckedCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type documentCreateOrConnectWithoutChatsInput = {
@@ -822,7 +848,9 @@ export type documentUpdateWithoutChatsInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUpdateManyWithoutDocumentNestedInput
   project?: Prisma.projectUpdateOneRequiredWithoutDocumentsNestedInput
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutDocumentsNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutDocumentsNestedInput
@@ -838,7 +866,9 @@ export type documentUncheckedUpdateWithoutChatsInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUncheckedUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type documentCreateWithoutProjectInput = {
@@ -848,8 +878,10 @@ export type documentCreateWithoutProjectInput = {
   fileName: string
   status?: string
   createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
   sections?: Prisma.sectionCreateNestedManyWithoutDocumentInput
   chats?: Prisma.chatCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationCreateNestedManyWithoutDocumentInput
   workspace: Prisma.workspaceCreateNestedOneWithoutDocumentsInput
   user: Prisma.userCreateNestedOneWithoutDocumentsInput
 }
@@ -863,8 +895,10 @@ export type documentUncheckedCreateWithoutProjectInput = {
   fileName: string
   status?: string
   createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
   sections?: Prisma.sectionUncheckedCreateNestedManyWithoutDocumentInput
   chats?: Prisma.chatUncheckedCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationUncheckedCreateNestedManyWithoutDocumentInput
 }
 
 export type documentCreateOrConnectWithoutProjectInput = {
@@ -893,7 +927,22 @@ export type documentUpdateManyWithWhereWithoutProjectInput = {
   data: Prisma.XOR<Prisma.documentUpdateManyMutationInput, Prisma.documentUncheckedUpdateManyWithoutProjectInput>
 }
 
-export type documentCreateManyUserInput = {
+export type documentCreateWithoutUserInput = {
+  id?: string
+  title: string
+  fileUrl: string
+  fileName: string
+  status?: string
+  createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
+  sections?: Prisma.sectionCreateNestedManyWithoutDocumentInput
+  chats?: Prisma.chatCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationCreateNestedManyWithoutDocumentInput
+  project: Prisma.projectCreateNestedOneWithoutDocumentsInput
+  workspace: Prisma.workspaceCreateNestedOneWithoutDocumentsInput
+}
+
+export type documentUncheckedCreateWithoutUserInput = {
   id?: string
   title: string
   workspaceId: string
@@ -902,43 +951,112 @@ export type documentCreateManyUserInput = {
   status?: string
   createdAt?: Date | string
   projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
+  sections?: Prisma.sectionUncheckedCreateNestedManyWithoutDocumentInput
+  chats?: Prisma.chatUncheckedCreateNestedManyWithoutDocumentInput
+  notification?: Prisma.notificationUncheckedCreateNestedManyWithoutDocumentInput
 }
 
-export type documentUpdateWithoutUserInput = {
+export type documentCreateOrConnectWithoutUserInput = {
+  where: Prisma.documentWhereUniqueInput
+  create: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput>
+}
+
+export type documentCreateManyUserInputEnvelope = {
+  data: Prisma.documentCreateManyUserInput | Prisma.documentCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type documentUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.documentWhereUniqueInput
+  update: Prisma.XOR<Prisma.documentUpdateWithoutUserInput, Prisma.documentUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.documentCreateWithoutUserInput, Prisma.documentUncheckedCreateWithoutUserInput>
+}
+
+export type documentUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.documentWhereUniqueInput
+  data: Prisma.XOR<Prisma.documentUpdateWithoutUserInput, Prisma.documentUncheckedUpdateWithoutUserInput>
+}
+
+export type documentUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.documentScalarWhereInput
+  data: Prisma.XOR<Prisma.documentUpdateManyMutationInput, Prisma.documentUncheckedUpdateManyWithoutUserInput>
+}
+
+export type documentCreateWithoutNotificationInput = {
+  id?: string
+  title: string
+  fileUrl: string
+  fileName: string
+  status?: string
+  createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
+  sections?: Prisma.sectionCreateNestedManyWithoutDocumentInput
+  chats?: Prisma.chatCreateNestedManyWithoutDocumentInput
+  project: Prisma.projectCreateNestedOneWithoutDocumentsInput
+  workspace: Prisma.workspaceCreateNestedOneWithoutDocumentsInput
+  user: Prisma.userCreateNestedOneWithoutDocumentsInput
+}
+
+export type documentUncheckedCreateWithoutNotificationInput = {
+  id?: string
+  title: string
+  workspaceId: string
+  userId: string
+  fileUrl: string
+  fileName: string
+  status?: string
+  createdAt?: Date | string
+  projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
+  sections?: Prisma.sectionUncheckedCreateNestedManyWithoutDocumentInput
+  chats?: Prisma.chatUncheckedCreateNestedManyWithoutDocumentInput
+}
+
+export type documentCreateOrConnectWithoutNotificationInput = {
+  where: Prisma.documentWhereUniqueInput
+  create: Prisma.XOR<Prisma.documentCreateWithoutNotificationInput, Prisma.documentUncheckedCreateWithoutNotificationInput>
+}
+
+export type documentUpsertWithoutNotificationInput = {
+  update: Prisma.XOR<Prisma.documentUpdateWithoutNotificationInput, Prisma.documentUncheckedUpdateWithoutNotificationInput>
+  create: Prisma.XOR<Prisma.documentCreateWithoutNotificationInput, Prisma.documentUncheckedCreateWithoutNotificationInput>
+  where?: Prisma.documentWhereInput
+}
+
+export type documentUpdateToOneWithWhereWithoutNotificationInput = {
+  where?: Prisma.documentWhereInput
+  data: Prisma.XOR<Prisma.documentUpdateWithoutNotificationInput, Prisma.documentUncheckedUpdateWithoutNotificationInput>
+}
+
+export type documentUpdateWithoutNotificationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUpdateManyWithoutDocumentNestedInput
   chats?: Prisma.chatUpdateManyWithoutDocumentNestedInput
   project?: Prisma.projectUpdateOneRequiredWithoutDocumentsNestedInput
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutDocumentsNestedInput
+  user?: Prisma.userUpdateOneRequiredWithoutDocumentsNestedInput
 }
 
-export type documentUncheckedUpdateWithoutUserInput = {
+export type documentUncheckedUpdateWithoutNotificationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUncheckedUpdateManyWithoutDocumentNestedInput
   chats?: Prisma.chatUncheckedUpdateManyWithoutDocumentNestedInput
-}
-
-export type documentUncheckedUpdateManyWithoutUserInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
-  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
-  fileName?: Prisma.StringFieldUpdateOperationsInput | string
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  projectId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type documentCreateManyWorkspaceInput = {
@@ -950,6 +1068,7 @@ export type documentCreateManyWorkspaceInput = {
   status?: string
   createdAt?: Date | string
   projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
 }
 
 export type documentUpdateWithoutWorkspaceInput = {
@@ -959,8 +1078,10 @@ export type documentUpdateWithoutWorkspaceInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUpdateManyWithoutDocumentNestedInput
   chats?: Prisma.chatUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUpdateManyWithoutDocumentNestedInput
   project?: Prisma.projectUpdateOneRequiredWithoutDocumentsNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutDocumentsNestedInput
 }
@@ -974,8 +1095,10 @@ export type documentUncheckedUpdateWithoutWorkspaceInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUncheckedUpdateManyWithoutDocumentNestedInput
   chats?: Prisma.chatUncheckedUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type documentUncheckedUpdateManyWithoutWorkspaceInput = {
@@ -987,6 +1110,7 @@ export type documentUncheckedUpdateManyWithoutWorkspaceInput = {
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
 }
 
 export type documentCreateManyProjectInput = {
@@ -998,6 +1122,7 @@ export type documentCreateManyProjectInput = {
   fileName: string
   status?: string
   createdAt?: Date | string
+  tags?: Prisma.documentCreatetagsInput | string[]
 }
 
 export type documentUpdateWithoutProjectInput = {
@@ -1007,8 +1132,10 @@ export type documentUpdateWithoutProjectInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUpdateManyWithoutDocumentNestedInput
   chats?: Prisma.chatUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUpdateManyWithoutDocumentNestedInput
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutDocumentsNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutDocumentsNestedInput
 }
@@ -1022,8 +1149,10 @@ export type documentUncheckedUpdateWithoutProjectInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
   sections?: Prisma.sectionUncheckedUpdateManyWithoutDocumentNestedInput
   chats?: Prisma.chatUncheckedUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUncheckedUpdateManyWithoutDocumentNestedInput
 }
 
 export type documentUncheckedUpdateManyWithoutProjectInput = {
@@ -1035,6 +1164,61 @@ export type documentUncheckedUpdateManyWithoutProjectInput = {
   fileName?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
+}
+
+export type documentCreateManyUserInput = {
+  id?: string
+  title: string
+  workspaceId: string
+  fileUrl: string
+  fileName: string
+  status?: string
+  createdAt?: Date | string
+  projectId: string
+  tags?: Prisma.documentCreatetagsInput | string[]
+}
+
+export type documentUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
+  sections?: Prisma.sectionUpdateManyWithoutDocumentNestedInput
+  chats?: Prisma.chatUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUpdateManyWithoutDocumentNestedInput
+  project?: Prisma.projectUpdateOneRequiredWithoutDocumentsNestedInput
+  workspace?: Prisma.workspaceUpdateOneRequiredWithoutDocumentsNestedInput
+}
+
+export type documentUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
+  sections?: Prisma.sectionUncheckedUpdateManyWithoutDocumentNestedInput
+  chats?: Prisma.chatUncheckedUpdateManyWithoutDocumentNestedInput
+  notification?: Prisma.notificationUncheckedUpdateManyWithoutDocumentNestedInput
+}
+
+export type documentUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  fileUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  fileName?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectId?: Prisma.StringFieldUpdateOperationsInput | string
+  tags?: Prisma.documentUpdatetagsInput | string[]
 }
 
 
@@ -1045,11 +1229,13 @@ export type documentUncheckedUpdateManyWithoutProjectInput = {
 export type DocumentCountOutputType = {
   sections: number
   chats: number
+  notification: number
 }
 
 export type DocumentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sections?: boolean | DocumentCountOutputTypeCountSectionsArgs
   chats?: boolean | DocumentCountOutputTypeCountChatsArgs
+  notification?: boolean | DocumentCountOutputTypeCountNotificationArgs
 }
 
 /**
@@ -1076,6 +1262,13 @@ export type DocumentCountOutputTypeCountChatsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.chatWhereInput
 }
 
+/**
+ * DocumentCountOutputType without action
+ */
+export type DocumentCountOutputTypeCountNotificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.notificationWhereInput
+}
+
 
 export type documentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1087,8 +1280,10 @@ export type documentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   status?: boolean
   createdAt?: boolean
   projectId?: boolean
+  tags?: boolean
   sections?: boolean | Prisma.document$sectionsArgs<ExtArgs>
   chats?: boolean | Prisma.document$chatsArgs<ExtArgs>
+  notification?: boolean | Prisma.document$notificationArgs<ExtArgs>
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -1105,6 +1300,7 @@ export type documentSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   createdAt?: boolean
   projectId?: boolean
+  tags?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -1120,6 +1316,7 @@ export type documentSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   status?: boolean
   createdAt?: boolean
   projectId?: boolean
+  tags?: boolean
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -1135,12 +1332,14 @@ export type documentSelectScalar = {
   status?: boolean
   createdAt?: boolean
   projectId?: boolean
+  tags?: boolean
 }
 
-export type documentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "workspaceId" | "userId" | "fileUrl" | "fileName" | "status" | "createdAt" | "projectId", ExtArgs["result"]["document"]>
+export type documentOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "workspaceId" | "userId" | "fileUrl" | "fileName" | "status" | "createdAt" | "projectId" | "tags", ExtArgs["result"]["document"]>
 export type documentInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sections?: boolean | Prisma.document$sectionsArgs<ExtArgs>
   chats?: boolean | Prisma.document$chatsArgs<ExtArgs>
+  notification?: boolean | Prisma.document$notificationArgs<ExtArgs>
   project?: boolean | Prisma.projectDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -1162,6 +1361,7 @@ export type $documentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     sections: Prisma.$sectionPayload<ExtArgs>[]
     chats: Prisma.$chatPayload<ExtArgs>[]
+    notification: Prisma.$notificationPayload<ExtArgs>[]
     project: Prisma.$projectPayload<ExtArgs>
     workspace: Prisma.$workspacePayload<ExtArgs>
     user: Prisma.$userPayload<ExtArgs>
@@ -1176,6 +1376,7 @@ export type $documentPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     status: string
     createdAt: Date
     projectId: string
+    tags: string[]
   }, ExtArgs["result"]["document"]>
   composites: {}
 }
@@ -1572,6 +1773,7 @@ export interface Prisma__documentClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sections<T extends Prisma.document$sectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.document$sectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$sectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chats<T extends Prisma.document$chatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.document$chatsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$chatPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notification<T extends Prisma.document$notificationArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.document$notificationArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$notificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   project<T extends Prisma.projectDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.projectDefaultArgs<ExtArgs>>): Prisma.Prisma__projectClient<runtime.Types.Result.GetResult<Prisma.$projectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   workspace<T extends Prisma.workspaceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.workspaceDefaultArgs<ExtArgs>>): Prisma.Prisma__workspaceClient<runtime.Types.Result.GetResult<Prisma.$workspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.userDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.userDefaultArgs<ExtArgs>>): Prisma.Prisma__userClient<runtime.Types.Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
@@ -1613,6 +1815,7 @@ export interface documentFieldRefs {
   readonly status: Prisma.FieldRef<"document", 'String'>
   readonly createdAt: Prisma.FieldRef<"document", 'DateTime'>
   readonly projectId: Prisma.FieldRef<"document", 'String'>
+  readonly tags: Prisma.FieldRef<"document", 'String[]'>
 }
     
 
@@ -2054,6 +2257,30 @@ export type document$chatsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.ChatScalarFieldEnum | Prisma.ChatScalarFieldEnum[]
+}
+
+/**
+ * document.notification
+ */
+export type document$notificationArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the notification
+   */
+  select?: Prisma.notificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the notification
+   */
+  omit?: Prisma.notificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.notificationInclude<ExtArgs> | null
+  where?: Prisma.notificationWhereInput
+  orderBy?: Prisma.notificationOrderByWithRelationInput | Prisma.notificationOrderByWithRelationInput[]
+  cursor?: Prisma.notificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**

@@ -2,18 +2,23 @@ import { NextResponse,NextRequest } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import {prisma} from '@/lib/prisma'
-async function POST(req:NextRequest)
+export async function POST(req:NextRequest)
 {
 const {name,workspaceId} = await req.json();
-const session = getServerSession(authOptions);
-
+const session = await getServerSession(authOptions);
+if(!session?.user?.id)
+{
+    return NextResponse.json({message:"unauthorized user"},{
+        status:405
+    })
+}
 
 try {
 
-    const project = await prisma.project.create({
+    await prisma.project.create({
      data:{
         name:name,
-        userId:session.id,
+        userId:session?.user?.id,
         workspaceId
      }
 })
@@ -42,17 +47,26 @@ return NextResponse.json({
 }
 
 
-async function GET(req:NextRequest)
+export async function GET(req:NextRequest)
 {
-const session = getServerSession(authOptions);
+const session = await getServerSession(authOptions);
 
+if(!session?.user?.id)
+{
+    return NextResponse.json({message:"unauthorized user"},{
+        status:405
+    })
+}
 
 
 try {
 
     const projects = await prisma.project.findMany({
     where:{
-        userId:session.id
+        userId:session.user.id
+    },
+    include:{
+        documents:true
     }
 })
 

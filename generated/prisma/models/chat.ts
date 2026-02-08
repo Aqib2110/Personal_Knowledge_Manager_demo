@@ -28,6 +28,7 @@ export type ChatMinAggregateOutputType = {
   id: string | null
   message: string | null
   userId: string | null
+  createdAt: Date | null
   documentId: string | null
   workspaceId: string | null
 }
@@ -36,6 +37,7 @@ export type ChatMaxAggregateOutputType = {
   id: string | null
   message: string | null
   userId: string | null
+  createdAt: Date | null
   documentId: string | null
   workspaceId: string | null
 }
@@ -44,6 +46,7 @@ export type ChatCountAggregateOutputType = {
   id: number
   message: number
   userId: number
+  createdAt: number
   documentId: number
   workspaceId: number
   _all: number
@@ -54,6 +57,7 @@ export type ChatMinAggregateInputType = {
   id?: true
   message?: true
   userId?: true
+  createdAt?: true
   documentId?: true
   workspaceId?: true
 }
@@ -62,6 +66,7 @@ export type ChatMaxAggregateInputType = {
   id?: true
   message?: true
   userId?: true
+  createdAt?: true
   documentId?: true
   workspaceId?: true
 }
@@ -70,6 +75,7 @@ export type ChatCountAggregateInputType = {
   id?: true
   message?: true
   userId?: true
+  createdAt?: true
   documentId?: true
   workspaceId?: true
   _all?: true
@@ -151,6 +157,7 @@ export type ChatGroupByOutputType = {
   id: string
   message: string
   userId: string
+  createdAt: Date
   documentId: string
   workspaceId: string
   _count: ChatCountAggregateOutputType | null
@@ -180,6 +187,7 @@ export type chatWhereInput = {
   id?: Prisma.StringFilter<"chat"> | string
   message?: Prisma.StringFilter<"chat"> | string
   userId?: Prisma.StringFilter<"chat"> | string
+  createdAt?: Prisma.DateTimeFilter<"chat"> | Date | string
   documentId?: Prisma.StringFilter<"chat"> | string
   workspaceId?: Prisma.StringFilter<"chat"> | string
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.workspaceWhereInput>
@@ -190,6 +198,7 @@ export type chatOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   workspace?: Prisma.workspaceOrderByWithRelationInput
@@ -203,6 +212,7 @@ export type chatWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.chatWhereInput | Prisma.chatWhereInput[]
   message?: Prisma.StringFilter<"chat"> | string
   userId?: Prisma.StringFilter<"chat"> | string
+  createdAt?: Prisma.DateTimeFilter<"chat"> | Date | string
   documentId?: Prisma.StringFilter<"chat"> | string
   workspaceId?: Prisma.StringFilter<"chat"> | string
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.workspaceWhereInput>
@@ -213,6 +223,7 @@ export type chatOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
   _count?: Prisma.chatCountOrderByAggregateInput
@@ -227,6 +238,7 @@ export type chatScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"chat"> | string
   message?: Prisma.StringWithAggregatesFilter<"chat"> | string
   userId?: Prisma.StringWithAggregatesFilter<"chat"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"chat"> | Date | string
   documentId?: Prisma.StringWithAggregatesFilter<"chat"> | string
   workspaceId?: Prisma.StringWithAggregatesFilter<"chat"> | string
 }
@@ -235,6 +247,7 @@ export type chatCreateInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   workspace: Prisma.workspaceCreateNestedOneWithoutChatsInput
   document: Prisma.documentCreateNestedOneWithoutChatsInput
 }
@@ -243,6 +256,7 @@ export type chatUncheckedCreateInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   documentId: string
   workspaceId: string
 }
@@ -251,6 +265,7 @@ export type chatUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutChatsNestedInput
   document?: Prisma.documentUpdateOneRequiredWithoutChatsNestedInput
 }
@@ -259,6 +274,7 @@ export type chatUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -267,6 +283,7 @@ export type chatCreateManyInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   documentId: string
   workspaceId: string
 }
@@ -275,12 +292,14 @@ export type chatUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type chatUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -299,6 +318,7 @@ export type chatCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
 }
@@ -307,6 +327,7 @@ export type chatMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
 }
@@ -315,6 +336,7 @@ export type chatMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   message?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
 }
@@ -407,6 +429,7 @@ export type chatCreateWithoutWorkspaceInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   document: Prisma.documentCreateNestedOneWithoutChatsInput
 }
 
@@ -414,6 +437,7 @@ export type chatUncheckedCreateWithoutWorkspaceInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   documentId: string
 }
 
@@ -450,6 +474,7 @@ export type chatScalarWhereInput = {
   id?: Prisma.StringFilter<"chat"> | string
   message?: Prisma.StringFilter<"chat"> | string
   userId?: Prisma.StringFilter<"chat"> | string
+  createdAt?: Prisma.DateTimeFilter<"chat"> | Date | string
   documentId?: Prisma.StringFilter<"chat"> | string
   workspaceId?: Prisma.StringFilter<"chat"> | string
 }
@@ -458,6 +483,7 @@ export type chatCreateWithoutDocumentInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   workspace: Prisma.workspaceCreateNestedOneWithoutChatsInput
 }
 
@@ -465,6 +491,7 @@ export type chatUncheckedCreateWithoutDocumentInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   workspaceId: string
 }
 
@@ -498,6 +525,7 @@ export type chatCreateManyWorkspaceInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   documentId: string
 }
 
@@ -505,6 +533,7 @@ export type chatUpdateWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   document?: Prisma.documentUpdateOneRequiredWithoutChatsNestedInput
 }
 
@@ -512,6 +541,7 @@ export type chatUncheckedUpdateWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -519,6 +549,7 @@ export type chatUncheckedUpdateManyWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -526,6 +557,7 @@ export type chatCreateManyDocumentInput = {
   id?: string
   message: string
   userId: string
+  createdAt?: Date | string
   workspaceId: string
 }
 
@@ -533,6 +565,7 @@ export type chatUpdateWithoutDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutChatsNestedInput
 }
 
@@ -540,6 +573,7 @@ export type chatUncheckedUpdateWithoutDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -547,6 +581,7 @@ export type chatUncheckedUpdateManyWithoutDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -556,6 +591,7 @@ export type chatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   message?: boolean
   userId?: boolean
+  createdAt?: boolean
   documentId?: boolean
   workspaceId?: boolean
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
@@ -566,6 +602,7 @@ export type chatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   message?: boolean
   userId?: boolean
+  createdAt?: boolean
   documentId?: boolean
   workspaceId?: boolean
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
@@ -576,6 +613,7 @@ export type chatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   message?: boolean
   userId?: boolean
+  createdAt?: boolean
   documentId?: boolean
   workspaceId?: boolean
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
@@ -586,11 +624,12 @@ export type chatSelectScalar = {
   id?: boolean
   message?: boolean
   userId?: boolean
+  createdAt?: boolean
   documentId?: boolean
   workspaceId?: boolean
 }
 
-export type chatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "message" | "userId" | "documentId" | "workspaceId", ExtArgs["result"]["chat"]>
+export type chatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "message" | "userId" | "createdAt" | "documentId" | "workspaceId", ExtArgs["result"]["chat"]>
 export type chatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   document?: boolean | Prisma.documentDefaultArgs<ExtArgs>
@@ -614,6 +653,7 @@ export type $chatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     message: string
     userId: string
+    createdAt: Date
     documentId: string
     workspaceId: string
   }, ExtArgs["result"]["chat"]>
@@ -1044,6 +1084,7 @@ export interface chatFieldRefs {
   readonly id: Prisma.FieldRef<"chat", 'String'>
   readonly message: Prisma.FieldRef<"chat", 'String'>
   readonly userId: Prisma.FieldRef<"chat", 'String'>
+  readonly createdAt: Prisma.FieldRef<"chat", 'DateTime'>
   readonly documentId: Prisma.FieldRef<"chat", 'String'>
   readonly workspaceId: Prisma.FieldRef<"chat", 'String'>
 }

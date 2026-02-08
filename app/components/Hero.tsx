@@ -6,8 +6,10 @@ import { BsThreeDots } from "react-icons/bs";
 import { FaGreaterThan } from "react-icons/fa";
 import { File,FileTypeIcon,FileText,BookOpen } from "lucide-react";
 import { PlusCircle,CheckCircle,UploadIcon } from "lucide-react";
+import {useRouter} from 'next/navigation';
 import {motion} from 'framer-motion';
 const Hero = () => {
+  const router = useRouter();
   return (
     <div className="min-h-screen relative z-1 bg-[url('/personal_knowledge_manager_bg.png')] bg-cover bg-center ">
       <div className='absolute inset-0 z-[-1] bg-black/50'></div>
@@ -34,12 +36,14 @@ const Hero = () => {
         transition={{ duration: 0.5, delay:0.6 }}
       className=" hidden flex-col md:flex md:flex-row gap-5 items-center  justify-center lg:justify-start  mt-3 w-full">
         <div className="h-full w-full md:w-fit lg:w-1/4 pt-3 flex justify-center   py-2">
-          <span className="bg-blue-500 flex items-center gap-2 cursor-pointer rounded-md px-9 py-2.5 text-white">
-             <span className=" text-white">
+          <span className="bg-blue-500 flex items-center gap-2 cursor-pointer rounded-md px-9 py-2.5 text-white"
+           onClick={()=>{console.log("clicked");router.push("/library")}}
+          >
+             <span className=" text-white" >
              <UploadIcon size={18} className=" text-white " />
             </span>
             Upload Document
-          </span>
+          </span >
         </div>
 
         <div className="lg:w-3/4 w-full  justify-center md:justify-start md:w-fit flex ">
@@ -71,9 +75,11 @@ const Hero = () => {
           </div>
         </div>
 
-         <div className="h-full w-full  md:w-fit lg:w-1/4 pt-3 flex justify-center   py-2">
-          <span className="bg-blue-500 flex items-center gap-2 cursor-pointer rounded-md px-9 py-2.5 text-white">
-             <span className=" text-white">
+         <div className="h-full w-full  md:w-fit lg:w-1/4 pt-3 flex justify-center py-2">
+          <span className="bg-blue-500 flex items-center cursor-pointer gap-2 cursor-pointer rounded-md px-9 py-2.5 text-white"
+          onClick={()=>{console.log("clicked");router.push("/library")}}
+          >
+             <span className=" text-white" >
              <UploadIcon size={18} className=" text-white " />
             </span>
             Upload Document

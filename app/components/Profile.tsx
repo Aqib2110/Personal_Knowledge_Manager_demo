@@ -11,12 +11,12 @@ import { Settings, Shield } from "lucide-react"
 import { useRouter } from "next/navigation"
 
 export function Profile() {
-  const router = useRouter()
+  const router = useRouter();
 
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="outline-none">
-        <Avatar className="h-9 w-9 cursor-pointer">
+        <Avatar className="md:h-9 md:w-9 h-7 w-7 cursor-pointer">
           <AvatarImage src="/avatar.png" />
           <AvatarFallback>MA</AvatarFallback>
         </Avatar>
@@ -26,12 +26,12 @@ export function Profile() {
         align="end"
         className="w-48 bg-white shadow-lg"
       >
-        <DropdownMenuItem
-          onClick={() => router.push("/settings")}
+ <DropdownMenuItem
+          onClick={() => router.push("/workspaces")}
           className="cursor-pointer gap-2"
         >
-          <Settings className="h-4 w-4" />
-          Settings
+          <Shield className="h-4 w-4" />
+          Workspaces
         </DropdownMenuItem>
 
         <DropdownMenuItem
@@ -41,6 +41,15 @@ export function Profile() {
           <Shield className="h-4 w-4" />
           Roles & Permissions
         </DropdownMenuItem>
+
+        <DropdownMenuItem
+          onClick={() => router.push("/settings")}
+          className="cursor-pointer gap-2"
+        >
+          <Settings className="h-4 w-4" />
+          Settings
+        </DropdownMenuItem>
+
       </DropdownMenuContent>
     </DropdownMenu>
   )

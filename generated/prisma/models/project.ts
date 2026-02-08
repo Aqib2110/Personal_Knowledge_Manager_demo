@@ -175,6 +175,7 @@ export type projectWhereInput = {
   workspaceId?: Prisma.StringFilter<"project"> | string
   userId?: Prisma.StringFilter<"project"> | string
   documents?: Prisma.DocumentListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.workspaceWhereInput>
 }
 
@@ -184,6 +185,7 @@ export type projectOrderByWithRelationInput = {
   workspaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   documents?: Prisma.documentOrderByRelationAggregateInput
+  user?: Prisma.userOrderByWithRelationInput
   workspace?: Prisma.workspaceOrderByWithRelationInput
 }
 
@@ -196,6 +198,7 @@ export type projectWhereUniqueInput = Prisma.AtLeast<{
   workspaceId?: Prisma.StringFilter<"project"> | string
   userId?: Prisma.StringFilter<"project"> | string
   documents?: Prisma.DocumentListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.workspaceWhereInput>
 }, "id">
 
@@ -222,8 +225,8 @@ export type projectScalarWhereWithAggregatesInput = {
 export type projectCreateInput = {
   id?: string
   name: string
-  userId: string
   documents?: Prisma.documentCreateNestedManyWithoutProjectInput
+  user: Prisma.userCreateNestedOneWithoutProjectsInput
   workspace: Prisma.workspaceCreateNestedOneWithoutProjectsInput
 }
 
@@ -238,8 +241,8 @@ export type projectUncheckedCreateInput = {
 export type projectUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   documents?: Prisma.documentUpdateManyWithoutProjectNestedInput
+  user?: Prisma.userUpdateOneRequiredWithoutProjectsNestedInput
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutProjectsNestedInput
 }
 
@@ -261,7 +264,6 @@ export type projectCreateManyInput = {
 export type projectUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type projectUncheckedUpdateManyInput = {
@@ -363,11 +365,53 @@ export type projectUpdateOneRequiredWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.projectUpdateToOneWithWhereWithoutDocumentsInput, Prisma.projectUpdateWithoutDocumentsInput>, Prisma.projectUncheckedUpdateWithoutDocumentsInput>
 }
 
+export type projectCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.projectCreateWithoutUserInput, Prisma.projectUncheckedCreateWithoutUserInput> | Prisma.projectCreateWithoutUserInput[] | Prisma.projectUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.projectCreateOrConnectWithoutUserInput | Prisma.projectCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.projectCreateManyUserInputEnvelope
+  connect?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+}
+
+export type projectUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.projectCreateWithoutUserInput, Prisma.projectUncheckedCreateWithoutUserInput> | Prisma.projectCreateWithoutUserInput[] | Prisma.projectUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.projectCreateOrConnectWithoutUserInput | Prisma.projectCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.projectCreateManyUserInputEnvelope
+  connect?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+}
+
+export type projectUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.projectCreateWithoutUserInput, Prisma.projectUncheckedCreateWithoutUserInput> | Prisma.projectCreateWithoutUserInput[] | Prisma.projectUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.projectCreateOrConnectWithoutUserInput | Prisma.projectCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.projectUpsertWithWhereUniqueWithoutUserInput | Prisma.projectUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.projectCreateManyUserInputEnvelope
+  set?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+  disconnect?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+  delete?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+  connect?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+  update?: Prisma.projectUpdateWithWhereUniqueWithoutUserInput | Prisma.projectUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.projectUpdateManyWithWhereWithoutUserInput | Prisma.projectUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.projectScalarWhereInput | Prisma.projectScalarWhereInput[]
+}
+
+export type projectUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.projectCreateWithoutUserInput, Prisma.projectUncheckedCreateWithoutUserInput> | Prisma.projectCreateWithoutUserInput[] | Prisma.projectUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.projectCreateOrConnectWithoutUserInput | Prisma.projectCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.projectUpsertWithWhereUniqueWithoutUserInput | Prisma.projectUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.projectCreateManyUserInputEnvelope
+  set?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+  disconnect?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+  delete?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+  connect?: Prisma.projectWhereUniqueInput | Prisma.projectWhereUniqueInput[]
+  update?: Prisma.projectUpdateWithWhereUniqueWithoutUserInput | Prisma.projectUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.projectUpdateManyWithWhereWithoutUserInput | Prisma.projectUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.projectScalarWhereInput | Prisma.projectScalarWhereInput[]
+}
+
 export type projectCreateWithoutWorkspaceInput = {
   id?: string
   name: string
-  userId: string
   documents?: Prisma.documentCreateNestedManyWithoutProjectInput
+  user: Prisma.userCreateNestedOneWithoutProjectsInput
 }
 
 export type projectUncheckedCreateWithoutWorkspaceInput = {
@@ -416,7 +460,7 @@ export type projectScalarWhereInput = {
 export type projectCreateWithoutDocumentsInput = {
   id?: string
   name: string
-  userId: string
+  user: Prisma.userCreateNestedOneWithoutProjectsInput
   workspace: Prisma.workspaceCreateNestedOneWithoutProjectsInput
 }
 
@@ -446,7 +490,7 @@ export type projectUpdateToOneWithWhereWithoutDocumentsInput = {
 export type projectUpdateWithoutDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  user?: Prisma.userUpdateOneRequiredWithoutProjectsNestedInput
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutProjectsNestedInput
 }
 
@@ -455,6 +499,46 @@ export type projectUncheckedUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type projectCreateWithoutUserInput = {
+  id?: string
+  name: string
+  documents?: Prisma.documentCreateNestedManyWithoutProjectInput
+  workspace: Prisma.workspaceCreateNestedOneWithoutProjectsInput
+}
+
+export type projectUncheckedCreateWithoutUserInput = {
+  id?: string
+  name: string
+  workspaceId: string
+  documents?: Prisma.documentUncheckedCreateNestedManyWithoutProjectInput
+}
+
+export type projectCreateOrConnectWithoutUserInput = {
+  where: Prisma.projectWhereUniqueInput
+  create: Prisma.XOR<Prisma.projectCreateWithoutUserInput, Prisma.projectUncheckedCreateWithoutUserInput>
+}
+
+export type projectCreateManyUserInputEnvelope = {
+  data: Prisma.projectCreateManyUserInput | Prisma.projectCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type projectUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.projectWhereUniqueInput
+  update: Prisma.XOR<Prisma.projectUpdateWithoutUserInput, Prisma.projectUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.projectCreateWithoutUserInput, Prisma.projectUncheckedCreateWithoutUserInput>
+}
+
+export type projectUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.projectWhereUniqueInput
+  data: Prisma.XOR<Prisma.projectUpdateWithoutUserInput, Prisma.projectUncheckedUpdateWithoutUserInput>
+}
+
+export type projectUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.projectScalarWhereInput
+  data: Prisma.XOR<Prisma.projectUpdateManyMutationInput, Prisma.projectUncheckedUpdateManyWithoutUserInput>
 }
 
 export type projectCreateManyWorkspaceInput = {
@@ -466,8 +550,8 @@ export type projectCreateManyWorkspaceInput = {
 export type projectUpdateWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
   documents?: Prisma.documentUpdateManyWithoutProjectNestedInput
+  user?: Prisma.userUpdateOneRequiredWithoutProjectsNestedInput
 }
 
 export type projectUncheckedUpdateWithoutWorkspaceInput = {
@@ -481,6 +565,32 @@ export type projectUncheckedUpdateManyWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type projectCreateManyUserInput = {
+  id?: string
+  name: string
+  workspaceId: string
+}
+
+export type projectUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  documents?: Prisma.documentUpdateManyWithoutProjectNestedInput
+  workspace?: Prisma.workspaceUpdateOneRequiredWithoutProjectsNestedInput
+}
+
+export type projectUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  documents?: Prisma.documentUncheckedUpdateManyWithoutProjectNestedInput
+}
+
+export type projectUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -520,6 +630,7 @@ export type projectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   workspaceId?: boolean
   userId?: boolean
   documents?: boolean | Prisma.project$documentsArgs<ExtArgs>
+  user?: boolean | Prisma.userDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
@@ -529,6 +640,7 @@ export type projectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   workspaceId?: boolean
   userId?: boolean
+  user?: boolean | Prisma.userDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -537,6 +649,7 @@ export type projectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   name?: boolean
   workspaceId?: boolean
   userId?: boolean
+  user?: boolean | Prisma.userDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["project"]>
 
@@ -550,13 +663,16 @@ export type projectSelectScalar = {
 export type projectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "workspaceId" | "userId", ExtArgs["result"]["project"]>
 export type projectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | Prisma.project$documentsArgs<ExtArgs>
+  user?: boolean | Prisma.userDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.ProjectCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type projectIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.userDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
 }
 export type projectIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.userDefaultArgs<ExtArgs>
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
 }
 
@@ -564,6 +680,7 @@ export type $projectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "project"
   objects: {
     documents: Prisma.$documentPayload<ExtArgs>[]
+    user: Prisma.$userPayload<ExtArgs>
     workspace: Prisma.$workspacePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -966,6 +1083,7 @@ readonly fields: projectFieldRefs;
 export interface Prisma__projectClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   documents<T extends Prisma.project$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.project$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$documentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.userDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.userDefaultArgs<ExtArgs>>): Prisma.Prisma__userClient<runtime.Types.Result.GetResult<Prisma.$userPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   workspace<T extends Prisma.workspaceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.workspaceDefaultArgs<ExtArgs>>): Prisma.Prisma__workspaceClient<runtime.Types.Result.GetResult<Prisma.$workspacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.

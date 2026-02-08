@@ -175,7 +175,10 @@ export type userWhereInput = {
   name?: Prisma.StringFilter<"user"> | string
   password?: Prisma.StringNullableFilter<"user"> | string | null
   workspaces?: Prisma.WorkspaceListRelationFilter
+  projects?: Prisma.ProjectListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
+  workspacesmember?: Prisma.MemberListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }
 
 export type userOrderByWithRelationInput = {
@@ -184,7 +187,10 @@ export type userOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   workspaces?: Prisma.workspaceOrderByRelationAggregateInput
+  projects?: Prisma.projectOrderByRelationAggregateInput
   documents?: Prisma.documentOrderByRelationAggregateInput
+  workspacesmember?: Prisma.memberOrderByRelationAggregateInput
+  notifications?: Prisma.notificationOrderByRelationAggregateInput
 }
 
 export type userWhereUniqueInput = Prisma.AtLeast<{
@@ -196,7 +202,10 @@ export type userWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"user"> | string
   password?: Prisma.StringNullableFilter<"user"> | string | null
   workspaces?: Prisma.WorkspaceListRelationFilter
+  projects?: Prisma.ProjectListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
+  workspacesmember?: Prisma.MemberListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
 }, "id" | "email">
 
 export type userOrderByWithAggregationInput = {
@@ -225,7 +234,10 @@ export type userCreateInput = {
   name: string
   password?: string | null
   workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
+  projects?: Prisma.projectCreateNestedManyWithoutUserInput
   documents?: Prisma.documentCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutUserInput
 }
 
 export type userUncheckedCreateInput = {
@@ -234,7 +246,10 @@ export type userUncheckedCreateInput = {
   name: string
   password?: string | null
   workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type userUpdateInput = {
@@ -243,7 +258,10 @@ export type userUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
+  projects?: Prisma.projectUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutUserNestedInput
 }
 
 export type userUncheckedUpdateInput = {
@@ -252,7 +270,10 @@ export type userUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type userCreateManyInput = {
@@ -276,6 +297,11 @@ export type userUncheckedUpdateManyInput = {
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
+export type UserScalarRelationFilter = {
+  is?: Prisma.userWhereInput
+  isNot?: Prisma.userWhereInput
+}
+
 export type userCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
@@ -295,19 +321,6 @@ export type userMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
-}
-
-export type UserScalarRelationFilter = {
-  is?: Prisma.userWhereInput
-  isNot?: Prisma.userWhereInput
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
 }
 
 export type userCreateNestedOneWithoutWorkspacesInput = {
@@ -338,12 +351,57 @@ export type userUpdateOneRequiredWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.userUpdateToOneWithWhereWithoutDocumentsInput, Prisma.userUpdateWithoutDocumentsInput>, Prisma.userUncheckedUpdateWithoutDocumentsInput>
 }
 
+export type userCreateNestedOneWithoutProjectsInput = {
+  create?: Prisma.XOR<Prisma.userCreateWithoutProjectsInput, Prisma.userUncheckedCreateWithoutProjectsInput>
+  connectOrCreate?: Prisma.userCreateOrConnectWithoutProjectsInput
+  connect?: Prisma.userWhereUniqueInput
+}
+
+export type userUpdateOneRequiredWithoutProjectsNestedInput = {
+  create?: Prisma.XOR<Prisma.userCreateWithoutProjectsInput, Prisma.userUncheckedCreateWithoutProjectsInput>
+  connectOrCreate?: Prisma.userCreateOrConnectWithoutProjectsInput
+  upsert?: Prisma.userUpsertWithoutProjectsInput
+  connect?: Prisma.userWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.userUpdateToOneWithWhereWithoutProjectsInput, Prisma.userUpdateWithoutProjectsInput>, Prisma.userUncheckedUpdateWithoutProjectsInput>
+}
+
+export type userCreateNestedOneWithoutWorkspacesmemberInput = {
+  create?: Prisma.XOR<Prisma.userCreateWithoutWorkspacesmemberInput, Prisma.userUncheckedCreateWithoutWorkspacesmemberInput>
+  connectOrCreate?: Prisma.userCreateOrConnectWithoutWorkspacesmemberInput
+  connect?: Prisma.userWhereUniqueInput
+}
+
+export type userUpdateOneRequiredWithoutWorkspacesmemberNestedInput = {
+  create?: Prisma.XOR<Prisma.userCreateWithoutWorkspacesmemberInput, Prisma.userUncheckedCreateWithoutWorkspacesmemberInput>
+  connectOrCreate?: Prisma.userCreateOrConnectWithoutWorkspacesmemberInput
+  upsert?: Prisma.userUpsertWithoutWorkspacesmemberInput
+  connect?: Prisma.userWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.userUpdateToOneWithWhereWithoutWorkspacesmemberInput, Prisma.userUpdateWithoutWorkspacesmemberInput>, Prisma.userUncheckedUpdateWithoutWorkspacesmemberInput>
+}
+
+export type userCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.userCreateWithoutNotificationsInput, Prisma.userUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.userCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.userWhereUniqueInput
+}
+
+export type userUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.userCreateWithoutNotificationsInput, Prisma.userUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.userCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.userUpsertWithoutNotificationsInput
+  connect?: Prisma.userWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.userUpdateToOneWithWhereWithoutNotificationsInput, Prisma.userUpdateWithoutNotificationsInput>, Prisma.userUncheckedUpdateWithoutNotificationsInput>
+}
+
 export type userCreateWithoutWorkspacesInput = {
   id?: string
   email: string
   name: string
   password?: string | null
+  projects?: Prisma.projectCreateNestedManyWithoutUserInput
   documents?: Prisma.documentCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutUserInput
 }
 
 export type userUncheckedCreateWithoutWorkspacesInput = {
@@ -351,7 +409,10 @@ export type userUncheckedCreateWithoutWorkspacesInput = {
   email: string
   name: string
   password?: string | null
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type userCreateOrConnectWithoutWorkspacesInput = {
@@ -375,7 +436,10 @@ export type userUpdateWithoutWorkspacesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projects?: Prisma.projectUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutUserNestedInput
 }
 
 export type userUncheckedUpdateWithoutWorkspacesInput = {
@@ -383,7 +447,10 @@ export type userUncheckedUpdateWithoutWorkspacesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type userCreateWithoutDocumentsInput = {
@@ -392,6 +459,9 @@ export type userCreateWithoutDocumentsInput = {
   name: string
   password?: string | null
   workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
+  projects?: Prisma.projectCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutUserInput
 }
 
 export type userUncheckedCreateWithoutDocumentsInput = {
@@ -400,6 +470,9 @@ export type userUncheckedCreateWithoutDocumentsInput = {
   name: string
   password?: string | null
   workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type userCreateOrConnectWithoutDocumentsInput = {
@@ -424,6 +497,9 @@ export type userUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
+  projects?: Prisma.projectUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutUserNestedInput
 }
 
 export type userUncheckedUpdateWithoutDocumentsInput = {
@@ -432,6 +508,189 @@ export type userUncheckedUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type userCreateWithoutProjectsInput = {
+  id?: string
+  email: string
+  name: string
+  password?: string | null
+  workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
+  documents?: Prisma.documentCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutUserInput
+}
+
+export type userUncheckedCreateWithoutProjectsInput = {
+  id?: string
+  email: string
+  name: string
+  password?: string | null
+  workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type userCreateOrConnectWithoutProjectsInput = {
+  where: Prisma.userWhereUniqueInput
+  create: Prisma.XOR<Prisma.userCreateWithoutProjectsInput, Prisma.userUncheckedCreateWithoutProjectsInput>
+}
+
+export type userUpsertWithoutProjectsInput = {
+  update: Prisma.XOR<Prisma.userUpdateWithoutProjectsInput, Prisma.userUncheckedUpdateWithoutProjectsInput>
+  create: Prisma.XOR<Prisma.userCreateWithoutProjectsInput, Prisma.userUncheckedCreateWithoutProjectsInput>
+  where?: Prisma.userWhereInput
+}
+
+export type userUpdateToOneWithWhereWithoutProjectsInput = {
+  where?: Prisma.userWhereInput
+  data: Prisma.XOR<Prisma.userUpdateWithoutProjectsInput, Prisma.userUncheckedUpdateWithoutProjectsInput>
+}
+
+export type userUpdateWithoutProjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
+  documents?: Prisma.documentUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutUserNestedInput
+}
+
+export type userUncheckedUpdateWithoutProjectsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type userCreateWithoutWorkspacesmemberInput = {
+  id?: string
+  email: string
+  name: string
+  password?: string | null
+  workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
+  projects?: Prisma.projectCreateNestedManyWithoutUserInput
+  documents?: Prisma.documentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationCreateNestedManyWithoutUserInput
+}
+
+export type userUncheckedCreateWithoutWorkspacesmemberInput = {
+  id?: string
+  email: string
+  name: string
+  password?: string | null
+  workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.notificationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type userCreateOrConnectWithoutWorkspacesmemberInput = {
+  where: Prisma.userWhereUniqueInput
+  create: Prisma.XOR<Prisma.userCreateWithoutWorkspacesmemberInput, Prisma.userUncheckedCreateWithoutWorkspacesmemberInput>
+}
+
+export type userUpsertWithoutWorkspacesmemberInput = {
+  update: Prisma.XOR<Prisma.userUpdateWithoutWorkspacesmemberInput, Prisma.userUncheckedUpdateWithoutWorkspacesmemberInput>
+  create: Prisma.XOR<Prisma.userCreateWithoutWorkspacesmemberInput, Prisma.userUncheckedCreateWithoutWorkspacesmemberInput>
+  where?: Prisma.userWhereInput
+}
+
+export type userUpdateToOneWithWhereWithoutWorkspacesmemberInput = {
+  where?: Prisma.userWhereInput
+  data: Prisma.XOR<Prisma.userUpdateWithoutWorkspacesmemberInput, Prisma.userUncheckedUpdateWithoutWorkspacesmemberInput>
+}
+
+export type userUpdateWithoutWorkspacesmemberInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
+  projects?: Prisma.projectUpdateManyWithoutUserNestedInput
+  documents?: Prisma.documentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUpdateManyWithoutUserNestedInput
+}
+
+export type userUncheckedUpdateWithoutWorkspacesmemberInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.notificationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type userCreateWithoutNotificationsInput = {
+  id?: string
+  email: string
+  name: string
+  password?: string | null
+  workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
+  projects?: Prisma.projectCreateNestedManyWithoutUserInput
+  documents?: Prisma.documentCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberCreateNestedManyWithoutUserInput
+}
+
+export type userUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  email: string
+  name: string
+  password?: string | null
+  workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
+  documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
+  workspacesmember?: Prisma.memberUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type userCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.userWhereUniqueInput
+  create: Prisma.XOR<Prisma.userCreateWithoutNotificationsInput, Prisma.userUncheckedCreateWithoutNotificationsInput>
+}
+
+export type userUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.userUpdateWithoutNotificationsInput, Prisma.userUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.userCreateWithoutNotificationsInput, Prisma.userUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.userWhereInput
+}
+
+export type userUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.userWhereInput
+  data: Prisma.XOR<Prisma.userUpdateWithoutNotificationsInput, Prisma.userUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type userUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
+  projects?: Prisma.projectUpdateManyWithoutUserNestedInput
+  documents?: Prisma.documentUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUpdateManyWithoutUserNestedInput
+}
+
+export type userUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
+  documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
+  workspacesmember?: Prisma.memberUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -441,12 +700,18 @@ export type userUncheckedUpdateWithoutDocumentsInput = {
 
 export type UserCountOutputType = {
   workspaces: number
+  projects: number
   documents: number
+  workspacesmember: number
+  notifications: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspaces?: boolean | UserCountOutputTypeCountWorkspacesArgs
+  projects?: boolean | UserCountOutputTypeCountProjectsArgs
   documents?: boolean | UserCountOutputTypeCountDocumentsArgs
+  workspacesmember?: boolean | UserCountOutputTypeCountWorkspacesmemberArgs
+  notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
 }
 
 /**
@@ -469,8 +734,29 @@ export type UserCountOutputTypeCountWorkspacesArgs<ExtArgs extends runtime.Types
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountProjectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.projectWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.documentWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountWorkspacesmemberArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.memberWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.notificationWhereInput
 }
 
 
@@ -480,7 +766,10 @@ export type userSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   password?: boolean
   workspaces?: boolean | Prisma.user$workspacesArgs<ExtArgs>
+  projects?: boolean | Prisma.user$projectsArgs<ExtArgs>
   documents?: boolean | Prisma.user$documentsArgs<ExtArgs>
+  workspacesmember?: boolean | Prisma.user$workspacesmemberArgs<ExtArgs>
+  notifications?: boolean | Prisma.user$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -508,7 +797,10 @@ export type userSelectScalar = {
 export type userOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password", ExtArgs["result"]["user"]>
 export type userInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspaces?: boolean | Prisma.user$workspacesArgs<ExtArgs>
+  projects?: boolean | Prisma.user$projectsArgs<ExtArgs>
   documents?: boolean | Prisma.user$documentsArgs<ExtArgs>
+  workspacesmember?: boolean | Prisma.user$workspacesmemberArgs<ExtArgs>
+  notifications?: boolean | Prisma.user$notificationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type userIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -518,7 +810,10 @@ export type $userPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "user"
   objects: {
     workspaces: Prisma.$workspacePayload<ExtArgs>[]
+    projects: Prisma.$projectPayload<ExtArgs>[]
     documents: Prisma.$documentPayload<ExtArgs>[]
+    workspacesmember: Prisma.$memberPayload<ExtArgs>[]
+    notifications: Prisma.$notificationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -920,7 +1215,10 @@ readonly fields: userFieldRefs;
 export interface Prisma__userClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   workspaces<T extends Prisma.user$workspacesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$workspacesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$workspacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  projects<T extends Prisma.user$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$projectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documents<T extends Prisma.user$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$documentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  workspacesmember<T extends Prisma.user$workspacesmemberArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$workspacesmemberArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$memberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.user$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.user$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$notificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1366,6 +1664,30 @@ export type user$workspacesArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
+ * user.projects
+ */
+export type user$projectsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the project
+   */
+  select?: Prisma.projectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the project
+   */
+  omit?: Prisma.projectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.projectInclude<ExtArgs> | null
+  where?: Prisma.projectWhereInput
+  orderBy?: Prisma.projectOrderByWithRelationInput | Prisma.projectOrderByWithRelationInput[]
+  cursor?: Prisma.projectWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
  * user.documents
  */
 export type user$documentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1387,6 +1709,54 @@ export type user$documentsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.DocumentScalarFieldEnum | Prisma.DocumentScalarFieldEnum[]
+}
+
+/**
+ * user.workspacesmember
+ */
+export type user$workspacesmemberArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the member
+   */
+  select?: Prisma.memberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the member
+   */
+  omit?: Prisma.memberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.memberInclude<ExtArgs> | null
+  where?: Prisma.memberWhereInput
+  orderBy?: Prisma.memberOrderByWithRelationInput | Prisma.memberOrderByWithRelationInput[]
+  cursor?: Prisma.memberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MemberScalarFieldEnum | Prisma.MemberScalarFieldEnum[]
+}
+
+/**
+ * user.notifications
+ */
+export type user$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the notification
+   */
+  select?: Prisma.notificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the notification
+   */
+  omit?: Prisma.notificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.notificationInclude<ExtArgs> | null
+  where?: Prisma.notificationWhereInput
+  orderBy?: Prisma.notificationOrderByWithRelationInput | Prisma.notificationOrderByWithRelationInput[]
+  cursor?: Prisma.notificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
 }
 
 /**
