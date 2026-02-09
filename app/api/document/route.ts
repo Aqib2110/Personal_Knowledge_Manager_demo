@@ -20,6 +20,7 @@ export async function POST(req:NextRequest)
    const projectId = data.get("projectId");
     console.log("3",file,workspaceId,projectId);
 console.log("cergyutrhghui jtrn htrytvrrgiutyrhotui")
+console.log(process.env.REDIS_HOST,process.env.REDIS_PASSWORD,Number(process.env.REDIS_PORT),process.env.REDIS_USERNAME,"redis")
     const title = file?.name;
    
     if(!file || !title || !workspaceId || !projectId)
