@@ -123,7 +123,6 @@ interface section{
 
 
 
-import * as pdfjs from "pdfjs-dist/legacy/build/pdf.js";
 
 // async function parsePDFBuffer(fileBuffer: Buffer): Promise<string> {
 //   const loadingTask = pdfjs.getDocument({ data: fileBuffer });
@@ -145,6 +144,8 @@ import * as pdfjs from "pdfjs-dist/legacy/build/pdf.js";
 
 //   return text;
 // }
+import * as pdfjs from "pdfjs-dist/legacy/build/pdf.js";
+
 export async function parsePDFBuffer(fileBuffer: Buffer): Promise<string> {
   const loadingTask = pdfjs.getDocument({ data: fileBuffer });
   const pdf = await loadingTask.promise;

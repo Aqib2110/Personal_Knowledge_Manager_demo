@@ -133,8 +133,10 @@ useEffect(() => {
       return res.json();
     })
     .then(data=>{
+
       setdocumentId(data.document.id);
       setsendNotify(true);
+      alert("File upload successfully");
     }).catch(err=>console.error(err));
 }, [File])
 
