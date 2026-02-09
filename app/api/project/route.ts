@@ -79,7 +79,7 @@ return NextResponse.json({
     if(error as unknown)
     {
         return NextResponse.json({
-   messag:"internal server error"
+   messag:"internal server errors"
 },{
     status:500
 })
