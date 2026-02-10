@@ -13,6 +13,7 @@ export async function POST(req:NextRequest)
     {
      return NextResponse.json({message:"Unauthorized"},{status:401});
     }
+
     const data = await req.formData();
     console.log(data,"data");
     const file = data.get("file") as File;
