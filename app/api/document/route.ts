@@ -8,6 +8,7 @@ import { getServerSession } from "next-auth";
 export async function POST(req:NextRequest)
 {
     const session = await getServerSession(authOptions);
+    console.log(process.env.R2_ENDPOINT,process.env.ACCESS_KEY_ID,process.env.SECRET_ACCESS_KEY,process.env.R2_BUCKET,process.env.R2_API_TOKEN,"s3 credentials")
     const queue = getQueue();
     // console.log(session,"session");
     if(!session?.user.id)
