@@ -1,13 +1,14 @@
 import { NextResponse,NextRequest } from "next/server";
 import  {prisma} from "@/lib/prisma";
 import { s3Upload } from "@/lib/s3";
-import { queue } from "@/lib/queue";
+import { getQueue } from "@/lib/queue";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 
 export async function POST(req:NextRequest)
 {
     const session = await getServerSession(authOptions);
+    const queue = getQueue();
     // console.log(session,"session");
     if(!session?.user.id)
     {
