@@ -218,7 +218,7 @@ return (
            
         <Card
         key={doc?.id}
-        className={`bg-white w-full h-full oveflow-hidden border-gray-100 border hover:bg-white/10 transition`}
+        className={`bg-white w-full h-full overflow-hidden border-gray-100 border hover:bg-white/10 transition`}
       >
         <CardContent className="p-4  space-y-3">
           <div className="flex text-black items-center gap-3">
