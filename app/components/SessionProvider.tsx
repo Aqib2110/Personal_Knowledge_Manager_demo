@@ -4,9 +4,13 @@ import { SessionProvider } from 'next-auth/react'
 import ContentWrapper from './ContentWrapper'
 const SessionProvid = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ContentWrapper>
-        <SessionProvider>{children}</SessionProvider>
-   </ContentWrapper> 
+   
+        <SessionProvider>
+          <ContentWrapper>
+          {children}
+          </ContentWrapper> 
+          </SessionProvider>
+  
   )
 }
 

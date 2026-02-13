@@ -62,6 +62,7 @@ model chat{
   workspaceId String
   workspace workspace @relation(fields: [workspaceId],references: [id])
   document document @relation(fields: [documentId],references: [id])
+  user user @relation(fields: [userId],references: [id])
 }
 
 model project{
@@ -94,11 +95,13 @@ model user{
   email String @unique
   name String
   password String?
+  image String?
   workspaces workspace[]
   projects project[]
   documents document[]
   workspacesmember member[]
   notifications notification[]
+  chats chat[]
 }
 
 model notification{

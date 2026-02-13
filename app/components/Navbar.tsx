@@ -8,11 +8,15 @@ import { Profile } from "./Profile";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 const Navbar = () => {
   const [nav, setnav] = useState("Dashboard");
   const [sidebar, setsidebar] = useState(false);
-
+ const router = useRouter();
+  const session = useSession();
+  console.log(session);
   useEffect(() => {
+  
    const path = window.location.pathname;
     if(path === "/")setnav("Dashboard");
     else if(path === "/library")setnav("Library");
@@ -20,10 +24,14 @@ const Navbar = () => {
     else if(path === "/ai")setnav("AI");
     else if(path === "/pricing")setnav("Pricing");
     else if(path === "/analytics")setnav("Analytics");
-  }, [])
+    if(session?.status === "unauthenticated")
+    {
+      router.push("/auth/signup");
+      return;
+    }
+  }, [session])
   
-  const router = useRouter();
-
+ 
   return (
     <div className="px-5 w-full h-[60px] border-b fixed top-0  border-white/10  bg-gradient-to-r from-slate-900 to-[#0B1E36]">
       <div className="flex h-full  justify-between items-center  ">
@@ -122,7 +130,7 @@ const Navbar = () => {
         </Link>
         
       <div>
-        <Profile />
+        <Profile session={session}/>
       </div>
       <div className="block md:hidden">
  <MenuIcon size={22} className="text-white" onClick={()=>{setsidebar(true);}} />

@@ -10,15 +10,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Settings, Shield } from "lucide-react"
 import { useRouter } from "next/navigation"
 
-export function Profile() {
+
+export function Profile({session}:{session:any}) {
   const router = useRouter();
 
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="outline-none">
         <Avatar className="md:h-9 md:w-9 h-7 w-7 cursor-pointer">
-          <AvatarImage src="/avatar.png" />
-          <AvatarFallback>MA</AvatarFallback>
+          {
+            session?.data?.user?.image ? <AvatarImage src={ session?.data?.user?.image || ""} /> : <AvatarFallback>{session?.data?.user?.name ? session.data.user.name.charAt(0) : "U"}</AvatarFallback>
+          }
         </Avatar>
       </DropdownMenuTrigger>
 

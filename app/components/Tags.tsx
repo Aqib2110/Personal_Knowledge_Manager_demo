@@ -33,7 +33,6 @@ setmydocs(mydoc);
 console.log()
 }, [documents])
 useEffect(() => {
-  console.log(docId,oldTag,tagupdate,inputRefTag?.current?.value)
  if(!docId || !val || !oldTag || !tagupdate)return;
 console.log("reach")
  fetch('/api/tag/update',{

@@ -262,14 +262,31 @@ if(!documentId)return;
             {loading ? <div className='h-full w-full flex justify-center items-center'>Loading...</div> : chats.length > 0 ? chats.map((chat: any) => {
               return chat.message ? <div className=''>
                 <div className='flex justify-start'>
+                  <span className='flex gap-2 items-center'>
+<span className='rounded-full w-6 h-6 text-sm font-semibold  text-center border'>
+{
+  chat?.user?.image ? <img src={chat.user.image} alt="user" className='rounded-full w-full h-full object-cover' /> :
+  chat?.user?.name ? chat.user.name.slice(0, 2).toUpperCase() : "U"
+}
+</span>
  <div className='bg-black text-white w-fit p-2 rounded-md'>
+ 
                   {JSON.parse(chat.message).question}
                 </div>
+                </span>
                 </div>
+
+            
                <div className='flex justify-end'>
+                <span className='flex gap-2 items-center'>
+
+            
  <div className='bg-white text-black w-fit p-2 rounded-md'>
                   {JSON.parse(chat.message).answer}
                 </div>
+<span className='rounded-full w-6 h-6  text-center text-sm font-semibold  border'>AI</span>
+
+                    </span>   
                </div>
                
               </div> : <div className={`${chat.question ? "bg-black border self-start text-white" : "bg-white self-end text-black"} w-fit p-2 rounded-md`}>

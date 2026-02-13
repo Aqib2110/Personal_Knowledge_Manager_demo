@@ -2,9 +2,14 @@ import React, { useEffect } from 'react'
 import Link from 'next/link';
 import { useState } from 'react';
 import { Cross } from 'lucide-react';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 const MobNav = ({sidebar,setsidebar}:{sidebar:boolean,setsidebar:React.Dispatch<boolean>}) => {
     const [nav, setnav] = useState("Dashboard");
+      const router = useRouter();
+        const session = useSession();
      useEffect(() => {
+      
        const path = window.location.pathname;
         if(path === "/")setnav("Dashboard");
         else if(path === "/library")setnav("Library");
@@ -12,7 +17,12 @@ const MobNav = ({sidebar,setsidebar}:{sidebar:boolean,setsidebar:React.Dispatch<
         else if(path === "/ai")setnav("AI");
         else if(path === "/pricing")setnav("Pricing");
         else if(path === "/analytics")setnav("Analytics");
-      }, [])
+        if(session?.status === "unauthenticated")
+        {
+          router.push("/auth/signup");
+          return;
+        }
+      }, [session])
   return (
     <div className='h-screen absolute flex justify-center items-center top-0 right-0 z-10 w-full bg-gradient-to-r from-slate-900 to-[#0B1E36]'>
         <div className=" h-4/5  flex flex-col justify-between items-center">

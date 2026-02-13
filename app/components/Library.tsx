@@ -105,6 +105,7 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
+   if(!workspaceId || !documentId || !sendNotify) return;
    fetch("/api/notification",{
     method:"POST",
    headers:{
@@ -116,7 +117,7 @@ useEffect(() => {
     if(!res.ok) throw new Error(`http error : ${res.statusText}`)
     return res.json();
    })
-   .then(data=>{}).catch(err=>console.error(err));
+   .then(data=>console.log(data)).catch(err=>console.error(err));
 }, [sendNotify])
 
 useEffect(() => {
@@ -217,9 +218,9 @@ return (
            
         <Card
         key={doc?.id}
-        className={`bg-white border-gray-100 border hover:bg-white/10 transition`}
+        className={`bg-white w-full h-full oveflow-hidden border-gray-100 border hover:bg-white/10 transition`}
       >
-        <CardContent className="p-4 space-y-3">
+        <CardContent className="p-4  space-y-3">
           <div className="flex text-black items-center gap-3">
             {iconForType('')}
             <h3 className="font-medium text-black truncate">

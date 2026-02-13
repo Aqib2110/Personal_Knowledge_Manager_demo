@@ -22,7 +22,11 @@ try {
         id
     },
     include:{
-        chats:true
+        chats:{
+           include:{
+            user:true
+           }
+        }
     }
 })
 if(!chats)
