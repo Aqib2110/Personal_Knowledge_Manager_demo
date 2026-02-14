@@ -282,8 +282,8 @@ const MobAI = () => {
 
 
 
-                <div className=' flex flex-col  px-3  ml-[5%] w-full flex-1'>
-                    <div className='border flex-1 flex flex-col gap-2 overflow-auto p-3'>
+                <div className=' flex flex-col overflow-auto px-3  ml-[5%] w-full flex-1'>
+                    <div className='border flex-1 flex flex-col gap-2 p-3'>
 
                         {loading ? <div className='h-full w-full flex justify-center items-center'>Loading...</div> : chats.length > 0 ? chats.map((chat: any) => {
                             return chat.message ? <div id={chat.id} className='flex flex-col gap-3'>
@@ -348,7 +348,7 @@ const MobAI = () => {
                  </div>
               
                </div>
-                 <div className='p-2 flex border sticky bottom-0 w-full  justify-center gap-3 items-center'>
+                 <div className='p-2 flex  sticky bottom-0 w-full  justify-center gap-3 items-center'>
 
                     <input type="text" ref={inputRef} placeholder='Ask Your knowledge...' className='w-full px-3 outline py-3 bg-white border rounded-lg' />
 
