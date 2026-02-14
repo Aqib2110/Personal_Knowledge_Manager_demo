@@ -314,13 +314,10 @@ if(!documentId)return;
 
           </div>
 
-          <div className='p-2 flex border w-full sticky justify-center gap-3 items-center'>
+          <div className='p-2 flex border w-full justify-center gap-3 items-center'>
 
             <input type="text" ref={inputRef} placeholder='Ask Your knowledge...' className='w-full px-3 outline py-3 bg-white border rounded-lg' />
-            {/* <span className='bg-blue-500 py-3 text-white px-5 cursor-pointer rounded-md' onClick={()=>{
-  if(!inputRef?.current)return;
-  setchats((chat:any)=>[...chat,inputRef.current?.value])}
-  }>send</span> */}
+          
             <span className={`bg-blue-500 py-3 ${loading || timer ? "cursor-not-allowed opacity-50" : "cursor-pointer"} text-white  px-5  rounded-md`} onClick={() => { handleSend() }}>send</span>
           </div>
         </div>
