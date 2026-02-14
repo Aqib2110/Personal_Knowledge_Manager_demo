@@ -142,84 +142,84 @@ const MobAI = () => {
 
 
 
-<div className={`  ${!sidebar ? "w-[8%]" : "w-[80%]"} lg:w-[25%]  md:w-[30%] z-10 pt-[60px]  h-full absolute top-0 left-0 `}>
+            <div className={`  ${!sidebar ? "w-[8%]" : "w-[80%]"} lg:w-[25%]  md:w-[30%] z-10 pt-[60px]  h-full absolute top-0 left-0 `}>
 
 
 
-                    <div className={`w-full h-full  relative  flex flex-col ${sidebar ? "bg-white border-r border-gray-300" : ""}`}>
-                        {!sidebar ? <MenuIcon size={15} className={`text-black md:hidden  absolute top-1 right-1`} onClick={() => { setsidebar(true); }} />
+                <div className={`w-full h-full  relative  flex flex-col ${sidebar ? "bg-white border-r border-gray-300" : ""}`}>
+                    {!sidebar ? <MenuIcon size={15} className={`text-black md:hidden  absolute top-1 right-1`} onClick={() => { setsidebar(true); }} />
 
-                            : <CrossIcon size={15} className={`text-black md:hidden  absolute top-1 right-1 rotate-[45deg]`} onClick={() => { setsidebar(false); }} />
+                        : <CrossIcon size={15} className={`text-black md:hidden  absolute top-1 right-1 rotate-[45deg]`} onClick={() => { setsidebar(false); }} />
 
-                        }
-                        <h2 className={`font-bold ${sidebar ? "block" : "hidden"} md:block text-xl`}>Workspaces</h2>
-                        <div className={`py-3 flex ${sidebar ? "block" : "hidden"} md:block overflow-auto flex-col gap-3 flex-1`}>
-                            {organizations.map((org) => {
-                                const currItem = organiz.find(item => item.id === org.id);
-                                return (
-                                    <ul key={org.id} className='bg-white   text-black border  flex  flex-col rounded-md pl-6 pr-2 py-3'>
-                                        <li className='list-disc px-2 border rounded-md'>
-                                            <div className='flex cursor-pointer  justify-between items-center' onClick={() => { setorganiz((orgn) => orgn.map(item => item.id === org.id ? { ...item, open: !item.open } : item)); }}>
+                    }
+                    <h2 className={`font-bold ${sidebar ? "block" : "hidden"} md:block text-xl`}>Workspaces</h2>
+                    <div className={`py-3 flex ${sidebar ? "block" : "hidden"} md:block overflow-auto flex-col gap-3 flex-1`}>
+                        {organizations.map((org) => {
+                            const currItem = organiz.find(item => item.id === org.id);
+                            return (
+                                <ul key={org.id} className='bg-white   text-black border  flex  flex-col rounded-md pl-6 pr-2 py-3'>
+                                    <li className='list-disc px-2 border rounded-md'>
+                                        <div className='flex cursor-pointer  justify-between items-center' onClick={() => { setorganiz((orgn) => orgn.map(item => item.id === org.id ? { ...item, open: !item.open } : item)); }}>
 
-                                                <div className=' text-black text-md font-semibold'>
-                                                    {org.name}
-                                                </div>
-                                                <div className=' text-black '>
-                                                    {currItem?.open ? <ChevronUp size={18} className='' /> : <ChevronDown size={18} className='' />}
-                                                </div>
+                                            <div className=' text-black text-md font-semibold'>
+                                                {org.name}
                                             </div>
+                                            <div className=' text-black '>
+                                                {currItem?.open ? <ChevronUp size={18} className='' /> : <ChevronDown size={18} className='' />}
+                                            </div>
+                                        </div>
 
 
 
 
 
-                                            <div className={`${org.id === currItem?.id && currItem?.open ? "block" : "hidden"}`}>
+                                        <div className={`${org.id === currItem?.id && currItem?.open ? "block" : "hidden"}`}>
 
 
-                                                <span className=' text-sm text-gray-700'>Projects</span>
-                                                <div className=' flex gap-3 flex-col'>
-                                                    {org.projects.map((project) => {
-                                                        const currItem = proj.find(item => item.id === project.id);
-                                                        return (
-                                                            <ul key={project.id} className='flex py-3 px-2 rounded-md border flex-col'>
-                                                                <li className='list-disc'>
-                                                                    <div className='flex  cursor-pointer justify-between items-center' onClick={() => { setproj(projec => projec.map(proj => proj?.id === project.id ? { ...proj, open: !proj.open } : proj)) }}>
-                                                                        <div className='text-black text-sm font-semibold'>
-                                                                            {project.name}
-                                                                        </div>
-                                                                        <div className=' text-black '>
-                                                                            {currItem?.open ? <ChevronUp size={18} className='' /> : <ChevronDown size={18} className='' />}
-                                                                        </div>
-
+                                            <span className=' text-sm text-gray-700'>Projects</span>
+                                            <div className=' flex gap-3 flex-col'>
+                                                {org.projects.map((project) => {
+                                                    const currItem = proj.find(item => item.id === project.id);
+                                                    return (
+                                                        <ul key={project.id} className='flex py-3 px-2 rounded-md border flex-col'>
+                                                            <li className='list-disc'>
+                                                                <div className='flex  cursor-pointer justify-between items-center' onClick={() => { setproj(projec => projec.map(proj => proj?.id === project.id ? { ...proj, open: !proj.open } : proj)) }}>
+                                                                    <div className='text-black text-sm font-semibold'>
+                                                                        {project.name}
                                                                     </div>
-                                                                </li>
-                                                                <div className={`${project.id === currItem?.id && currItem?.open ? "block" : "hidden"}`}>
-
-
-                                                                    <span className=' text-[12px] text-gray-900'>Documents</span>
-
-
-
-
-
-                                                                    <div className=' flex gap-3 flex-col'>
-                                                                        {project.documents.map((document) => {
-                                                                            return (
-                                                                                <ul key={document.id} className={`flex py-3 px-6 ${document.status === "processing" ? "hidden" : "block"} rounded-md border flex-col`}>
-                                                                                    <li className='list-disc'>
-                                                                                        <div className='flex cursor-pointer justify-between items-center' onClick={() => { setdoc((docs: any) => { return { id: document.id, open: !docs.open } }); setdocumentId(document.id); setworkspaceId(org.id) }}>
-                                                                                            <div className=' text-black text-[12px] font-semibold'>
-                                                                                                {document.title}
-                                                                                            </div>
-
-                                                                                        </div>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            )
-                                                                        })}
-
+                                                                    <div className=' text-black '>
+                                                                        {currItem?.open ? <ChevronUp size={18} className='' /> : <ChevronDown size={18} className='' />}
                                                                     </div>
+
                                                                 </div>
+                                                            </li>
+                                                            <div className={`${project.id === currItem?.id && currItem?.open ? "block" : "hidden"}`}>
+
+
+                                                                <span className=' text-[12px] text-gray-900'>Documents</span>
+
+
+
+
+
+                                                                <div className=' flex gap-3 flex-col'>
+                                                                    {project.documents.map((document) => {
+                                                                        return (
+                                                                            <ul key={document.id} className={`flex py-3 px-6 ${document.status === "processing" ? "hidden" : "block"} rounded-md border flex-col`}>
+                                                                                <li className='list-disc'>
+                                                                                    <div className='flex cursor-pointer justify-between items-center' onClick={() => { setdoc((docs: any) => { return { id: document.id, open: !docs.open } }); setdocumentId(document.id); setworkspaceId(org.id) }}>
+                                                                                        <div className=' text-black text-[12px] font-semibold'>
+                                                                                            {document.title}
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        )
+                                                                    })}
+
+                                                                </div>
+                                                            </div>
 
 
 
@@ -229,33 +229,32 @@ const MobAI = () => {
 
 
 
-                                                            </ul>
-                                                        )
-                                                    })}
-
-                                                </div>
-
-
+                                                        </ul>
+                                                    )
+                                                })}
 
                                             </div>
 
 
 
+                                        </div>
 
 
-                                        </li>
 
 
 
-                                    </ul>
-                                )
-                            })}
+                                    </li>
 
-                        </div>
+
+
+                                </ul>
+                            )
+                        })}
+
                     </div>
-
                 </div>
 
+            </div>
 
 
 
@@ -264,15 +263,16 @@ const MobAI = () => {
 
 
 
-            <div className='flex flex-1 flex-col px-3 border  py-4 '>
 
-               
-
+            <div className='flex h-full flex-1 flex-col px-3 border  py-4 '>
 
 
 
 
- 
+
+
+
+
 
 
 
@@ -345,15 +345,15 @@ const MobAI = () => {
 
 
 
-                 </div>
-              
-               </div>
-                 <div className='p-2 flex  sticky bottom-0 w-full  justify-center gap-3 items-center'>
-
-                    <input type="text" ref={inputRef} placeholder='Ask Your knowledge...' className='w-full px-3 outline py-3 bg-white border rounded-lg' />
-
-                    <span className={`bg-blue-500 py-3 ${loading || timer ? "cursor-not-allowed opacity-50" : "cursor-pointer"} text-white  px-5  rounded-md`} onClick={() => { handleSend() }}>send</span>
                 </div>
+
+            </div>
+            <div className='p-2 flex fixed bottom-0 left-0 w-full  justify-center gap-3 items-center'>
+
+                <input type="text" ref={inputRef} placeholder='Ask Your knowledge...' className='w-full px-3 outline py-3 bg-white border rounded-lg' />
+
+                <span className={`bg-blue-500 py-3 ${loading || timer ? "cursor-not-allowed opacity-50" : "cursor-pointer"} text-white  px-5  rounded-md`} onClick={() => { handleSend() }}>send</span>
+            </div>
         </div>
     )
 }
