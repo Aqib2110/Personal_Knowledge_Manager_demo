@@ -122,7 +122,9 @@ export const ChatScalarFieldEnum = {
   userId: 'userId',
   createdAt: 'createdAt',
   documentId: 'documentId',
-  workspaceId: 'workspaceId'
+  workspaceId: 'workspaceId',
+  sectionName: 'sectionName',
+  matchScore: 'matchScore'
 } as const
 
 export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]

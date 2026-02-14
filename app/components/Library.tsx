@@ -250,7 +250,7 @@ return (
       ) : (
         <div className="space-y-2">
           {allDocuments.filter(doc => doc.title.toLowerCase().includes(val.toLowerCase())).map((doc) => (
-            <div key={doc.id} className="flex flex-col gap-4 bg-white items-center justify-between rounded-lg border border-white/10 p-4 text-black">
+            <div key={doc.id} className="flex overflow-hidden w-full flex-col gap-4 bg-white items-center justify-between rounded-lg border border-white/10 p-4 text-black">
               <div className="flex items-center gap-3">{iconForType('')}<div><p className="font-medium">{doc.title}</p><p className="text-xs text-gray-500">{doc.project?.name}</p></div></div>
               <div className="flex flex-wrap gap-2">{doc.tags.map((tag) => (<span key={tag} className="rounded-full text-gray-500 px-2 py-0.5 text-xs">#{tag}</span>))}</div>
             </div>

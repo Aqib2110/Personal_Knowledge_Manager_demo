@@ -7,7 +7,6 @@ import { CrossIcon, MenuIcon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { puter } from "@heyputer/puter.js";
 
-const aiImpact = [{ day: "Mon", questions: 120 }, { day: "Tue", questions: 180 }, { day: "Wed", questions: 220 }, { day: "Thu", questions: 300 }, { day: "Fri", questions: 420 },];
 
 interface WorkspaceTypes {
   id: string,
@@ -37,10 +36,13 @@ export default function AnalyticsPage() {
   const [organizations, setorganizations] = useState<WorkspaceTypes[]>([])
   const [documentId, setdocumentId] = useState('');
   const [chats, setchats] = useState<any>([]);
-  const [loading, setloading] = useState(true);
+  const [loading, setloading] = useState(false);
   const [documents, setdocuments] = useState<any>({chats:[],docs:[]});
   const [docAnalytics, setdocAnalytics] = useState<any>([]);
   const [lineAnalytics, setlineAnalytics] = useState<any>([]);
+  const [workspaceId, setworkspaceId] = useState('');
+  const [showInsights, setshowInsights] = useState(false);
+  const [generate, setgenerate] = useState("");
   const [document, setdocument] = useState({id:"",title:""});
 const kpis = [{ label: "Total Documents", value: documents.docs.length }, { label: "Active Documents", value: documents.docs.length }, { label: "AI Questions", value: documents.chats.length }, { label: "AI Success Rate", value: "92%" },];
 
@@ -54,6 +56,41 @@ const kpis = [{ label: "Total Documents", value: documents.docs.length }, { labe
     }
   }))))
   
+
+    const docs = organizations?.flatMap(org=>org?.projects?.flatMap(proj=>proj?.documents?.map(doc=>{return {docId:doc.id,title:doc.title}})))
+     setdocuments({
+      chats:chat,
+      docs:docs
+    })
+   
+  }, [organizations])
+
+  useEffect(() => {
+    if(!documentId || !document)return;
+    setloading(true);
+   puter.ai.chat(`
+generate a precise weekly insight report of five lines for workspace based on this workspace array
+includes number of documents most used document etc .
+Here is the list of questions:
+${JSON.stringify(organizations)}`)
+ .then(res=>{
+ console.log(res?.message?.content,"intent");
+const raw = res?.message?.content;
+console.log("raw",raw);
+if (typeof raw !== "string") return;
+setgenerate(raw);
+ setloading(false);
+ })
+
+  }, [documentId])
+  
+
+useEffect(() => {
+  if(!document.id) return;
+  setloading(true);
+  const docChats = documents.chats.filter((chat:any)=>chat.docId === document.id);
+  setchats(docChats);
+  console.log(docChats,"docChats");
      puter.ai.chat(`
 You are given a list of user questions.
 
@@ -72,21 +109,19 @@ Return an array of objects like this:
 ]
 
 Here is the list of questions:
-${JSON.stringify(chat)}`)
+${JSON.stringify(docChats)}`)
  .then(res=>{
  console.log(res?.message?.content,"intent");
 const raw = res?.message?.content;
+console.log("raw",raw);
 if (typeof raw !== "string") return;
 setchats(JSON.parse(raw));
  setloading(false);
  })
-    const docs = organizations?.flatMap(org=>org?.projects?.flatMap(proj=>proj?.documents?.map(doc=>{return {docId:doc.id,title:doc.title}})))
-     setdocuments({
-      chats:chat,
-      docs:docs
-    })
-   
-  }, [organizations])
+
+}, [document])
+
+
 
   useEffect(() => {
    if(!document.id || !document.title ) return;
@@ -134,7 +169,7 @@ BarAnalytics.forEach((item: any) => {
 
   setlineAnalytics(lineAnalyticsArr);
    setdocAnalytics(analyticsArr);
-     }, [document])
+     }, [document,chats])
   
   
   useEffect(() => {
@@ -163,7 +198,7 @@ console.log(lineAnalytics);
         <div className={`p-5 ${sidebar ? "block" : "hidden"} md:block border-b border-gray-200`}>
           <h2 className="font-semibold text-gray-900">Workspaces</h2>
         </div> <ScrollArea className={`${sidebar ? "block" : "hidden"} md:block h-[calc(100vh-64px)]`}> <div className="p-4 space-y-6">
-           {organizations.map((ws) => (<div key={ws.name}> <p className="text-sm  font-medium text-gray-700 mb-2"> {ws.name} </p> <ul className="space-y-1 text-sm text-gray-600"> {ws.projects.flatMap(document=>document.documents.map((doc) => (<li
+           {organizations.map((ws) => (<div key={ws.name}> <p className="text-sm cursor-pointer font-medium text-gray-700 mb-2" onClick={()=>{setworkspaceId(ws.id);setdocumentId('')}}> {ws.name} </p> <ul className={`space-y-1 ${workspaceId === ws?.id ? "block" : "hidden"} text-sm text-gray-600`}> {ws.projects.flatMap(document=>document.documents.map((doc) => (<li
           key={doc.id}
           className={` rounded ${loading ? "cursor-not-allowed opacity-50" : "cursor-pointer"} px-2 py-1 ${doc.id === documentId ? "bg-gray-100" : ""}`}
           onClick={()=>{setdocument({id:doc.id,title:doc.title});setdocumentId(doc.id);}}
@@ -231,6 +266,15 @@ console.log(lineAnalytics);
         </div>
        }
        </div>}
+       {documentId && !loading && <div className="flex flex-col gap-5 justify-center items-center">
+        <button className="text-sm text-white px-4 rounded-md cursor-pointer py-2 bg-black" onClick={()=>{setshowInsights(true)}}>Generate Weekly Insights Report</button> 
+       {showInsights && <span className="font-medium w-full text-gray-900">
+
+          {generate}
+
+
+        </span> }
+      </div>}
       </main>
     </div>
 

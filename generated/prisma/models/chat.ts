@@ -20,8 +20,18 @@ export type chatModel = runtime.Types.Result.DefaultSelection<Prisma.$chatPayloa
 
 export type AggregateChat = {
   _count: ChatCountAggregateOutputType | null
+  _avg: ChatAvgAggregateOutputType | null
+  _sum: ChatSumAggregateOutputType | null
   _min: ChatMinAggregateOutputType | null
   _max: ChatMaxAggregateOutputType | null
+}
+
+export type ChatAvgAggregateOutputType = {
+  matchScore: number | null
+}
+
+export type ChatSumAggregateOutputType = {
+  matchScore: number | null
 }
 
 export type ChatMinAggregateOutputType = {
@@ -31,6 +41,8 @@ export type ChatMinAggregateOutputType = {
   createdAt: Date | null
   documentId: string | null
   workspaceId: string | null
+  sectionName: string | null
+  matchScore: number | null
 }
 
 export type ChatMaxAggregateOutputType = {
@@ -40,6 +52,8 @@ export type ChatMaxAggregateOutputType = {
   createdAt: Date | null
   documentId: string | null
   workspaceId: string | null
+  sectionName: string | null
+  matchScore: number | null
 }
 
 export type ChatCountAggregateOutputType = {
@@ -49,9 +63,19 @@ export type ChatCountAggregateOutputType = {
   createdAt: number
   documentId: number
   workspaceId: number
+  sectionName: number
+  matchScore: number
   _all: number
 }
 
+
+export type ChatAvgAggregateInputType = {
+  matchScore?: true
+}
+
+export type ChatSumAggregateInputType = {
+  matchScore?: true
+}
 
 export type ChatMinAggregateInputType = {
   id?: true
@@ -60,6 +84,8 @@ export type ChatMinAggregateInputType = {
   createdAt?: true
   documentId?: true
   workspaceId?: true
+  sectionName?: true
+  matchScore?: true
 }
 
 export type ChatMaxAggregateInputType = {
@@ -69,6 +95,8 @@ export type ChatMaxAggregateInputType = {
   createdAt?: true
   documentId?: true
   workspaceId?: true
+  sectionName?: true
+  matchScore?: true
 }
 
 export type ChatCountAggregateInputType = {
@@ -78,6 +106,8 @@ export type ChatCountAggregateInputType = {
   createdAt?: true
   documentId?: true
   workspaceId?: true
+  sectionName?: true
+  matchScore?: true
   _all?: true
 }
 
@@ -119,6 +149,18 @@ export type ChatAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: ChatAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: ChatSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: ChatMinAggregateInputType
@@ -149,6 +191,8 @@ export type chatGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: ChatCountAggregateInputType | true
+  _avg?: ChatAvgAggregateInputType
+  _sum?: ChatSumAggregateInputType
   _min?: ChatMinAggregateInputType
   _max?: ChatMaxAggregateInputType
 }
@@ -160,7 +204,11 @@ export type ChatGroupByOutputType = {
   createdAt: Date
   documentId: string
   workspaceId: string
+  sectionName: string | null
+  matchScore: number | null
   _count: ChatCountAggregateOutputType | null
+  _avg: ChatAvgAggregateOutputType | null
+  _sum: ChatSumAggregateOutputType | null
   _min: ChatMinAggregateOutputType | null
   _max: ChatMaxAggregateOutputType | null
 }
@@ -190,6 +238,8 @@ export type chatWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"chat"> | Date | string
   documentId?: Prisma.StringFilter<"chat"> | string
   workspaceId?: Prisma.StringFilter<"chat"> | string
+  sectionName?: Prisma.StringNullableFilter<"chat"> | string | null
+  matchScore?: Prisma.FloatNullableFilter<"chat"> | number | null
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.workspaceWhereInput>
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.documentWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
@@ -202,6 +252,8 @@ export type chatOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
+  sectionName?: Prisma.SortOrderInput | Prisma.SortOrder
+  matchScore?: Prisma.SortOrderInput | Prisma.SortOrder
   workspace?: Prisma.workspaceOrderByWithRelationInput
   document?: Prisma.documentOrderByWithRelationInput
   user?: Prisma.userOrderByWithRelationInput
@@ -217,6 +269,8 @@ export type chatWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"chat"> | Date | string
   documentId?: Prisma.StringFilter<"chat"> | string
   workspaceId?: Prisma.StringFilter<"chat"> | string
+  sectionName?: Prisma.StringNullableFilter<"chat"> | string | null
+  matchScore?: Prisma.FloatNullableFilter<"chat"> | number | null
   workspace?: Prisma.XOR<Prisma.WorkspaceScalarRelationFilter, Prisma.workspaceWhereInput>
   document?: Prisma.XOR<Prisma.DocumentScalarRelationFilter, Prisma.documentWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.userWhereInput>
@@ -229,9 +283,13 @@ export type chatOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
+  sectionName?: Prisma.SortOrderInput | Prisma.SortOrder
+  matchScore?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.chatCountOrderByAggregateInput
+  _avg?: Prisma.chatAvgOrderByAggregateInput
   _max?: Prisma.chatMaxOrderByAggregateInput
   _min?: Prisma.chatMinOrderByAggregateInput
+  _sum?: Prisma.chatSumOrderByAggregateInput
 }
 
 export type chatScalarWhereWithAggregatesInput = {
@@ -244,12 +302,16 @@ export type chatScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"chat"> | Date | string
   documentId?: Prisma.StringWithAggregatesFilter<"chat"> | string
   workspaceId?: Prisma.StringWithAggregatesFilter<"chat"> | string
+  sectionName?: Prisma.StringNullableWithAggregatesFilter<"chat"> | string | null
+  matchScore?: Prisma.FloatNullableWithAggregatesFilter<"chat"> | number | null
 }
 
 export type chatCreateInput = {
   id?: string
   message: string
   createdAt?: Date | string
+  sectionName?: string | null
+  matchScore?: number | null
   workspace: Prisma.workspaceCreateNestedOneWithoutChatsInput
   document: Prisma.documentCreateNestedOneWithoutChatsInput
   user: Prisma.userCreateNestedOneWithoutChatsInput
@@ -262,12 +324,16 @@ export type chatUncheckedCreateInput = {
   createdAt?: Date | string
   documentId: string
   workspaceId: string
+  sectionName?: string | null
+  matchScore?: number | null
 }
 
 export type chatUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutChatsNestedInput
   document?: Prisma.documentUpdateOneRequiredWithoutChatsNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutChatsNestedInput
@@ -280,6 +346,8 @@ export type chatUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type chatCreateManyInput = {
@@ -289,12 +357,16 @@ export type chatCreateManyInput = {
   createdAt?: Date | string
   documentId: string
   workspaceId: string
+  sectionName?: string | null
+  matchScore?: number | null
 }
 
 export type chatUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type chatUncheckedUpdateManyInput = {
@@ -304,6 +376,8 @@ export type chatUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type ChatListRelationFilter = {
@@ -323,6 +397,12 @@ export type chatCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
+  sectionName?: Prisma.SortOrder
+  matchScore?: Prisma.SortOrder
+}
+
+export type chatAvgOrderByAggregateInput = {
+  matchScore?: Prisma.SortOrder
 }
 
 export type chatMaxOrderByAggregateInput = {
@@ -332,6 +412,8 @@ export type chatMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
+  sectionName?: Prisma.SortOrder
+  matchScore?: Prisma.SortOrder
 }
 
 export type chatMinOrderByAggregateInput = {
@@ -341,6 +423,12 @@ export type chatMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   documentId?: Prisma.SortOrder
   workspaceId?: Prisma.SortOrder
+  sectionName?: Prisma.SortOrder
+  matchScore?: Prisma.SortOrder
+}
+
+export type chatSumOrderByAggregateInput = {
+  matchScore?: Prisma.SortOrder
 }
 
 export type chatCreateNestedManyWithoutWorkspaceInput = {
@@ -427,6 +515,14 @@ export type chatUncheckedUpdateManyWithoutDocumentNestedInput = {
   deleteMany?: Prisma.chatScalarWhereInput | Prisma.chatScalarWhereInput[]
 }
 
+export type NullableFloatFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
 export type chatCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.chatCreateWithoutUserInput, Prisma.chatUncheckedCreateWithoutUserInput> | Prisma.chatCreateWithoutUserInput[] | Prisma.chatUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.chatCreateOrConnectWithoutUserInput | Prisma.chatCreateOrConnectWithoutUserInput[]
@@ -473,6 +569,8 @@ export type chatCreateWithoutWorkspaceInput = {
   id?: string
   message: string
   createdAt?: Date | string
+  sectionName?: string | null
+  matchScore?: number | null
   document: Prisma.documentCreateNestedOneWithoutChatsInput
   user: Prisma.userCreateNestedOneWithoutChatsInput
 }
@@ -483,6 +581,8 @@ export type chatUncheckedCreateWithoutWorkspaceInput = {
   userId: string
   createdAt?: Date | string
   documentId: string
+  sectionName?: string | null
+  matchScore?: number | null
 }
 
 export type chatCreateOrConnectWithoutWorkspaceInput = {
@@ -521,12 +621,16 @@ export type chatScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"chat"> | Date | string
   documentId?: Prisma.StringFilter<"chat"> | string
   workspaceId?: Prisma.StringFilter<"chat"> | string
+  sectionName?: Prisma.StringNullableFilter<"chat"> | string | null
+  matchScore?: Prisma.FloatNullableFilter<"chat"> | number | null
 }
 
 export type chatCreateWithoutDocumentInput = {
   id?: string
   message: string
   createdAt?: Date | string
+  sectionName?: string | null
+  matchScore?: number | null
   workspace: Prisma.workspaceCreateNestedOneWithoutChatsInput
   user: Prisma.userCreateNestedOneWithoutChatsInput
 }
@@ -537,6 +641,8 @@ export type chatUncheckedCreateWithoutDocumentInput = {
   userId: string
   createdAt?: Date | string
   workspaceId: string
+  sectionName?: string | null
+  matchScore?: number | null
 }
 
 export type chatCreateOrConnectWithoutDocumentInput = {
@@ -569,6 +675,8 @@ export type chatCreateWithoutUserInput = {
   id?: string
   message: string
   createdAt?: Date | string
+  sectionName?: string | null
+  matchScore?: number | null
   workspace: Prisma.workspaceCreateNestedOneWithoutChatsInput
   document: Prisma.documentCreateNestedOneWithoutChatsInput
 }
@@ -579,6 +687,8 @@ export type chatUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   documentId: string
   workspaceId: string
+  sectionName?: string | null
+  matchScore?: number | null
 }
 
 export type chatCreateOrConnectWithoutUserInput = {
@@ -613,12 +723,16 @@ export type chatCreateManyWorkspaceInput = {
   userId: string
   createdAt?: Date | string
   documentId: string
+  sectionName?: string | null
+  matchScore?: number | null
 }
 
 export type chatUpdateWithoutWorkspaceInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   document?: Prisma.documentUpdateOneRequiredWithoutChatsNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutChatsNestedInput
 }
@@ -629,6 +743,8 @@ export type chatUncheckedUpdateWithoutWorkspaceInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type chatUncheckedUpdateManyWithoutWorkspaceInput = {
@@ -637,6 +753,8 @@ export type chatUncheckedUpdateManyWithoutWorkspaceInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type chatCreateManyDocumentInput = {
@@ -645,12 +763,16 @@ export type chatCreateManyDocumentInput = {
   userId: string
   createdAt?: Date | string
   workspaceId: string
+  sectionName?: string | null
+  matchScore?: number | null
 }
 
 export type chatUpdateWithoutDocumentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutChatsNestedInput
   user?: Prisma.userUpdateOneRequiredWithoutChatsNestedInput
 }
@@ -661,6 +783,8 @@ export type chatUncheckedUpdateWithoutDocumentInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type chatUncheckedUpdateManyWithoutDocumentInput = {
@@ -669,6 +793,8 @@ export type chatUncheckedUpdateManyWithoutDocumentInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type chatCreateManyUserInput = {
@@ -677,12 +803,16 @@ export type chatCreateManyUserInput = {
   createdAt?: Date | string
   documentId: string
   workspaceId: string
+  sectionName?: string | null
+  matchScore?: number | null
 }
 
 export type chatUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   message?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   workspace?: Prisma.workspaceUpdateOneRequiredWithoutChatsNestedInput
   document?: Prisma.documentUpdateOneRequiredWithoutChatsNestedInput
 }
@@ -693,6 +823,8 @@ export type chatUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 export type chatUncheckedUpdateManyWithoutUserInput = {
@@ -701,6 +833,8 @@ export type chatUncheckedUpdateManyWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documentId?: Prisma.StringFieldUpdateOperationsInput | string
   workspaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  sectionName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  matchScore?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
 }
 
 
@@ -712,6 +846,8 @@ export type chatSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   documentId?: boolean
   workspaceId?: boolean
+  sectionName?: boolean
+  matchScore?: boolean
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   document?: boolean | Prisma.documentDefaultArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -724,6 +860,8 @@ export type chatSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   documentId?: boolean
   workspaceId?: boolean
+  sectionName?: boolean
+  matchScore?: boolean
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   document?: boolean | Prisma.documentDefaultArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -736,6 +874,8 @@ export type chatSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   documentId?: boolean
   workspaceId?: boolean
+  sectionName?: boolean
+  matchScore?: boolean
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   document?: boolean | Prisma.documentDefaultArgs<ExtArgs>
   user?: boolean | Prisma.userDefaultArgs<ExtArgs>
@@ -748,9 +888,11 @@ export type chatSelectScalar = {
   createdAt?: boolean
   documentId?: boolean
   workspaceId?: boolean
+  sectionName?: boolean
+  matchScore?: boolean
 }
 
-export type chatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "message" | "userId" | "createdAt" | "documentId" | "workspaceId", ExtArgs["result"]["chat"]>
+export type chatOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "message" | "userId" | "createdAt" | "documentId" | "workspaceId" | "sectionName" | "matchScore", ExtArgs["result"]["chat"]>
 export type chatInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspace?: boolean | Prisma.workspaceDefaultArgs<ExtArgs>
   document?: boolean | Prisma.documentDefaultArgs<ExtArgs>
@@ -781,6 +923,8 @@ export type $chatPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdAt: Date
     documentId: string
     workspaceId: string
+    sectionName: string | null
+    matchScore: number | null
   }, ExtArgs["result"]["chat"]>
   composites: {}
 }
@@ -1213,6 +1357,8 @@ export interface chatFieldRefs {
   readonly createdAt: Prisma.FieldRef<"chat", 'DateTime'>
   readonly documentId: Prisma.FieldRef<"chat", 'String'>
   readonly workspaceId: Prisma.FieldRef<"chat", 'String'>
+  readonly sectionName: Prisma.FieldRef<"chat", 'String'>
+  readonly matchScore: Prisma.FieldRef<"chat", 'Float'>
 }
     
 

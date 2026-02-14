@@ -13,13 +13,13 @@ import { useRouter } from "next/navigation"
 
 export function Profile({session}:{session:any}) {
   const router = useRouter();
-
+console.log(session);
   return (
     <DropdownMenu modal={false}>
       <DropdownMenuTrigger className="outline-none">
-        <Avatar className="md:h-9 md:w-9 h-7 w-7 cursor-pointer">
+        <Avatar className="md:h-9 bg-white md:w-9 h-7 w-7 cursor-pointer">
           {
-            session?.data?.user?.image ? <AvatarImage src={ session?.data?.user?.image || ""} /> : <AvatarFallback>{session?.data?.user?.name ? session.data.user.name.charAt(0) : "U"}</AvatarFallback>
+            session?.data?.user?.image ? <AvatarImage src={ session?.data?.user?.image } /> : <AvatarFallback className="text-black">{session?.data?.user?.name ? session.data.user.name.charAt(0) : "U"}</AvatarFallback>
           }
         </Avatar>
       </DropdownMenuTrigger>

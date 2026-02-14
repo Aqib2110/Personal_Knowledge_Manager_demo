@@ -20,22 +20,54 @@ export  const authOptions:NextAuthOptions = {
       password: { label: "Password", type: "password" }
     },
     async authorize(credentials, req) {
-      const user = await prisma.user.findUnique({
-        where:{
-            email:credentials?.username,
-            password:credentials?.password
-        }
-      })
+      // const user = await prisma.user.findUnique({
+      //   where:{
+      //       email:credentials?.username
+      //   }
+      // })
 
-      if (user) {
-        return user;
-      } else {
-        // If you return null then an error will be displayed advising the user to check their details.
-        return null;
+      // if (!user?.password) 
+      //   {
+      //   throw new Error("No user found with this email, please sign in with Google");
+      //  }
+      // else if (user && user.password === credentials?.password) 
+      // {
+      //   return user;
+      // } else {
+      //   // If you return null then an error will be displayed advising the user to check their details.
+      //   return null;
 
-        // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-      }
-    }
+      //   // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+      // }
+     
+
+  if (!credentials?.username || !credentials?.password) {
+    return null;
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: credentials.username,
+    },
+  });
+
+  if (!user) {
+    throw new Error("No user found with this email");
+  }
+
+  if (!user.password) {
+    throw new Error("Please login with Google");
+  }
+
+  const isValid = user.password === credentials.password;
+
+  if (!isValid) {
+    return null;
+  }
+
+  return user;
+}
+
   }),
     Google({
        clientId: process.env.GOOGLE_ID!,
@@ -56,8 +88,10 @@ export  const authOptions:NextAuthOptions = {
       const existingUser = await prisma.user.findUnique({
         where: { email: user.email! }
       });
-
-      if (!existingUser) {
+      if (existingUser) {
+  throw new Error("Email already exists. Please login with Google.");
+}
+    else if (!existingUser) {
         await prisma.user.create({
           data: {
             email: user.email!,

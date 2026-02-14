@@ -41,16 +41,23 @@ console.log(document);
     const answer = await runQuery(document?.sections,query);
       await prisma.chat.create({
         data:{
-            message:JSON.stringify({question:query,answer:answer}),
+            message:JSON.stringify({question:query,answer:answer.answer}),
             userId:session.user.id,
             documentId:id,
-            workspaceId
+            workspaceId,
+            sectionName:answer?.sectionName || null,
+            matchScore:answer?.matchScore || null
+        },
+        include:{
+            document:true,
         }
       })
     return NextResponse.json({
         question:query,
         answer,
-        documentId:id
+        documentId:id,
+        sectionName:answer?.sectionName || null,
+        matchScore:answer?.matchScore || null
     },{status:200})
  } catch (error) {
     console.error("Error in query route:", error);

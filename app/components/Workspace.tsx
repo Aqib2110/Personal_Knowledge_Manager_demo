@@ -117,7 +117,7 @@ if(loading)
   <div>Loading...</div>
     </div>
 }
-return ( <div className={`${showPopup ? "h-screen" : "min-h-screen"} z-10 pt-[60px] bg-gray-50 md:p-8 p-3`}> 
+return ( <div className={`${showPopup ? "h-screen" : "min-h-screen"} border-2 border-red-900 z-10 min-h-screen pt-[60px] md:px-8 px-3 bg-gray-50 `}> 
 
 <div className=" ">
     <div className="max-w-7xl mx-auto space-y-8">

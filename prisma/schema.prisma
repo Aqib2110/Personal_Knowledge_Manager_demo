@@ -60,6 +60,8 @@ model chat{
   createdAt DateTime @default(now())
   documentId String
   workspaceId String
+  sectionName String?
+  matchScore Float?
   workspace workspace @relation(fields: [workspaceId],references: [id])
   document document @relation(fields: [documentId],references: [id])
   user user @relation(fields: [userId],references: [id])

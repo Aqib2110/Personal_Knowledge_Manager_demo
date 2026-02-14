@@ -260,7 +260,7 @@ if(!documentId)return;
           <div className='border flex-1 flex flex-col gap-2 overflow-auto p-3'>
         
             {loading ? <div className='h-full w-full flex justify-center items-center'>Loading...</div> : chats.length > 0 ? chats.map((chat: any) => {
-              return chat.message ? <div className=''>
+              return chat.message ? <div id={chat.id} className='flex flex-col gap-3'>
                 <div className='flex justify-start'>
                   <span className='flex gap-2 items-center'>
 <span className='rounded-full w-6 h-6 text-sm font-semibold  text-center border'>
@@ -281,8 +281,21 @@ if(!documentId)return;
                 <span className='flex gap-2 items-center'>
 
             
- <div className='bg-white text-black w-fit p-2 rounded-md'>
+ <div className='bg-white flex flex-col justify-start text-black w-fit p-2 rounded-md'>
+                 <span className='text-lg font-semibold'>
                   {JSON.parse(chat.message).answer}
+                  </span> 
+                  {/* <span className='text-sm text-gray-500'>
+                    {chat?.document?.title ? `Source: ${chat.document.title}` : ""}
+                  </span> */}
+                  <span className='text-sm text-gray-500'>
+                    {chat.sectionName ? `Section: ${chat.sectionName}` : ""}
+                    </span>
+                    
+                    <span className='text-sm text-gray-500'>
+                    {chat.matchScore ? `Match Score: ${chat.matchScore}` : ""}
+                    </span>
+
                 </div>
 <span className='rounded-full w-6 h-6  text-center text-sm font-semibold  border'>AI</span>
 
@@ -301,7 +314,7 @@ if(!documentId)return;
 
           </div>
 
-          <div className='p-2 flex justify-center gap-3 items-center'>
+          <div className='p-2 flex border w-full sticky justify-center gap-3 items-center'>
 
             <input type="text" ref={inputRef} placeholder='Ask Your knowledge...' className='w-full px-3 outline py-3 bg-white border rounded-lg' />
             {/* <span className='bg-blue-500 py-3 text-white px-5 cursor-pointer rounded-md' onClick={()=>{
