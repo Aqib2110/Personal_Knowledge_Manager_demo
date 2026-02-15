@@ -24,7 +24,7 @@ const MobNav = ({sidebar,setsidebar}:{sidebar:boolean,setsidebar:React.Dispatch<
         }
       }, [session])
   return (
-    <div className='h-screen absolute flex justify-center items-center top-0 right-0 z-10 w-full bg-gradient-to-r from-slate-900 to-[#0B1E36]'>
+    <div className='h-screen fixed flex justify-center items-center left-0 top-0 right-0 z-10 w-full bg-gradient-to-r from-slate-900 to-[#0B1E36]'>
         <div className=" h-4/5  flex flex-col justify-between items-center">
             <Cross size={22} className='text-white rotate-[45deg] absolute top-3 right-3' onClick={()=>{setsidebar(false);}}/>
                   <Link

@@ -33,7 +33,7 @@ const Navbar = () => {
   
  
   return (
-    <div className="px-5 w-full h-[60px] border-b fixed top-0  border-white/10  bg-gradient-to-r from-slate-900 to-[#0B1E36]">
+    <div className="px-5 w-full h-[60px] border-b fixed top-0 left-0 border-white/10  bg-gradient-to-r from-slate-900 to-[#0B1E36]">
       <div className="flex h-full  justify-between items-center  ">
         <div className="flex h-full    md:flex-4 ">
           <div className=" flex  flex-5  justify-between items-center">
