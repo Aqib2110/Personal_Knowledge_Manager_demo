@@ -2,7 +2,6 @@ import { NextResponse,NextRequest } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import {prisma} from '@/lib/prisma'
-import { ObjectAttributes } from "@aws-sdk/client-s3";
 export async function POST(req:NextRequest)
 {
 const {name} = await req.json();
@@ -16,14 +15,14 @@ if(!session?.user?.id)
 }
 
 try {
-console.log("trying");
+console.log("trying",session);
     await prisma.workspace.create({
      data:{
         name:name,
         userId:session?.user?.id,
-        slug:"b"
      }
 })
+
 
 return NextResponse.json({
     message:"workspace created successfully"

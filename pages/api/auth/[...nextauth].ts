@@ -81,48 +81,44 @@ export  const authOptions:NextAuthOptions = {
   session: { strategy: "jwt" },
  callbacks:{
 
-   async signIn({ user, account }) {
-    // Only run this for Google login
-    if (account?.provider === "google") {
+async signIn({ user, account }) {
+  if (account?.provider === "google") {
+    const existingUser = await prisma.user.findUnique({
+      where: { email: user.email! }
+    });
 
-      const existingUser = await prisma.user.findUnique({
-        where: { email: user.email! }
+    if (!existingUser) {
+      await prisma.user.create({
+        data: {
+          email: user.email!,
+          name: user.name!,
+          image: user.image,
+          password: null,
+        }
       });
-      if (existingUser) {
-  throw new Error("Email already exists. Please login with Google.");
-}
-    else if (!existingUser) {
-        await prisma.user.create({
-          data: {
-            email: user.email!,
-            name: user.name!,
-            image: user.image,
-            password: null,
-          }
-        });
-      }
     }
+  }
 
-    return true;
-  },
-    async jwt({ token, user }) {
-    if (user) {
-      token.id = user.id;
+  return true;
+},
+async jwt({ token, user }) {
+  if (user?.email) {
+    const dbUser = await prisma.user.findUnique({
+      where: { email: user.email }
+    });
+
+    if (dbUser) {
+      token.id = dbUser.id;
     }
-    return token;
-   },
+  }
 
+  return token;
+},
     async session({ session, token }) {
       if (token) {
       (session.user as any).id = token.id;
       (session.user as any).token = token;
     }
-    //   const dbUser = await db.user.findUnique({
-    //     where: { email: session.user?.email! }
-    //   })
-    //   if (dbUser) {
-    //     (session.user as any).id = dbUser.id;
-    //   }
       return session;
     }
   }
