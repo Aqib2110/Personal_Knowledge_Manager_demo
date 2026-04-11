@@ -115,10 +115,7 @@ async jwt({ token, user }) {
   return token;
 },
     async session({ session, token }) {
-      if (token) {
       (session.user as any).id = token.id;
-      (session.user as any).token = token;
-    }
       return session;
     }
   }
