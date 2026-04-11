@@ -192,6 +192,9 @@ console.log(lineAnalytics);
   <div className="min-h-screen overflow-auto relative pt-[60px] bg-gray-50 flex">
     <div className="h-full md:flex relative w-full">
       
+
+
+      
       <aside className={`${sidebar ? "w-[80%]" : "w-[8%]"}  h-full md:w-[30%] lg:w-[25%] fixed md:relative mt-[60px] md:mt-0 z-10 md:z-0 top-0 left-0 ${sidebar ? "border-r border-gray-200 bg-white" : ""}`}>
         {sidebar ? <CrossIcon size={15} className="text-black block md:hidden absolute rotate-[45deg] top-3 right-3" onClick={() => { setsidebar(false); }} />
           : <MenuIcon size={15} className="text-black absolute md:hidden top-3 right-1" onClick={() => { setsidebar(true); }} />}
