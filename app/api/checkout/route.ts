@@ -20,7 +20,7 @@ export async function POST(req:NextRequest) {
           quantity: 1,
         },
       ],
-      return_url: "http://localhost:3000/success?session_id={CHECKOUT_SESSION_ID}",
+      return_url: "https://personal-knowledge-manager-demo-3hd.vercel.app/success?session_id={CHECKOUT_SESSION_ID}",
     });
     return NextResponse.json({
       clientSecret: session.client_secret,
