@@ -1,9 +1,14 @@
-import React from 'react'
+"use client";
+import React, { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
  import { Button } from "@/components/ui/button"; 
  import { Check } from "lucide-react";
+import { useRouter } from 'next/navigation';
 
 const Pricing = () => {
+  const router = useRouter();
+
+
   return (
     <div className='min-h-screen bg-gray-50 px-6 pb-16 pt-[60px]'>
       
@@ -53,7 +58,9 @@ const Pricing = () => {
           <li className="flex items-center gap-2"><Check className="h-4 w-4" /> Priority support</li>
         </ul>
 
-        <Button className="w-full">Upgrade to Pro</Button>
+        <Button className="w-full cursor-pointer" onClick={()=>{router.push('/checkout?plan=pro')}} >
+         Upgrade to Pro
+        </Button>
       </CardContent>
     </Card>
 

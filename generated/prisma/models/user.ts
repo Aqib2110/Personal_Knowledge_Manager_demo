@@ -30,6 +30,7 @@ export type UserMinAggregateOutputType = {
   name: string | null
   password: string | null
   image: string | null
+  subscriptionStatus: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -38,6 +39,7 @@ export type UserMaxAggregateOutputType = {
   name: string | null
   password: string | null
   image: string | null
+  subscriptionStatus: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -46,6 +48,7 @@ export type UserCountAggregateOutputType = {
   name: number
   password: number
   image: number
+  subscriptionStatus: number
   _all: number
 }
 
@@ -56,6 +59,7 @@ export type UserMinAggregateInputType = {
   name?: true
   password?: true
   image?: true
+  subscriptionStatus?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -64,6 +68,7 @@ export type UserMaxAggregateInputType = {
   name?: true
   password?: true
   image?: true
+  subscriptionStatus?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -72,6 +77,7 @@ export type UserCountAggregateInputType = {
   name?: true
   password?: true
   image?: true
+  subscriptionStatus?: true
   _all?: true
 }
 
@@ -153,6 +159,7 @@ export type UserGroupByOutputType = {
   name: string
   password: string | null
   image: string | null
+  subscriptionStatus: string
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -182,6 +189,7 @@ export type userWhereInput = {
   name?: Prisma.StringFilter<"user"> | string
   password?: Prisma.StringNullableFilter<"user"> | string | null
   image?: Prisma.StringNullableFilter<"user"> | string | null
+  subscriptionStatus?: Prisma.StringFilter<"user"> | string
   workspaces?: Prisma.WorkspaceListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
@@ -196,6 +204,7 @@ export type userOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
   workspaces?: Prisma.workspaceOrderByRelationAggregateInput
   projects?: Prisma.projectOrderByRelationAggregateInput
   documents?: Prisma.documentOrderByRelationAggregateInput
@@ -213,6 +222,7 @@ export type userWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"user"> | string
   password?: Prisma.StringNullableFilter<"user"> | string | null
   image?: Prisma.StringNullableFilter<"user"> | string | null
+  subscriptionStatus?: Prisma.StringFilter<"user"> | string
   workspaces?: Prisma.WorkspaceListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   documents?: Prisma.DocumentListRelationFilter
@@ -227,6 +237,7 @@ export type userOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrderInput | Prisma.SortOrder
   image?: Prisma.SortOrderInput | Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
   _count?: Prisma.userCountOrderByAggregateInput
   _max?: Prisma.userMaxOrderByAggregateInput
   _min?: Prisma.userMinOrderByAggregateInput
@@ -241,6 +252,7 @@ export type userScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"user"> | string
   password?: Prisma.StringNullableWithAggregatesFilter<"user"> | string | null
   image?: Prisma.StringNullableWithAggregatesFilter<"user"> | string | null
+  subscriptionStatus?: Prisma.StringWithAggregatesFilter<"user"> | string
 }
 
 export type userCreateInput = {
@@ -249,6 +261,7 @@ export type userCreateInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
   projects?: Prisma.projectCreateNestedManyWithoutUserInput
   documents?: Prisma.documentCreateNestedManyWithoutUserInput
@@ -263,6 +276,7 @@ export type userUncheckedCreateInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
@@ -277,6 +291,7 @@ export type userUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUpdateManyWithoutUserNestedInput
@@ -291,6 +306,7 @@ export type userUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
@@ -305,6 +321,7 @@ export type userCreateManyInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
 }
 
 export type userUpdateManyMutationInput = {
@@ -313,6 +330,7 @@ export type userUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type userUncheckedUpdateManyInput = {
@@ -321,6 +339,7 @@ export type userUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserScalarRelationFilter = {
@@ -334,6 +353,7 @@ export type userCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
 }
 
 export type userMaxOrderByAggregateInput = {
@@ -342,6 +362,7 @@ export type userMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
 }
 
 export type userMinOrderByAggregateInput = {
@@ -350,6 +371,7 @@ export type userMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   password?: Prisma.SortOrder
   image?: Prisma.SortOrder
+  subscriptionStatus?: Prisma.SortOrder
 }
 
 export type userCreateNestedOneWithoutWorkspacesInput = {
@@ -442,6 +464,7 @@ export type userCreateWithoutWorkspacesInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   projects?: Prisma.projectCreateNestedManyWithoutUserInput
   documents?: Prisma.documentCreateNestedManyWithoutUserInput
   workspacesmember?: Prisma.memberCreateNestedManyWithoutUserInput
@@ -455,6 +478,7 @@ export type userUncheckedCreateWithoutWorkspacesInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
   workspacesmember?: Prisma.memberUncheckedCreateNestedManyWithoutUserInput
@@ -484,6 +508,7 @@ export type userUpdateWithoutWorkspacesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   projects?: Prisma.projectUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUpdateManyWithoutUserNestedInput
   workspacesmember?: Prisma.memberUpdateManyWithoutUserNestedInput
@@ -497,6 +522,7 @@ export type userUncheckedUpdateWithoutWorkspacesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
   workspacesmember?: Prisma.memberUncheckedUpdateManyWithoutUserNestedInput
@@ -510,6 +536,7 @@ export type userCreateWithoutDocumentsInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
   projects?: Prisma.projectCreateNestedManyWithoutUserInput
   workspacesmember?: Prisma.memberCreateNestedManyWithoutUserInput
@@ -523,6 +550,7 @@ export type userUncheckedCreateWithoutDocumentsInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
   workspacesmember?: Prisma.memberUncheckedCreateNestedManyWithoutUserInput
@@ -552,6 +580,7 @@ export type userUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUpdateManyWithoutUserNestedInput
   workspacesmember?: Prisma.memberUpdateManyWithoutUserNestedInput
@@ -565,6 +594,7 @@ export type userUncheckedUpdateWithoutDocumentsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
   workspacesmember?: Prisma.memberUncheckedUpdateManyWithoutUserNestedInput
@@ -578,6 +608,7 @@ export type userCreateWithoutChatsInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
   projects?: Prisma.projectCreateNestedManyWithoutUserInput
   documents?: Prisma.documentCreateNestedManyWithoutUserInput
@@ -591,6 +622,7 @@ export type userUncheckedCreateWithoutChatsInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
@@ -620,6 +652,7 @@ export type userUpdateWithoutChatsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUpdateManyWithoutUserNestedInput
@@ -633,6 +666,7 @@ export type userUncheckedUpdateWithoutChatsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
@@ -646,6 +680,7 @@ export type userCreateWithoutProjectsInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
   documents?: Prisma.documentCreateNestedManyWithoutUserInput
   workspacesmember?: Prisma.memberCreateNestedManyWithoutUserInput
@@ -659,6 +694,7 @@ export type userUncheckedCreateWithoutProjectsInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
   workspacesmember?: Prisma.memberUncheckedCreateNestedManyWithoutUserInput
@@ -688,6 +724,7 @@ export type userUpdateWithoutProjectsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUpdateManyWithoutUserNestedInput
   workspacesmember?: Prisma.memberUpdateManyWithoutUserNestedInput
@@ -701,6 +738,7 @@ export type userUncheckedUpdateWithoutProjectsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
   workspacesmember?: Prisma.memberUncheckedUpdateManyWithoutUserNestedInput
@@ -714,6 +752,7 @@ export type userCreateWithoutWorkspacesmemberInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
   projects?: Prisma.projectCreateNestedManyWithoutUserInput
   documents?: Prisma.documentCreateNestedManyWithoutUserInput
@@ -727,6 +766,7 @@ export type userUncheckedCreateWithoutWorkspacesmemberInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
@@ -756,6 +796,7 @@ export type userUpdateWithoutWorkspacesmemberInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUpdateManyWithoutUserNestedInput
@@ -769,6 +810,7 @@ export type userUncheckedUpdateWithoutWorkspacesmemberInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
@@ -782,6 +824,7 @@ export type userCreateWithoutNotificationsInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceCreateNestedManyWithoutUserInput
   projects?: Prisma.projectCreateNestedManyWithoutUserInput
   documents?: Prisma.documentCreateNestedManyWithoutUserInput
@@ -795,6 +838,7 @@ export type userUncheckedCreateWithoutNotificationsInput = {
   name: string
   password?: string | null
   image?: string | null
+  subscriptionStatus?: string
   workspaces?: Prisma.workspaceUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.projectUncheckedCreateNestedManyWithoutUserInput
   documents?: Prisma.documentUncheckedCreateNestedManyWithoutUserInput
@@ -824,6 +868,7 @@ export type userUpdateWithoutNotificationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUpdateManyWithoutUserNestedInput
@@ -837,6 +882,7 @@ export type userUncheckedUpdateWithoutNotificationsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscriptionStatus?: Prisma.StringFieldUpdateOperationsInput | string
   workspaces?: Prisma.workspaceUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.projectUncheckedUpdateManyWithoutUserNestedInput
   documents?: Prisma.documentUncheckedUpdateManyWithoutUserNestedInput
@@ -926,6 +972,7 @@ export type userSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   password?: boolean
   image?: boolean
+  subscriptionStatus?: boolean
   workspaces?: boolean | Prisma.user$workspacesArgs<ExtArgs>
   projects?: boolean | Prisma.user$projectsArgs<ExtArgs>
   documents?: boolean | Prisma.user$documentsArgs<ExtArgs>
@@ -941,6 +988,7 @@ export type userSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   password?: boolean
   image?: boolean
+  subscriptionStatus?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type userSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -949,6 +997,7 @@ export type userSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   password?: boolean
   image?: boolean
+  subscriptionStatus?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type userSelectScalar = {
@@ -957,9 +1006,10 @@ export type userSelectScalar = {
   name?: boolean
   password?: boolean
   image?: boolean
+  subscriptionStatus?: boolean
 }
 
-export type userOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "image", ExtArgs["result"]["user"]>
+export type userOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "password" | "image" | "subscriptionStatus", ExtArgs["result"]["user"]>
 export type userInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   workspaces?: boolean | Prisma.user$workspacesArgs<ExtArgs>
   projects?: boolean | Prisma.user$projectsArgs<ExtArgs>
@@ -988,6 +1038,7 @@ export type $userPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string
     password: string | null
     image: string | null
+    subscriptionStatus: string
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1422,6 +1473,7 @@ export interface userFieldRefs {
   readonly name: Prisma.FieldRef<"user", 'String'>
   readonly password: Prisma.FieldRef<"user", 'String'>
   readonly image: Prisma.FieldRef<"user", 'String'>
+  readonly subscriptionStatus: Prisma.FieldRef<"user", 'String'>
 }
     
 
