@@ -13,7 +13,6 @@ datasource db {
 model workspace{
   id String @id @default(uuid())
   name String
-  role String @default("admin")
   userId String
   slug String ?
   documents document[] 

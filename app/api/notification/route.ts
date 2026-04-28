@@ -63,24 +63,6 @@ if(!session?.user?.id || !session?.user?.email)
 }
 
 try {
-//     const Notification = await prisma.workspace.findMany({
-//    where:{
-//    members:{
-//     some:{
-//         email:session.user.email
-//     }
-//    },
-//    notifications:{
-//     some:{
-//         workspaceId: 
-//     }
-//    }
-//    },
-//    include:{
-//     members:true,
-//     notifications:true
-//    }
-// })
 const Notification = await prisma.notification.findMany({
   where: {
     OR:[
