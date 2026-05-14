@@ -1,4 +1,3 @@
-"use client";
 import Hero from "./Hero";
 import Content from "./Content";
 const Home = () => {

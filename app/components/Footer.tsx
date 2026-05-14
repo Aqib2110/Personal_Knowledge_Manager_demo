@@ -1,4 +1,3 @@
-import React from 'react'
 
 const Footer = () => {
   return (
@@ -49,7 +48,7 @@ const Footer = () => {
 
         <div className="mt-12 py-6 border-t border-white/10 flex flex-1 flex-col md:flex-row items-center justify-center text-xs text-gray-500">
           <span>© {new Date().getFullYear()} KnowledgeHub. All rights reserved.</span>
-          
+
         </div>
 
       </div>

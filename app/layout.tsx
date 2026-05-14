@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import ContentWrapper from "./components/ContentWrapper";
-import SessionProvid from "./components/SessionProvider";
 import "./globals.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Personal Knowledge Manager",
-  description:"Organize, store, and retrieve your personal knowledge base efficiently."
+  description: "Organize, store, and retrieve your personal knowledge base efficiently."
 };
 
 export default function RootLayout({
@@ -24,14 +24,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-            <SessionProvid>
-            {children}
-            </SessionProvid>
+        <div className="flex flex-col bg-gray-100 w-full">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
