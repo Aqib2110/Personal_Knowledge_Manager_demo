@@ -1,21 +1,11 @@
-
 import React from 'react'
-import Home from './components/Home'
+import Roles from '../../components/Roles'
 const page = () => {
   return (
     <>
-      <Home />
+    <Roles />
     </>
   )
 }
 
 export default page
-
-
-
-
-
-
-
-
-

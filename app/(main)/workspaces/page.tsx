@@ -1,10 +1,8 @@
 import React from 'react'
-import Roles from '../components/Roles'
+import Workspace from '../../components/Workspace'
 const page = () => {
   return (
-    <>
-    <Roles />
-    </>
+      <Workspace />
   )
 }
 

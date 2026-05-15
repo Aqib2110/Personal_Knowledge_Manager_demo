@@ -1,5 +1,5 @@
 import React from 'react'
-import Tags from '../components/Tags'
+import Tags from '../../components/Tags'
 const page = () => {
   return (
     <div className='h-full w-full'>

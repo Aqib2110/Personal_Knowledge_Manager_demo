@@ -1,4 +1,4 @@
-import Pricing from '../components/Pricing'
+import Pricing from '../../components/Pricing'
 const page = () => {
   return (
     <div className='h-full w-full'>

@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import Client from '../components/Client'
+import Client from '../../components/Client'
 
 export default function Page({
   searchParams,

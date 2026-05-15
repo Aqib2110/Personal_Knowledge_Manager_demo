@@ -1,9 +1,9 @@
 import React from 'react'
-import Settings from '../components/Settings'
+import Notifications from '../../components/Notifications'
 const page = () => {
   return (
     <>
-    <Settings />
+    <Notifications />  
     </>
   )
 }

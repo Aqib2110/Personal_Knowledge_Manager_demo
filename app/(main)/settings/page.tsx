@@ -1,8 +1,10 @@
 import React from 'react'
-import Workspace from '../components/Workspace'
+import Settings from '../../components/Settings'
 const page = () => {
   return (
-      <Workspace />
+    <>
+    <Settings />
+    </>
   )
 }
 

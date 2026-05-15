@@ -1,11 +1,21 @@
+
 import React from 'react'
-import Notifications from '../components/Notifications'
+import Home from '../components/Home'
 const page = () => {
   return (
     <>
-    <Notifications />  
+      <Home />
     </>
   )
 }
 
 export default page
+
+
+
+
+
+
+
+
+
