@@ -305,7 +305,7 @@ const MobAI = () => {
                     </div>
                 </div>
             </div>
-            <div className='p-2 h-16 flex fixed bottom-0 left-0 w-full  justify-center gap-3 items-center'>
+            <div className='p-2 h-16 flex sticky bottom-0 left-0 w-full  justify-center gap-3 items-center'>
                 <input key="chat-input" type="text" ref={inputRef} placeholder='Ask Your knowledge...' className='w-full h-full px-3 outline py-3 bg-white border rounded-lg' />
                 <span key="chat-send" className={`bg-blue-500 py-3 ${loading || timer ? "cursor-not-allowed opacity-50" : "cursor-pointer"} text-white h-full px-5  rounded-md`} onClick={() => { handleSend() }}>send</span>
             </div>
